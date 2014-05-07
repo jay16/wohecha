@@ -1,0 +1,38 @@
+=javascript_include_tag "/javascripts/teas.js"
+
+%h1 商品管理 - 我喝茶 
+
+%div{style:"margin-top: -40px;"}
+  =link_to "添加商品", "/teas/new", class: "btn btn-default btn-primary right"
+  =link_to "订单列表", "/admin", class: "btn btn-default right"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th{style: "width:150px;"} 图片
+      %th 名称
+      %th 产地 
+      %th 价格
+      %th 净重 
+      %th{style: "width:200px;"} 描述
+      %th{style: "width:50px;"} 编辑
+      %th{style: "width:50px;"} 删除
+  %tbody
+    - @teas.each do |tea|
+      %tr.tea{id: "tea_#{tea.id}",class: "#{'success' if is_active(tea)}"}
+        %td
+          %img.img-news{src: "./images/#{tea.image}", style: "width:150px;"}
+          %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/teas/#{tea.id}/image", :enctype => "multipart/form-data", :method => "post", :style => "display:inline;width:100px;"}
+            %input.text_field{:name => "image", :onchange => "$('#image_submit#{tea.id}').trigger('click');", :type => "file", :style => "width: 150px;"}
+              %input.btn{:name => "commit", :style => "display:none;", :type => "submit", :value => "submit", :id => "image_submit#{tea.id}"}
+
+        %td= tea.name 
+        %td= tea.from
+        %td= tea.price.to_s + " #{tea.unit1}/#{tea.unit2}"
+        %td= tea.weight.to_i.to_s + " " + tea.unit3
+        %td= tea.desc
+        %td= link_to "编辑", "/teas/#{tea.id}/edit"
+        %td
+          %a{onclick: "Teas.delete(#{tea.id},'#{tea.name}');"} 删除
+
+

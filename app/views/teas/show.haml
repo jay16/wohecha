@@ -1,0 +1,20 @@
+%h1 商品管理 - 我喝茶 
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th 名称
+      %th 产地 
+      %th 价格
+      %th 净重 
+      %th 描述
+  %tbody
+    - @teas.each do |tea|
+      %tr.tea{id: "tea_#{tea.id}"}
+        %td= tea.name
+        %td= tea.from
+        %td= tea.price.to_s + " #{tea.unit1}/#{tea.unit2}"
+        %td= tea.weight.to_i.to_s + " " + tea.unit3
+        %td= tea.desc
+
+

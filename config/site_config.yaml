@@ -1,0 +1,19 @@
+default: &default
+  title: "我喝茶"
+  sutitle: "我喝茶"
+  slogan: "在路上"
+  favicon: "/images/favicon.ico"
+  post:
+    readmore: "详细阅读"
+    add_to_shopcart: "添加到购物车"
+
+
+production:
+  <<: *default
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  default_password: ''

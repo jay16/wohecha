@@ -1,0 +1,52 @@
+220.248.30.61 - - [06/May/2014 09:35:30] "GET / HTTP/1.1" 200 1184 0.0282
+220.248.30.61 - - [06/May/2014 09:35:30] "GET /images/wohecha_01.png HTTP/1.1" 304 - 0.0015
+220.248.30.61 - - [06/May/2014 09:35:30] "GET /images/favicon.ico HTTP/1.1" 304 - 0.0012
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /home HTTP/1.1" 200 16549 0.0378
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /css/bootstrap.css HTTP/1.1" 304 - 0.0189
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /css/style.css HTTP/1.1" 304 - 0.0026
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /css/prettyPhoto.css HTTP/1.1" 304 - 0.0012
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /css/fontello.css HTTP/1.1" 304 - 0.0011
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /css/bootstrap-responsive.css HTTP/1.1" 304 - 0.0011
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /js/jquery.js HTTP/1.1" 304 - 0.0038
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /js/jquery.scrollTo-1.4.2-min.js HTTP/1.1" 304 - 0.0016
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /js/jquery.localscroll-1.2.7-min.js HTTP/1.1" 304 - 0.0017
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /js/bootstrap.js HTTP/1.1" 304 - 0.0011
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /js/jquery.prettyPhoto.js HTTP/1.1" 304 - 0.0012
+220.248.30.61 - - [06/May/2014 09:35:38] "GET /js/site.js HTTP/1.1" 304 - 0.0011
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/logo_wohecha.png HTTP/1.1" 304 - 0.0012
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/brand1-ren.jpg HTTP/1.1" 304 - 0.0065
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /font/fontello.woff?6946176 HTTP/1.1" 404 5 0.0020
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/brand2-zai.jpg HTTP/1.1" 304 - 0.0014
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/brand3-cao.jpg HTTP/1.1" 304 - 0.0016
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/brand4-mu.jpg HTTP/1.1" 304 - 0.0008
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/brand5-jian.jpg HTTP/1.1" 304 - 0.0010
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/brand6-whc.jpg HTTP/1.1" 304 - 0.0009
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/blog_img-01.jpg HTTP/1.1" 304 - 0.0010
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/top-bg.png HTTP/1.1" 304 - 0.0012
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/blog_img-02.jpg HTTP/1.1" 304 - 0.0011
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/blog_img-03.jpg HTTP/1.1" 304 - 0.0011
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/gray.png HTTP/1.1" 304 - 0.0011
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/grey-cardboard-bg.png HTTP/1.1" 304 - 0.0009
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /images/dot-row-2.png HTTP/1.1" 304 - 0.0011
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /font/fontello.ttf?6946176 HTTP/1.1" 404 5 0.0019
+220.248.30.61 - - [06/May/2014 09:35:39] "GET /font/fontello.svg?6946176 HTTP/1.1" 404 5 0.0028
+220.248.30.61 - - [06/May/2014 09:35:59] "GET /cart?tea=1 HTTP/1.1" 200 2483 0.0324
+220.248.30.61 - - [06/May/2014 09:35:59] "GET /stylesheets/application.css HTTP/1.1" 304 - 0.0013
+220.248.30.61 - - [06/May/2014 09:35:59] "GET /javascripts/application.js HTTP/1.1" 304 - 0.0017
+Using rack adapter
+Thin web server (v1.6.2 codename Doc Brown)
+Maximum connections set to 1024
+Listening on 0.0.0.0:3000, CTRL+C to stop
+Stopping ...
+Stopping ...
+127.0.0.1 - - [06/May/2014 21:37:32] "GET /cart?tea=1 HTTP/1.1" 200 5887 0.0292
+127.0.0.1 - - [06/May/2014 21:37:33] "GET /stylesheets/application.scss HTTP/1.1" 200 10414 0.0842
+127.0.0.1 - - [06/May/2014 21:37:33] "GET /javascripts/transactions.js HTTP/1.1" 304 - 0.0026
+127.0.0.1 - - [06/May/2014 21:37:50] "GET /cart?tea=1 HTTP/1.1" 200 5887 0.0171
+127.0.0.1 - - [06/May/2014 21:37:50] "GET /stylesheets/application.scss HTTP/1.1" 200 10414 0.0506
+127.0.0.1 - - [06/May/2014 21:37:50] "GET /javascripts/transactions.js HTTP/1.1" 304 - 0.0040
+Using rack adapter
+Thin web server (v1.6.2 codename Doc Brown)
+Maximum connections set to 1024
+Listening on 0.0.0.0:3000, CTRL+C to stop
+Stopping ...

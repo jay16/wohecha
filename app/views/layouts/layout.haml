@@ -1,0 +1,16 @@
+-# coding: UTF-8
+!!!
+%html
+  %head
+    %title= [SiteConfig.title, SiteConfig.slogan].join("|")
+    %meta{"http-equiv" => "content-type", content: "text/html", charset: "UTF-8"}
+    %link{href: "#{SiteConfig.favicon}", rel: "shortcut icon"}
+    = javascript_include_tag "/javascripts/jquery.js"
+    = javascript_include_tag "/javascripts/bootstrap.min.3.0.3.js"
+    = stylesheet_link_tag "/stylesheets/bootstrap.min.3.0.3.css"
+    = stylesheet_link_tag "/stylesheets/application.scss"
+  %body{style: "background:#f0f0f0;"}
+    .container
+      .row
+        .col-sm-10.col-sm-offset-1
+          = yield

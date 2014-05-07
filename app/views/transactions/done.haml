@@ -1,0 +1,27 @@
+%h1 交易完成 - 我喝茶 
+
+
+%table.table.table-striped
+  %tbody
+    %tr
+      %td 订单号
+      %td= @transaction.out_trade_no
+    %tr
+      %td 收货人
+      %td= @transaction.receive_name
+    %tr
+      %td 收货地址
+      %td= @transaction.receive_address
+    %tr
+      %td 订单金额
+      %td= @transaction.total_fee
+    %tr
+      %td 订单状态
+      %td= @transaction.trade_status.split("_").join(" ")
+    %tr
+      %td 创建时间
+      %td= @transaction.created_at.strftime("%Y/%m/%d %H:%M:%S")
+    %tr
+      %td 更新时间
+      %td= @transaction.updated_at.strftime("%Y/%m/%d %H:%M:%S")
+
