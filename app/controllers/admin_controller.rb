@@ -18,6 +18,12 @@ class AdminController < ApplicationController
     haml :transactions, layout: :"../layouts/layout"
   end
 
+  get "/members" do
+    @members = Member.all
+
+    haml :members, layout: :"../layouts/layout"
+  end
+
   # GET /admin/login
   get "/login" do
     if session[:login_state]
