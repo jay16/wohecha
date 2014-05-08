@@ -74,7 +74,7 @@ class TransactionsController < ApplicationController
       :receive_email=> "买家邮箱",
       :receive_mobile => "买家手机号",
       :receive_address => "买家地址",
-      :gmt_payment => "买家付款时间",
+      :gmt_payment => "付款时间",
       :receive_zip  => "买家邮编"
     }
 

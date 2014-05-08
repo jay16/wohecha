@@ -1,29 +1,17 @@
 %h1 订单明细
 
-%p 订单信息
+=link_to "订单列表", "/admin", { class: "btn btn-default right", style: "margin-top: -40px;"}
 
-%table.table.table-hover.table-bordered
+.row 
+  .col-sm-6
+    %p 订单信息
 
-  - @columns.each do |key, value|
-    %tr
-      %td= value
-      %td= @transaction.instance_variable_get("@"+key.to_s)
+    %table.table.table-hover.table-bordered
 
-%p 购物车信息
+      - @columns.each do |key, value|
+        %tr
+          %td{style:"width:100px;"}= value
+          %td= @transaction.instance_variable_get("@"+key.to_s)
 
-%table.table.table-hover.table-bordered
-  %tr
-    %td quantity
-    %td= @order.quantity
-  %tr
-    %td amount
-    %td= @order.amount
-  - products = JSON.parse("["+@order.detail+"]")
-  %tr
-    %td 商品列表
-    %td= products.count.to_s + "种"
-
-  - products.each do |p|
-    %tr
-      %td= p["name"]
-      %td= p["price"].to_s + "元 x " + p["quantity"].to_s
+  .col-sm-6
+    = haml :_order , layout: false if @order
