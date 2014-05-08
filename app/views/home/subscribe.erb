@@ -1,0 +1,18 @@
+<div id="headerwrap">
+  <div class="clearfix">
+    <div class="container">
+      <div class="row">
+        <h1> 订阅成功</h1>
+
+        <h2>
+        <%= @member.email %> 有新消息会通知您 
+        </h2>
+
+        <h2>
+        <%= @member.created_at.strftime("%Y/%m/%d %H:%M") %>
+        </h2>
+
+      </div>
+    </div>
+  </div>
+</div>
