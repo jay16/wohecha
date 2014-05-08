@@ -53,7 +53,7 @@ class TransactionsController < ApplicationController
   # get /transactions/done
   get "/done" do
     @status, @transaction = find_or_create_transaction!
-    @order = Order.all(:out_trade_no => @transaction.out_trade_no)
+    @order = Order.all(:out_trade_no => @transaction.out_trade_no).first
 
     flash[:notice] = "付款成功啦!"
     haml :done, layout: :"../layouts/layout"
@@ -62,9 +62,9 @@ class TransactionsController < ApplicationController
   # show
   # get /transactions/:out_trade_no
   get "/:out_trade_no" do
-    Transaction.all.update(:out_trade_no => params[:out_trade_no])
     @transaction = Transaction.first(:out_trade_no => params[:out_trade_no])
-    @order = Order.all(:out_trade_no => params[:out_trade_no]).first
+    @order = Order.first(:out_trade_no => params[:out_trade_no])
+
     @columns = { 
       :out_trade_no => "订单号",
       :subject      => "订单标题",
