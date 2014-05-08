@@ -1,0 +1,9 @@
+%h1 订单明细
+
+%table.table.table-hover.table-bordered
+  - skips = ["@_repository", "@_persistence_state", "@id", "@sign"]
+  - @transaction.instance_variables.each do |var|
+    - next if (value = @transaction.instance_variable_get(var)).nil?
+    %tr
+      %td= var.to_s.gsub("@", "")
+      %td= value

@@ -4,9 +4,9 @@
       var order_list, total_amount, total_quantity;
       total_amount = 0;
       total_quantity = 0;
-      order_list = "";
+      order_list = new Array();
       $(".tea").each(function() {
-        var name, price, quantity;
+        var json, name, price, quantity;
         name = $(this).find(".name:first").html();
         price = parseFloat($(this).find(".price:first").html());
         price = Math.round(price * 10) / 10;
@@ -14,8 +14,14 @@
         total_quantity += quantity;
         total_amount += Math.round(price * quantity * 10) / 10;
         if (quantity > 0) {
-          order_list += "{ :name => " + name + ", :quantity => " + quantity + ", :price => " + price + "}";
+          json = {
+            "name": name,
+            "quantity": quantity,
+            "price": price
+          };
+          order_list.push(JSON.stringify(json));
         }
+        end;
         $(this).find(".amount:first").text(Math.round(price * quantity * 10) / 10);
         if (quantity === 0) {
           return $(this).find(".minus").attr("disabled", "disabled");
@@ -27,7 +33,7 @@
       $(".total-quantity").text(total_quantity);
       $("#quantity").attr("value", total_quantity);
       $("#amount").attr("value", total_amount);
-      $("#order").attr("value", order_list);
+      $("#order").attr("value", order_list.toString());
       if (total_amount === 0) {
         return $("input[type='submit']").attr("disabled", "disabled");
       } else {

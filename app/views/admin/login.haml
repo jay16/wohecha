@@ -5,8 +5,8 @@
   .solife-login-form
     .solife-login-inner{:style => "box-shadow: 0 0 1em black;"}
       .social-login{:style => "height:50px;"}
-        %div{:style => "width:100%;line-height:50px;height:50px;;font-size: 35px;text-align:center;"}
-          登陆
+        %div{:style => "width:100%;height:50px;text-align:center;background:#737c61;border-radius:5px;"}
+          %img{src: "./images/logo_wohecha.png"}
       %form#new_user.simple_form.new_user{"accept-charset" => "UTF-8", :action => "/admin/chk_login", "data-remote" => "true", :method => "post", :novalidate => "novalidate"}
         %div{:style => "margin:0;padding:0;display:inline"}
           %input{:name => "utf8", :type => "hidden", :value => "✓"}

@@ -25,6 +25,8 @@ class ApplicationController < Sinatra::Base
     send_file(file, :disposition => :inline) if File.exist?(file)
   end
 
+  #global shared function
+  ##############################################
   #authen user
   def authenticate! 
     unless session[:login_state]
@@ -33,5 +35,13 @@ class ApplicationController < Sinatra::Base
       flash[:notice] = "继续操作前请登录."
       redirect "/admin/login"
     end
+  end
+
+  def remote_ip
+    request.env["REMOTE_ADDR"] || "n-i-l"
+  end
+
+  def remote_browser
+    request.env["HTTP_USER_AGENT"] || "n-i-l"
   end
 end
