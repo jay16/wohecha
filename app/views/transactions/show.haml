@@ -1,17 +1,17 @@
 %h1 订单明细
 
-%table.table.table-hover.table-bordered
-  - skips = ["@_repository", "@_persistence_state", "@id", "@sign"]
-  - @transaction.instance_variables.each do |var|
-    - next if (value = @transaction.instance_variable_get(var)).nil?
-    %tr
-      %td= var.to_s.gsub("@", "")
-      %td= value
+%p 订单信息
 
 %table.table.table-hover.table-bordered
-  %tr
-    %td out_trade_no
-    %td= @order.out_trade_no
+
+  - @columns.each do |key, value|
+    %tr
+      %td= value
+      %td= @transaction.instance_variable_get("@"+key.to_s)
+
+%p 购物车信息
+
+%table.table.table-hover.table-bordered
   %tr
     %td quantity
     %td= @order.quantity

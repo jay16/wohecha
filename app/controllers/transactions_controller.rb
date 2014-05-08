@@ -65,6 +65,18 @@ class TransactionsController < ApplicationController
     Transaction.all.update(:out_trade_no => params[:out_trade_no])
     @transaction = Transaction.first(:out_trade_no => params[:out_trade_no])
     @order = Order.all(:out_trade_no => params[:out_trade_no]).first
+    @columns = { 
+      :out_trade_no => "订单号",
+      :subject      => "订单标题",
+      :total_fee    => "订单金额",
+      :seller_actions => "卖家待做",
+      :receive_name => "买家名称",
+      :receive_email=> "买家邮箱",
+      :receive_mobile => "买家手机号",
+      :receive_address => "买家地址",
+      :gmt_payment => "买家付款时间",
+      :receive_zip  => "买家邮编"
+    }
 
     haml :show, layout: :"../layouts/layout"
   end
