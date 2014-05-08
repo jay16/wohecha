@@ -36,6 +36,7 @@ class Transaction
     property :sign_type, String
     property :sign, String
     property :receive_address, String
+    property :focus_state, String
     property :ip, String # remote ip
     property :browser, String 
     property :created_at, DateTime

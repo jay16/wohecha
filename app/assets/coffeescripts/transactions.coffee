@@ -16,7 +16,6 @@ window.Teas =
       if quantity > 0 #购物车商品列表
         json = { "name": name, "quantity": quantity, "price": price }
         order_list.push(JSON.stringify(json))
-      end
 
       # 更新[小计]数值
       $(this).find(".amount:first").text(Math.round(price * quantity * 10)/10)
@@ -27,6 +26,7 @@ window.Teas =
       else
         $(this).find(".minus").removeAttr("disabled")
 
+    total_amount = Math.round(total_amount*10)/10
     $(".total-amount").text(total_amount)
     $(".total-quantity").text(total_quantity)
 

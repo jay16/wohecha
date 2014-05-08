@@ -1,9 +1,11 @@
 #encoding: utf-8 
+require "json"
 class TransactionsController < ApplicationController
   set :views, ENV["VIEW_PATH"] + "/transactions"
 
   #无权限则登陆
   before "/:out_trade_no" do 
+    pass if %(/checkout /done /notify).include?(request.path_info)
     authenticate!
   end
 
@@ -50,7 +52,8 @@ class TransactionsController < ApplicationController
 
   # get /transactions/done
   get "/done" do
-    status, @transaction = find_or_create_transaction!
+    @status, @transaction = find_or_create_transaction!
+    @order = Order.all(:out_trade_no => @transaction.out_trade_no)
 
     flash[:notice] = "付款成功啦!"
     haml :done, layout: :"../layouts/layout"
@@ -59,7 +62,9 @@ class TransactionsController < ApplicationController
   # show
   # get /transactions/:out_trade_no
   get "/:out_trade_no" do
+    Transaction.all.update(:out_trade_no => params[:out_trade_no])
     @transaction = Transaction.first(:out_trade_no => params[:out_trade_no])
+    @order = Order.all(:out_trade_no => params[:out_trade_no]).first
 
     haml :show, layout: :"../layouts/layout"
   end
@@ -73,13 +78,13 @@ class TransactionsController < ApplicationController
     #存在则更新，不存在则创建
     if transaction.nil?
       params.merge!({ created_at: DateTime.now, updated_at: DateTime.now })
-      transaction = Transaction.create(params).to_s
+      transaction = Transaction.create(params)
       status += "create; status: "
-      status += (transaction.nil? ? "true" : "false")
+      status += (transaction.saved? ? "true" : "false")
     else
       params.merge!({ updated_at: DateTime.now })
-      status += "update; status: "
-      status += transaction.update(params).to_s
+      transaction.update(params)
+      status += "update; status: " + (transaction.saved? ? "true" : "false")
     end
 
     [status, transaction]
@@ -91,7 +96,7 @@ class TransactionsController < ApplicationController
 
   def generate_out_trade_no
     ip_hex = remote_ip.split(".").map{ |is| ("%02X" %is.to_i).to_s }.join.hex
-    Time.now.to_i.to_s + ip_hex.to_s + Order.count
+    Time.now.to_i.to_s + ip_hex.to_s + Order.count.to_s
   end
 
   not_found do

@@ -21,7 +21,6 @@
           };
           order_list.push(JSON.stringify(json));
         }
-        end;
         $(this).find(".amount:first").text(Math.round(price * quantity * 10) / 10);
         if (quantity === 0) {
           return $(this).find(".minus").attr("disabled", "disabled");
@@ -29,6 +28,7 @@
           return $(this).find(".minus").removeAttr("disabled");
         }
       });
+      total_amount = Math.round(total_amount * 10) / 10;
       $(".total-amount").text(total_amount);
       $(".total-quantity").text(total_quantity);
       $("#quantity").attr("value", total_quantity);

@@ -7,3 +7,23 @@
     %tr
       %td= var.to_s.gsub("@", "")
       %td= value
+
+%table.table.table-hover.table-bordered
+  %tr
+    %td out_trade_no
+    %td= @order.out_trade_no
+  %tr
+    %td quantity
+    %td= @order.quantity
+  %tr
+    %td amount
+    %td= @order.amount
+  - products = JSON.parse("["+@order.detail+"]")
+  %tr
+    %td 商品列表
+    %td= products.count.to_s + "种"
+
+  - products.each do |p|
+    %tr
+      %td= p["name"]
+      %td= p["price"].to_s + "元 x " + p["quantity"].to_s

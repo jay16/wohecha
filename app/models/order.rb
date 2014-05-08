@@ -3,6 +3,7 @@ class Order
     include DataMapper::Resource
 
     property :id, Serial 
+    property :out_trade_no, String
     property :quantity, String
     property :amount, String
     property :detail, String 
