@@ -102,9 +102,6 @@ class TransactionsController < ApplicationController
     [status, transaction]
   end
 
-  def chk_params(tea_id)
-    params[:tea] && params[:tea].to_i == tea_id ? 1 : 0
-  end
 
   def generate_out_trade_no
     ip_hex = remote_ip.split(".").map{ |is| ("%02X" %is.to_i).to_s }.join.hex

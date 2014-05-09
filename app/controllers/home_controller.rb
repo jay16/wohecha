@@ -34,6 +34,7 @@ class HomeController < ApplicationController
     erb :subscribe, layout: :"../layouts/layout.v2"
   end
 
+
   not_found do
     "sorry"
   end

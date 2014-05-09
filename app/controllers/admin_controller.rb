@@ -1,5 +1,6 @@
 #encoding: utf-8 
 class AdminController < ApplicationController
+  enable :logging
   set :views, ENV["VIEW_PATH"] + "/admin"
 
   #无权限则登陆

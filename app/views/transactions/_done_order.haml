@@ -1,0 +1,19 @@
+.col-sm-6
+  %p 购物车列表
+
+  %table.table.table-hover.table-bordered
+    %tr
+      %td quantity
+      %td= @order.quantity
+    %tr
+      %td amount
+      %td= @order.amount
+    - products = JSON.parse("["+@order.detail+"]")
+    %tr
+      %td 商品列表
+      %td= products.count.to_s + "种"
+
+    - products.each do |p|
+      %tr
+        %td= p["name"]
+        %td= p["price"].to_s + "元 x " + p["quantity"].to_s
