@@ -16,13 +16,16 @@ class ApplicationController < Sinatra::Base
   use CoffeeHandler
   use AssetHandler
 
-  #load css/js file
+  #load css/js/font file
   get "/js/:file" do
-    file = File.join(ENV["APP_ROOT_PATH"],"app/assets/javascripts/#{params[:file]}")
-    send_file(file, :disposition => :inline) if File.exist?(file)
+    disposition_file("javascripts")
   end
   get "/css/:file" do
-    file = File.join(ENV["APP_ROOT_PATH"],"app/assets/stylesheets/#{params[:file]}")
+    disposition_file("stylesheets")
+  end
+
+  def disposition_file(file_type)
+    file = File.join(ENV["APP_ROOT_PATH"],"app/assets/#{file_type}/#{params[:file]}")
     send_file(file, :disposition => :inline) if File.exist?(file)
   end
 

@@ -6,10 +6,8 @@
           <div class="row">
             <div class="span12">
               <h2>留下邮箱，有新消息会通知您</h2>
-              <form accept-charset="UTF-8" action="/subscribe" class="form-inline col-sm-12" method="post" role="form">
-                <input type="text" name="email" placeholder="you@yourmail.com" class="cform-text" size="40" title="your email">
-                <input type="submit" value="通知我" class="cform-submit">
-              </form>
+              <input type="text" name="your-email" placeholder="you@yourmail.com" class="cform-text" size="40" title="your email">
+              <input type="submit" value="通知我" class="cform-submit">
             </div>
           </div>
           <div class="row">
@@ -49,30 +47,30 @@
     <!--******************** Our Story Section ********************-->
     <section id="ourstory" class="single-page scrollblock">
       <div class="container">
-        <div class="align"><i class="icon-cog-circled" style="color: #1d3e10;"></i></div>
+        <div class="align"><i class="icon-popup" style="color: #1d3e10;"></i></div>
         <h1>关于我喝茶</h1>
         <!-- Four columns -->
         <div class="row">
           <div class="span3">
-            <div class="align"> <i class="icon-desktop sev_icon"></i> </div>
+            <div class="align"> <i class="icon-target sev_icon"></i> </div>
             <h2>找茶</h2>
             <p>对爱茶的人来说，旅途并不辛苦，茶叶市场、茶园、茶友家、茶艺课堂...都是我们搜寻的好地方。</p>
           </div>
           <!-- /.span3 -->
           <div class="span3">
-            <div class="align"> <i class="icon-vector sev_icon"></i> </div>
+            <div class="align"> <i class="icon-right-circled sev_icon"></i> </div>
             <h2>学茶</h2>
             <p>原本的一窍不通，因喜爱而开始学习，勤品茗，读茶书，会茶人，乐此不疲。</p>
           </div>
           <!-- /.span3 -->
           <div class="span3">
-            <div class="align"> <i class="icon-basket sev_icon"></i> </div>
+            <div class="align"> <i class="icon-lastfm sev_icon"></i> </div>
             <h2>品茶</h2>
             <p>邀您品鉴我们发现的好茶，茶是生命惊喜的邀请，而人生是一场又一场美丽的茶宴。</p>
           </div>
           <!-- /.span3 -->
           <div class="span3">
-            <div class="align"> <i class="icon-mobile-1 sev_icon"></i> </div>
+            <div class="align"> <i class="icon-chat sev_icon"></i> </div>
             <h2>茶友记</h2>
             <p>朋友间真正的对话是无声的。并非话语，好朋友简简单单，好情谊清清爽爽。</p>
           </div>
@@ -86,7 +84,7 @@
     <!--******************** BrandStory Section ********************-->
     <section id="brandstory" class="single-page scrollblock">
       <div class="container">
-        <div class="align"><i class="icon-desktop-circled" style="color: #1d3e10;"></i></div>
+        <div class="align"><i class="icon-map" style="color: #1d3e10;"></i></div>
         <h1 id="folio-headline">品牌故事</h1>
         <div class="row">
           <div class="span4">
@@ -209,7 +207,7 @@
                 <p></p>
                 <p><%= tea.from %> </br><%= "价格：#{tea.price} #{tea.unit1}／#{tea.unit2}；   净重：#{tea.weight.to_i}#{tea.unit3}" %></p>
                 <p><%= tea.desc %></p>
-                  <a href="http://wiki.wohecha.cn" class="more-link"><%= SiteConfig.post.readmore %></a> 
+                  <a href="http://wiki.wohecha.cn" class="more-link"><%= SiteConfig.post.readmore %></a>
                   <a href="/cart?tea=<%= tea.id %>" class="more-link" style="float:right;margin-top:0px;"><%= SiteConfig.post.add_to_shopcart %></a>
               </div>
             </div>
@@ -222,4 +220,5 @@
         <a href="http://wiki.wohecha.cn" class="btn btn-large">喝茶日志</a> </div>
       <!-- /.container -->
     </section>
-    
+
+   </hr> 

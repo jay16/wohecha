@@ -40,7 +40,7 @@ body {
 	background:#f0f0f0;
 	color: #312A1E;
 	font-size: 100%;
-	font-family: 'Quattrocento', serif;
+	font-family: 'SimHei', serif;
 }
 ::-moz-selection {
 background:#f0bf00;
@@ -101,7 +101,7 @@ a:hover, a:active {
 }
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal; /* reset default browser weight for our webfonts */
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 }
 h1 {
 	font-size: 1.5em; /* 24px */
@@ -159,7 +159,7 @@ em {
 .more-link {
 	font-size: .875em; /* 14px */
 	margin-top: 1.5em;
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 }
 .more-link:link, .more-link:visited {
 	color: #f0bf00;
@@ -208,7 +208,7 @@ em {
 	font-size: 1.75em;
 	margin-left: 0;
 	font-weight: normal;
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 }
 .navbar .brand a:hover {
 	text-decoration: none;
@@ -235,7 +235,7 @@ em {
 	margin-top: 1.125em;
 }
 ul#menu-main > li > a {
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 	font-weight: normal;
 	font-size: 1em;
 	color: #fff;
@@ -268,14 +268,14 @@ ul#menu-main > li > a:hover {
 }
 #headerwrap h1 {
 	color: #FFFFFF;
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 	font-size: 4em;
 	font-weight: 400;
 	margin: 1em 0;
 }
 #headerwrap h2 {
 	color: #FFFFFF;
-	font-family: 'Heiti SC', sans serif;
+	font-family: 'SimHei', sans serif;
 	font-size: 2em;
 	font-weight: normal;
 	margin: 0.5em 0;
@@ -286,7 +286,7 @@ ul#menu-main > li > a:hover {
 }
 #headerwrap input[type=text] {
 	background: rgba(227, 231, 228, 1);
-	font-family: 'Heiti SC', sans serif;
+	font-family: 'SimHei', sans serif;
 	font-size: 1.3125em;
 	border: 0;
 	text-align: center;
@@ -305,7 +305,7 @@ ul#menu-main > li > a:hover {
 	width:50%;
 }
 #headerwrap input[type=submit] {
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 	color: #fff;
 	width: 185px;
 	height: 2.9em;
@@ -343,7 +343,7 @@ section.single-page {
 }
 section.single-page h1 {
 	text-align: center;
-	font-family:  'Yuanti SC', cursive;
+	font-family:  'SimHei', cursive;
 	margin-bottom: 2em; /* 72px */
 	font-size: 2.25em; /* 36px */
 }
@@ -361,7 +361,7 @@ section.single-page h1 {
 	max-width: 1170px;
 }
 #feature-headline {
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 	text-transform: uppercase;
 	color: rgba(228, 229, 229, 1);
 	margin-bottom: 3%; /* 39px */
@@ -370,11 +370,11 @@ section.single-page h1 {
 	background-size: 100% auto;
 }
 #feature-headline span {
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 	text-transform: lowercase;
 }
 #feature article p {
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 	font-size: 40px;
 	margin-bottom: 0;
 	line-height: 1.35;
@@ -396,7 +396,7 @@ section#brandstory hgroup h2 {
 }
 section#brandstory hgroup h3 {
 	margin-top:  .35em;
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 }
 section#brandstory .entry-content {
 	margin: 1em 0 2.5em;
@@ -493,7 +493,7 @@ blockquote.mega p {
 	font-size: 45px;
 	line-height: 50px;
 	text-align: left;
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 	color:#1d3e10;
 }
 blockquote.mega .cite {
@@ -525,7 +525,7 @@ article .inside {
 .post-date {
 	color: #A5A5A2;
 	float: right;
-	font-family: 'Heiti SC';
+	font-family: 'SimHei';
 	font-size: 14px;
 	font-style: normal;
 	line-height: 2;
@@ -622,7 +622,7 @@ section#team .align, section#contact .align {
 	height: 3.25em;
 }
 #theme-form input[type=submit] {
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 	color: #fff;
 	width: 185px;
 	height: 60px;
@@ -771,7 +771,7 @@ footer p {
 08 Buttons ------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */    
 .btn {
-	font-family: 'Yuanti SC', cursive;
+	font-family: 'SimHei', cursive;
 	color: #fff;
 	width: 185px;
 	height: 20px;

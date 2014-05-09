@@ -11,8 +11,11 @@
 /*cache
 /.git
 /.bundle
+*.yml
+*.yaml
 
 config/*.yml
+config/*.yaml
 # Ignore the default SQLite database.
 /db/*.db
 /db/*.sqlite3
