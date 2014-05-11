@@ -16,7 +16,8 @@ Bundler.require(:default, ENV["RACK_ENV"])
 ENV["APP_ROOT_PATH"] = File.expand_path("../../", __FILE__)
 ENV["VIEW_PATH"] = File.join(ENV["APP_ROOT_PATH"], "app/views")
 
-# system("chown -R webuser:webuser #{ENV['APP_PATH']}")
+system("chown -R nobody:nobody #{ENV['APP_ROOT_PATH']}")
+system("chmod -R 777 #{ENV['APP_ROOT_PATH']}")
 
 # 扩充require路径数组
 # require 文件时会在$:数组中查找是否存在
