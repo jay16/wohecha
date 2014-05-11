@@ -6,10 +6,10 @@
 %table.table.table-striped
   %thead
     %tr
-      %th 名称
-      %th{style: "width:60px;"} 价格
-      %th{style: "width:150px;"} 数量
-      %th{style: "width:50px;"} 小计
+      %th{style: "text-align:center;"} 名称
+      %th{style: "width:60px;text-align:center;"} 价格
+      %th{style: "width:100px;text-align:center"} 数量
+      %th{style: "width:50px;text-align:center;"} 小计
   %tbody
     - @teas.each do |tea|
       %tr.tea{id: "tea_#{tea.id}"}
@@ -21,10 +21,10 @@
         %td
           %a.minus.btn.btn-default.btn-xs.btn-primary{onclick: "Teas.minus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 3px 0px 0px 3px;"}
             %i.glyphicon.glyphicon-minus
-          %input.form-control.quantity{id: "tea_#{tea.id}_quantity", min: "0", style: "padding:0px;width:50px;display:inline;line-height:22px;height:22px;font-size:8px;border-radius: 0px;margin: auto -5px;text-align:center;", type: "number", value: "#{chk_params(tea.id)}", disabled: "disabled"}
+          %input.form-control.quantity{id: "tea_#{tea.id}_quantity", min: "0", style: "padding:0px;width:38px;display:inline;line-height:22px;height:22px;font-size:8px;border-radius: 0px;margin: auto -5px;text-align:center;", type: "number", value: "#{chk_params(tea.id)}", disabled: "disabled"}
           %a.plus.btn.btn-default.btn-xs.btn-primary{onclick: "Teas.plus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 0px 3px 3px 0px;"}
             %i.glyphicon.glyphicon-plus
-        %td.amount{id: "tea_#{tea.id}_amount"} 0
+        %td.amount{id: "tea_#{tea.id}_amount", style: "text-align: center;"} 0
     %tr.success
       %td{colspan: "2", style: "text-align: right;vertical-align:middle;"}
         %span.total-quantity{style: "font-size:18px;"} 0
