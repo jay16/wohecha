@@ -20,7 +20,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    daemon_controller (1.2.0)
     daemons (1.1.9)
     data_objects (0.10.14)
       addressable (~> 2.1)
@@ -50,10 +49,6 @@ GEM
     libv8 (3.16.14.3)
     minitest (5.3.3)
     multi_json (1.9.3)
-    passenger (4.0.41)
-      daemon_controller (>= 1.2.0)
-      rack
-      rake (>= 0.8.1)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -111,7 +106,6 @@ DEPENDENCIES
   dm-timestamps
   factory_girl
   haml
-  passenger
   rack-test
   rake
   rspec
