@@ -1,0 +1,42 @@
+= javascript_include_tag "/javascripts/shop_cart.js"
+%h3 购物车 - 我喝茶 
+
+%a.btn.btn-default.btn-xs.right{href: "/home", style: "margin-top:-40px;"} 返回home
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th 名称
+      %th{style: "width:120px;"} 价格
+      %th{style: "width:150px;"} 数量
+      %th{style: "width:50px;"} 小计
+  %tbody
+    - @teas.each do |tea|
+      %tr.tea{id: "tea_#{tea.id}"}
+        %td
+          %span.name= tea.name
+        %td
+          %span.price= tea.price.to_f.round(2)
+          = tea.unit1 + "/" + tea.unit2
+        %td
+          %a.minus.btn.btn-default.btn-xs.btn-primary{onclick: "Teas.minus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 3px 0px 0px 3px;"}
+            %i.glyphicon.glyphicon-minus
+          %input.form-control.quantity{id: "tea_#{tea.id}_quantity", min: "0", style: "padding:0px;width:50px;display:inline;line-height:22px;height:22px;font-size:8px;border-radius: 0px;margin: auto -5px;text-align:center;", type: "number", value: "#{chk_params(tea.id)}", disabled: "disabled"}
+          %a.plus.btn.btn-default.btn-xs.btn-primary{onclick: "Teas.plus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 0px 3px 3px 0px;"}
+            %i.glyphicon.glyphicon-plus
+        %td.amount{id: "tea_#{tea.id}_amount"} 0
+    %tr.success
+      %td{colspan: "2", style: "text-align: right;vertical-align:middle;"}
+        已选购
+        %span.total-quantity{style: "font-size:18px;"} 0
+        件商品
+      %td{style: "vertical-align:middle;"}
+        合计￥
+        %span.total-amount{style:"font-size:18px;"} 0
+      %td 
+        %form.form-inline.col-sm-12{"accept-charset" => "UTF-8", :action => "/transactions/checkout", :method => "post", :role => "form"}
+          %input#quantity.hidden{:name => "quantity", :type => "hidden", :value => "0"}/
+          %input#amount.hidden{:name => "amount", :type => "hidden", :value => "0"}/
+          %input#order.hidden{:name => "order", :type => "hidden", :value => "0"}/
+          %input.btn.btn-default.btn-success{:name => "commit", :type => "submit", :value => "结账"}
+
