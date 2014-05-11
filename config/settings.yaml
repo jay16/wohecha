@@ -1,11 +1,11 @@
 default: &default
   example: "www.example.com"
   alipay:
-    pid: '2088212078009126' # replace with your own
-    secret: 'gkvl7jzbnul33zxsr8zt0jem48o35tka'
-    seller_email: "wan@xiaojiti.com" # your alipay acount that you used to reigister the app
-    return_url: "http://demo.wohecha.cn/transactions/done"
-    notify_url: "http://demo.wohecha.cn/transactions/notify"
+    pid: '2088412481686716' # replace with your own
+    secret: 'p36fbudrydlvde32agr2xpqf6m8fk3nb'
+    seller_email: "aichun.sha@wohecha.cn" # your alipay acount that you used to reigister the app
+    return_url: "http://wohecha.cn/transactions/done"
+    notify_url: "http://wohecha.cn/transactions/notify"
 
 production:
   <<: *default
