@@ -21,5 +21,8 @@
   %body{style: "background:#f0f0f0;"}
     .container
       .row
-        .col-sm-10.col-sm-offset-1
-          = yield
+        - if mobile?
+          .col-sm-12
+        - else
+          .col-sm-10.col-sm-offset-1
+            = yield

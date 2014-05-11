@@ -1,12 +1,16 @@
 = javascript_include_tag "/javascripts/shop_cart.js"
-%h1 购物车 - 我喝茶 
+- if mobile?
+  %h3 购物车 - 我喝茶 
+- else
+  %h1 购物车 - 我喝茶 
 
-%a.btn.btn-default.right{href: "/home", style: "margin-top:-40px;"} 返回home
+%a.btn.btn-default.right{href: "/home", style: "margin-top:-40px;", class: "#{'btn-xs' if mobile?}"} 返回home
 
 %table.table.table-striped
   %thead
     %tr
-      %th{style: "width:120px"} 图片
+      - unless mobile?
+        %th{style: "width:120px"} 图片
       %th 名称
       %th{style: "width:120px;"} 价格
       %th{style: "width:120px;"} 净重
@@ -15,7 +19,8 @@
   %tbody
     - @teas.each do |tea|
       %tr.tea{id: "tea_#{tea.id}"}
-        %td <image src="./images/#{tea.image}" style="width:120px;">
+        - unless mobile?
+          %td <image src="./images/#{tea.image}" style="width:120px;">
         %td
           %span.name= tea.name + " <br>" + tea.from 
         %td
