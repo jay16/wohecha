@@ -23,6 +23,7 @@ class TeasController < ApplicationController
   end
   #post /teas/create { teas: { }}
   post "/create" do
+    params.merge!({:onsale => false})
     @tea = Tea.create(params[:tea])
 
     redirect "/teas?tea=#{@tea.id}" 
@@ -47,6 +48,17 @@ class TeasController < ApplicationController
   post "/:id/update" do
     @tea = Tea.first(:id => params[:id])
     @tea.update(params[:tea])
+
+    redirect "/teas?tea=#{@tea.id}"
+  end
+
+  # post /teas/1/onsale
+  # params: 
+  # onsale - true/false
+  # whether on sale
+  post "/:id/onsale" do
+    @tea = Tea.first(:id => params[:id])
+    @tea.update(:onsale => params[:status])
 
     redirect "/teas?tea=#{@tea.id}"
   end

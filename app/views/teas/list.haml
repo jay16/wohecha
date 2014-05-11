@@ -2,9 +2,13 @@
 
 %h1 商品管理 - 我喝茶 
 
-%div{style:"margin-top: -40px;"}
+.row{style:"margin-top: -40px;"}
   =link_to "添加商品", "/teas/new", class: "btn btn-default btn-primary right"
   =link_to "订单列表", "/admin", class: "btn btn-default right"
+
+.row{style:"margin-top: 5px;"}
+  %label{class: "right"}
+    %input{:id => "showall", :name => "showall", :value => 1, :type => "checkbox", :onchange => "Teas.show_all_teas(this);", class: "right"} 显示所有商品
 
 %table.table.table-striped
   %thead
@@ -13,13 +17,13 @@
       %th 名称
       %th 产地 
       %th 价格
-      %th 净重 
+      %th{style: "width:50px;"} 净重
       %th{style: "width:200px;"} 描述
       %th{style: "width:50px;"} 编辑
-      %th{style: "width:50px;"} 删除
+      %th{style: "width:50px;"} 上架
   %tbody
     - @teas.each do |tea|
-      %tr.tea{id: "tea_#{tea.id}",class: "#{'success' if is_active(tea)}"}
+      %tr.tea{id: "tea_#{tea.id}",class: "#{'success' if is_active(tea)} #{tea.onsale ? 'onsale' : 'hidden outsale'}"}
         %td
           %img.img-news{src: "./images/#{tea.image}", style: "width:150px;"}
           %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/teas/#{tea.id}/image", :enctype => "multipart/form-data", :method => "post", :style => "display:inline;width:100px;"}
@@ -33,6 +37,10 @@
         %td= tea.desc
         %td= link_to "编辑", "/teas/#{tea.id}/edit"
         %td
-          %a{onclick: "Teas.delete(#{tea.id},'#{tea.name}');"} 删除
-
+          %form.form-inline{"accept-charset" => "UTF-8", :action => "/teas/#{tea.id}/onsale", :method => "post", :role => "form"}
+            - if tea.onsale
+              %input{:name => "status", :value => 0, :type => "checkbox", :checked => "true", :onchange => "$('#tea_#{tea.id}_submit').trigger('click');"}/
+            - else
+              %input{:name => "status", :value => 1, :type => "checkbox", :onchange => "$('#tea_#{tea.id}_submit').trigger('click');"}/
+            %input.hidden{:name => "commit", :type => "submit", :value => "submit", :id => "tea_#{tea.id}_submit"}
 

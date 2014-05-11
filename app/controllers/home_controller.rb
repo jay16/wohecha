@@ -7,13 +7,14 @@ class HomeController < ApplicationController
     haml :index
   end
 
+  # home page only show onsale product
   get "/home" do
-    @teas = Tea.all
+    @teas = Tea.all(:onsale => true)
 
     erb :home, layout: :"../layouts/layout.v2"
   end
 
-  #购物车界面
+  # shop cart
   get "/cart" do
     @teas = Tea.all
     #@teas.each { |tea| tea.update(:price => tea.id * 0.01) }
@@ -21,7 +22,7 @@ class HomeController < ApplicationController
     haml :cart, layout: :"../layouts/layout"
   end
 
-  #订阅
+  # member#subscribe
   post "/subscribe" do
     @member = Member.first_or_create(:email => params[:email]) 
 

@@ -26,7 +26,7 @@ gem "sass"
 gem "therubyracer"
 gem "coffee-script"
 
-gem "passenger"
+#gem "passenger"
 gem "thin"
 gem "rake"
 gem "settingslogic"
@@ -40,6 +40,6 @@ gem "alipay_dualfun", :github => "happypeter/alipay_dualfun"
 group :test do
   gem "rack-test"
   gem "rspec"
-  gem "capybara"
+  #gem "capybara"
   gem "factory_girl"
 end
