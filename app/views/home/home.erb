@@ -201,7 +201,7 @@
           <% row.each do |tea| %>
           <article class="span4 post"> <img class="img-news" src="./images/<%= tea.image %>" alt="">
             <div class="inside">
-              <p class="post-date"><i class="icon-calendar"></i> <%= tea.market %></p>
+              <p class="post-date"><i class="icon-calendar"></i> <%= tea.market.strip if tea.market %></p>
               <h2><%= tea.name %></h2>
               <div class="entry-content">
                 <p></p>
