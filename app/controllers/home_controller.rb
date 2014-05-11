@@ -16,7 +16,7 @@ class HomeController < ApplicationController
 
   # shop cart
   get "/cart" do
-    @teas = Tea.all
+    @teas = Tea.all(:onsale => true)
     #@teas.each { |tea| tea.update(:price => tea.id * 0.01) }
 
     haml :cart, layout: :"../layouts/layout"
