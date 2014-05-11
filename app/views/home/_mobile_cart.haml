@@ -7,7 +7,7 @@
   %thead
     %tr
       %th 名称
-      %th{style: "width:120px;"} 价格
+      %th{style: "width:60px;"} 价格
       %th{style: "width:150px;"} 数量
       %th{style: "width:50px;"} 小计
   %tbody
@@ -27,14 +27,13 @@
         %td.amount{id: "tea_#{tea.id}_amount"} 0
     %tr.success
       %td{colspan: "2", style: "text-align: right;vertical-align:middle;"}
-        已选购
         %span.total-quantity{style: "font-size:18px;"} 0
-        件商品
+        件
       %td{style: "vertical-align:middle;"}
         合计￥
         %span.total-amount{style:"font-size:18px;"} 0
       %td 
-        %form.form-inline.col-sm-12{"accept-charset" => "UTF-8", :action => "/transactions/checkout", :method => "post", :role => "form"}
+        %form.form-inline.col-sm-12{"accept-charset" => "UTF-8", :action => "/transactions/checkout", :method => "post", :role => "form", :style => "margin:0px;padding:0px;"}
           %input#quantity.hidden{:name => "quantity", :type => "hidden", :value => "0"}/
           %input#amount.hidden{:name => "amount", :type => "hidden", :value => "0"}/
           %input#order.hidden{:name => "order", :type => "hidden", :value => "0"}/
