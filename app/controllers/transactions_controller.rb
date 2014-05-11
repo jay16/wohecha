@@ -71,7 +71,7 @@ class TransactionsController < ApplicationController
       :total_fee    => "订单金额",
       :seller_actions => "卖家待做",
       :receive_name => "买家名称",
-      :receive_email=> "买家邮箱",
+      :buyer_email => "买家邮箱",
       :receive_mobile => "买家手机号",
       :receive_address => "买家地址",
       :gmt_payment => "付款时间",
@@ -79,6 +79,14 @@ class TransactionsController < ApplicationController
     }
 
     haml :show, layout: :"../layouts/layout"
+  end
+ 
+  # wheth transaction over
+  post "/:id/status" do
+    @transaction = Transaction.first(:id => params[:id])
+    @transaction.update(:status => params[:status])
+
+    redirect "/admin?transaction=#{@transaction.id}"
   end
 
   def find_or_create_transaction!

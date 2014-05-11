@@ -18,6 +18,15 @@
           return alert("error:delete with ajax!");
         }
       });
+    },
+    show_all_teas: function(input) {
+      var is_checked;
+      is_checked = $(input).attr("checked");
+      if (is_checked === "checked") {
+        return $(".tea").removeClass("hidden");
+      } else {
+        return $(".outsale").addClass("hidden");
+      }
     }
   };
 

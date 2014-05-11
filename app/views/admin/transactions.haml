@@ -1,28 +1,45 @@
+= javascript_include_tag "/javascripts/transactions.js"
+
 %h1 订单列表- 我喝茶 
 
 .row{style: "margin-top: -40px;"}
   =link_to "商品列表", "/teas", { class: "btn btn-default right"}
   =link_to "会员列表", "/admin/members", { class: "btn btn-default right"}
 
+.row{style: "margin-top: 5px;"}
+  .col-sm-8
+    %label.control-label{:for => "search"} 搜索
+    %input#search.form-control{:placeholder => "输入完成后按回车键", :type => "text", style: "display:inline;width:80%;"}
+  .col-sm-4
+    %label{class: "right"}
+      %input{:id => "showall", :name => "showall", :value => 1, :type => "checkbox", :onchange => "Transactions.show_all_transactions(this);", class: "right"} 显示所有订单
 
 %table.table.table-striped
   %thead
     %tr
       %th{style: "width:120px"} 订单id
       %th{style: "width:120px"} 买家
+      %th{style: "width:120px"} 联系方式
       %th{style: "width:120px"} 金额
       %th{style: "width:100px"} 状态
-      %th{style: "width:120px"} 创建时间
       %th{style: "width:120px"} 更新时间
       %th{style: "width:50px"} 明细
+      %th{style: "width:50px"} 完成
   %tbody
     - @transactions.each do |transaction|
-      %tr
+      %tr{class: "transaction #{transaction.status ? 'hidden over' : 'wait'}", "data-keywords" => "#{keywords(transaction)}"}
         %td= transaction.out_trade_no
         %td= transaction.receive_name
+        %td= [transaction.receive_mobile, transaction.buyer_email || "no email"].join("<br>")
         %td= transaction.total_fee
-        %td= transaction.trade_status.split("_").join(" ")
-        %td= transaction.created_at.strftime("%Y/%m/%d %H:%M:%S")
+        %td= transaction.seller_actions.split("_").join(" ").downcase
         %td= transaction.updated_at.strftime("%Y/%m/%d %H:%M:%S")
         %td= link_to "明细", "/transactions/#{transaction.out_trade_no}", target: "_blank"
+        %td
+          %form.form-inline{"accept-charset" => "UTF-8", :action => "/transactions/#{transaction.id}/status", :method => "post", :role => "form"}
+            - if transaction.status
+              %input{:name => "status", :value => 0, :type => "checkbox", :checked => "true", :onchange => "$('#transaction_#{transaction.id}_submit').trigger('click');"}/
+            - else
+              %input{:name => "status", :value => 1, :type => "checkbox", :onchange => "$('#transaction_#{transaction.id}_submit').trigger('click');"}/
+            %input.hidden{:name => "commit", :type => "submit", :value => "submit", :id => "transaction_#{transaction.id}_submit"}
 

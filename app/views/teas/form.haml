@@ -1,7 +1,9 @@
 %form{:role => "form", :action => @form_path, :method => "post"}
   .form-group
-    %label{:for => "name"} 名称
-    %input#name.form-control{:placeholder => "name", :type => "text", :name => "tea[name]", :value => "#{@tea.name}"}
+    %label{:for => "name"} 名称 / 上市日期 / 是否下架
+    %br
+    %input#name.form-control{:placeholder => "name", :type => "text", :name => "tea[name]", :value => "#{@tea.name}", style: "width:60%;display:inline;"}
+    %input#market.form-control{:placeholder => "market", :type => "text", :name => "tea[market]", :value => "#{@tea.market || Time.now.strftime('%Y新品')}", style: "width:35%;display:inline;"}
   .form-group
     %label{:for => "from"} 产地
     %input#from.form-control{:placeholder => "from", :type => "text", :name => "tea[from]", :value => "#{@tea.from}"}
@@ -21,5 +23,8 @@
   .form-group
     %label{:for => "desc"} 描述
     <textarea class="form-control" rows="3" name="tea[desc]">#{@tea.desc}</textarea>
+  .form-group
+    %label{:for => "blog"} 博客链接
+    %input#blog.form-control{:placeholder => "blog", :type => "text", :name => "tea[blog]", :value => "#{@tea.blog}"}
   %button.btn.btn-default.btn-primary.right{:type => "submit"} 提交 
   %a.btn.btn-default.right{:href => "/teas"} 返回商品列表

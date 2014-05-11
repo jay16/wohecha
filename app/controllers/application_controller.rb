@@ -5,6 +5,7 @@ class ApplicationController < Sinatra::Base
   # register Sinatra::Auth
 
   helpers ApplicationHelper
+  helpers TransactionsHelper
   helpers HomeHelper
   helpers TeasHelper
   helpers Sinatra::FormHelpers
