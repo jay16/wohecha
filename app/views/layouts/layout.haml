@@ -2,9 +2,9 @@
 !!!
 %html
   %head
-    %title= [SiteConfig.title, SiteConfig.slogan].join("|")
+    %title= [Settings.website.title, Settings.website.slogan].join("|")
     %meta{"http-equiv" => "content-type", content: "text/html", charset: "UTF-8"}
-    %link{href: "#{SiteConfig.favicon}", rel: "shortcut icon"}
+    %link{href: "#{Settings.website.favicon}", rel: "shortcut icon"}
     = javascript_include_tag "/javascripts/jquery.js"
     = javascript_include_tag "/javascripts/bootstrap.min.3.0.3.js"
     = stylesheet_link_tag "/stylesheets/bootstrap.min.3.0.3.css"
@@ -27,3 +27,8 @@
         - else
           .col-sm-10.col-sm-offset-1
             = yield
+
+    .container
+      .row.center
+        .footer= "微信号: " + Settings.contact.weixin
+        .footer &copy; 2014 wohecha.cn

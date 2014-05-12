@@ -2,7 +2,7 @@
     <html lang="en">
     <head>
     <meta charset="utf-8">
-    <title><%= SiteConfig.title %></title>
+    <title><%= Settings.website.title %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -74,6 +74,10 @@
     <%= yield %>
 
     <div class="footer-wrapper">
+      <div class="container">
+        <footer>
+          <small>微信号: <%= Settings.contact.weixin %></small>
+        </footer>
       <div class="container">
         <footer>
           <small>&copy; 2014 wohecha.cn</small>

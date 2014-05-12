@@ -8,12 +8,12 @@
 %table.table.table-striped
   %thead
     %tr
-      %th.dyna-hidden.hidden{style: "width:120px;text-align:center;"} 图片
-      %th{style: "text-align:center;"} 名称
-      %th{style: "width:60px;text-align:center;"} 价格
-      %th.dyna-hidden.hidden{style: "width:30px;text-align:center"} 净重
-      %th{style: "width:100px;text-align:center"} 数量
-      %th{style: "width:50px;text-align:center;"} 小计
+      %th.dyna-hidden.hidden{style: "width:120px;"} 图片
+      %th 名称
+      %th{style: "width:60px;"} 价格
+      %th.dyna-hidden.hidden{style: "width:30px;"} 净重
+      %th{style: "width:100px;"} 数量
+      %th{style: "width:50px;"} 小计
   %tbody
     - @teas.each do |tea|
       %tr.tea{id: "tea_#{tea.id}"}

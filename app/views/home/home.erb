@@ -207,8 +207,8 @@
                 <p></p>
                 <p><%= tea.from %> </br><%= "价格：#{tea.price} #{tea.unit1}／#{tea.unit2}；   净重：#{tea.weight.to_i}#{tea.unit3}" %></p>
                 <p><%= tea.desc %></p>
-                  <a href="<%= tea.blog %>" class="more-link"><%= SiteConfig.post.readmore %></a>
-                  <a href="/cart?tea=<%= tea.id %>" class="more-link" style="float:right;margin-top:0px;"><%= SiteConfig.post.add_to_shopcart %></a>
+                  <a href="<%= tea.blog %>" class="more-link"><%= Settings.post.readmore %></a>
+                  <a href="/cart?tea=<%= tea.id %>" class="more-link" style="float:right;margin-top:0px;"><%= Settings.post.add_to_shopcart %></a>
               </div>
             </div>
             <!-- /.inside -->
