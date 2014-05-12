@@ -1,5 +1,5 @@
 #encoding: utf-8
-window.Teas =
+window.ShopCart =
   chk_total: ->
     total_amount = 0 #购物车商品总金额
     total_quantity= 0 #购物车商品数量
@@ -46,7 +46,7 @@ window.Teas =
     count += 1
     $quantity.attr("value", count)
     $("#"+input_id+"_amount").text(Math.round(count*price*10)/10)
-    Teas.chk_total()
+    ShopCart.chk_total()
 
   minus: (input_id, price) ->
     $quantity = $("#" + input_id+"_quantity")
@@ -55,7 +55,20 @@ window.Teas =
       count = count - 1
       $quantity.attr("value", count)
       $("#"+input_id+"_amount").text(Math.round(count*price*10)/10)
-      Teas.chk_total()
+      ShopCart.chk_total()
 
+  dyna_resize_shop_cart: ->
+    # Get the dimensions of the viewport
+    width = $(window).width()
+    if width > 550
+      $(".dyna-hidden").removeClass "hidden"
+    else
+      $(".dyna-hidden").addClass "hidden"
+
+
+# do when load this
 $ -> 
-  Teas.chk_total()
+  ShopCart.chk_total()
+  ShopCart.dyna_resize_shop_cart
+
+$(window).resize ShopCart.dyna_resize_shop_cart

@@ -3,29 +3,37 @@
 
 %a.btn.btn-default.btn-xs.right{href: "/home", style: "margin-top:-40px;"} 返回home
 
+%div#browser
+
 %table.table.table-striped
   %thead
     %tr
+      %th.dyna-hidden.hidden{style: "width:120px;text-align:center;"} 图片
       %th{style: "text-align:center;"} 名称
       %th{style: "width:60px;text-align:center;"} 价格
+      %th.dyna-hidden.hidden{style: "width:30px;text-align:center"} 净重
       %th{style: "width:100px;text-align:center"} 数量
       %th{style: "width:50px;text-align:center;"} 小计
   %tbody
     - @teas.each do |tea|
       %tr.tea{id: "tea_#{tea.id}"}
+        %td.dyna-hidden.hidden <image src="./images/#{tea.image}" style="width:120px;">
         %td
           %span.name= tea.name
         %td
           %span.price= tea.price.to_f.round(2)
           = tea.unit1 + "/" + tea.unit2
+        %td.dyna-hidden.hidden=tea.weight.to_s + tea.unit3
         %td
-          %a.minus.btn.btn-default.btn-xs.btn-primary{onclick: "Teas.minus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 3px 0px 0px 3px;"}
+          %a.minus.btn.btn-default.btn-xs.btn-primary{onclick: "ShopCart.minus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 3px 0px 0px 3px;"}
             %i.glyphicon.glyphicon-minus
           %input.form-control.quantity{id: "tea_#{tea.id}_quantity", min: "0", style: "padding:0px;width:38px;display:inline;line-height:22px;height:22px;font-size:8px;border-radius: 0px;margin: auto -5px;text-align:center;", type: "number", value: "#{chk_params(tea.id)}", disabled: "disabled"}
-          %a.plus.btn.btn-default.btn-xs.btn-primary{onclick: "Teas.plus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 0px 3px 3px 0px;"}
+          %a.plus.btn.btn-default.btn-xs.btn-primary{onclick: "ShopCart.plus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 0px 3px 3px 0px;"}
             %i.glyphicon.glyphicon-plus
         %td.amount{id: "tea_#{tea.id}_amount", style: "text-align: center;"} 0
     %tr.success
+      %td.dyna-hidden.hidden
+      %td.dyna-hidden.hidden
       %td{colspan: "2", style: "text-align: right;vertical-align:middle;"}
         %span.total-quantity{style: "font-size:18px;"} 0
         件

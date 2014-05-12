@@ -1,5 +1,5 @@
 (function() {
-  window.Teas = {
+  window.ShopCart = {
     chk_total: function() {
       var order_list, total_amount, total_quantity;
       total_amount = 0;
@@ -47,7 +47,7 @@
       count += 1;
       $quantity.attr("value", count);
       $("#" + input_id + "_amount").text(Math.round(count * price * 10) / 10);
-      return Teas.chk_total();
+      return ShopCart.chk_total();
     },
     minus: function(input_id, price) {
       var $quantity, count;
@@ -57,13 +57,25 @@
         count = count - 1;
         $quantity.attr("value", count);
         $("#" + input_id + "_amount").text(Math.round(count * price * 10) / 10);
-        return Teas.chk_total();
+        return ShopCart.chk_total();
+      }
+    },
+    dyna_resize_shop_cart: function() {
+      var width;
+      width = $(window).width();
+      if (width > 550) {
+        return $(".dyna-hidden").removeClass("hidden");
+      } else {
+        return $(".dyna-hidden").addClass("hidden");
       }
     }
   };
 
   $(function() {
-    return Teas.chk_total();
+    ShopCart.chk_total();
+    return ShopCart.dyna_resize_shop_cart;
   });
+
+  $(window).resize(ShopCart.dyna_resize_shop_cart);
 
 }).call(this);

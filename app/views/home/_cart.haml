@@ -23,10 +23,10 @@
           =" " + tea.unit1 + "/" + tea.unit2
         %td=tea.weight.to_s + tea.unit3
         %td
-          %a.minus.btn.btn-default.btn-xs.btn-primary{onclick: "Teas.minus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 3px 0px 0px 3px;"}
+          %a.minus.btn.btn-default.btn-xs.btn-primary{onclick: "ShopCart.minus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 3px 0px 0px 3px;"}
             %i.glyphicon.glyphicon-minus
           %input.form-control.quantity{id: "tea_#{tea.id}_quantity", min: "0", style: "padding:0px;width:50px;display:inline;line-height:22px;height:22px;font-size:8px;border-radius: 0px;margin: auto -5px;text-align:center;", type: "number", value: "#{chk_params(tea.id)}", disabled: "disabled"}
-          %a.plus.btn.btn-default.btn-xs.btn-primary{onclick: "Teas.plus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 0px 3px 3px 0px;"}
+          %a.plus.btn.btn-default.btn-xs.btn-primary{onclick: "ShopCart.plus('tea_#{tea.id}', #{tea.price});", style: "border-radius: 0px 3px 3px 0px;"}
             %i.glyphicon.glyphicon-plus
         %td.amount{id: "tea_#{tea.id}_amount"} 0
     %tr.success
