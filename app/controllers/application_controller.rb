@@ -34,7 +34,7 @@ class ApplicationController < Sinatra::Base
   ##############################################
   #authen user
   def authenticate! 
-    unless session[:login_state]
+    if request.cookies["login_state"].to_s.strip.empty?
       # 记录登陆前的path，登陆成功后返回至此path
 
       flash[:notice] = "继续操作前请登录."

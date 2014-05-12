@@ -1,16 +1,18 @@
 = javascript_include_tag "/javascripts/transactions.js"
 
-%h1 订单列表- 我喝茶 
-
-.row{style: "margin-top: -40px;"}
-  =link_to "商品列表", "/teas", { class: "btn btn-default right"}
-  =link_to "会员列表", "/admin/members", { class: "btn btn-default right"}
+.row
+  .col-sm-6
+    %h1 订单列表- 我喝茶 
+  .col-sm-6{style: "margin-top:25px;"}
+    =link_to "商品列表", "/teas", { class: "btn btn-default right"}
+    =link_to "会员列表", "/admin/members", { class: "btn btn-default right"}
 
 .row{style: "margin-top: 5px;"}
   .col-sm-8
     %label.control-label{:for => "search"} 搜索
-    %input#search.form-control{:placeholder => "输入完成后按回车键", :type => "text", style: "display:inline;width:80%;"}
-  .col-sm-4
+    %input#search.form-control{:placeholder => "输入关键字", :type => "text", style: "display:inline;width:60%;"}
+    %span.search-result
+  .col-sm-4{style: "margin-top:10px;"}
     %label{class: "right"}
       %input{:id => "showall", :name => "showall", :value => 1, :type => "checkbox", :onchange => "Transactions.show_all_transactions(this);", class: "right"} 显示所有订单
 

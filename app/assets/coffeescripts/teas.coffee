@@ -24,4 +24,27 @@ window.Teas=
     else
       $(".outsale").addClass("hidden")
       
+  # search tea with keywords 
+  search: (input) ->
+    keyword = $(input).val()
+    # when keyword is empty then show normal
+    if !keyword.trim()
+      $(".tea").removeClass("hidden")
+      $(".outsale").addClass("hidden")
+      $(".search-result").text("")
+    else
+      count = 0
+      $(".tea").each ->
+        keywords = $(this).data("keywords") 
+        if keywords.indexOf(keyword) >= 0
+          $(this).removeClass("hidden")
+          count += 1
+        else
+          $(this).addClass("hidden")
 
+        $(".search-result").text("["+count+"] results.")
+
+$ ->
+  # detect the change
+  $('input#search').bind "change keyup input", ->
+    Teas.search(this)

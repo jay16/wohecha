@@ -1,20 +1,24 @@
 (function() {
   window.Transactions = {
     search: function(input) {
-      var keyword;
+      var count, keyword;
       keyword = $(input).val();
       if (!keyword.trim()) {
         $(".transaction").removeClass("hidden");
-        return $(".over").addClass("hidden");
+        $(".over").addClass("hidden");
+        return $(".search-result").text("");
       } else {
+        count = 0;
         return $(".transaction").each(function() {
           var keywords;
           keywords = $(this).data("keywords");
           if (keywords.indexOf(keyword) >= 0) {
-            return $(this).removeClass("hidden");
+            $(this).removeClass("hidden");
+            count += 1;
           } else {
-            return $(this).addClass("hidden");
+            $(this).addClass("hidden");
           }
+          return $(".search-result").text("[" + count + "] results.");
         });
       }
     },

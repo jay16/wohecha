@@ -27,7 +27,35 @@
       } else {
         return $(".outsale").addClass("hidden");
       }
+    },
+    search: function(input) {
+      var count, keyword;
+      keyword = $(input).val();
+      if (!keyword.trim()) {
+        $(".tea").removeClass("hidden");
+        $(".outsale").addClass("hidden");
+        return $(".search-result").text("");
+      } else {
+        count = 0;
+        return $(".tea").each(function() {
+          var keywords;
+          keywords = $(this).data("keywords");
+          if (keywords.indexOf(keyword) >= 0) {
+            $(this).removeClass("hidden");
+            count += 1;
+          } else {
+            $(this).addClass("hidden");
+          }
+          return $(".search-result").text("[" + count + "] results.");
+        });
+      }
     }
   };
+
+  $(function() {
+    return $('input#search').bind("change keyup input", function() {
+      return Teas.search(this);
+    });
+  });
 
 }).call(this);

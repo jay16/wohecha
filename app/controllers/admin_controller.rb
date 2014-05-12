@@ -27,7 +27,8 @@ class AdminController < ApplicationController
 
   # GET /admin/login
   get "/login" do
-    if session[:login_state]
+    unless request.cookies["login_state"].to_s.strip.empty?
+
       redirect "/admin"
     else
       haml :login, layout: :"../layouts/layout"
@@ -37,10 +38,14 @@ class AdminController < ApplicationController
   post "/chk_login" do
     if params[:name] == SiteConfig.login.name and 
        params[:password] == SiteConfig.login.password then
-      session[:login_state] = true
+      # 必须指定path，否则cookie只在此path下有效
+      # authencate! 在application_controller下，即"/"
+      response.set_cookie "login_state", {:value=> remote_ip, :path => "/", :max_age => "2592000"}
+
       redirect "/admin"
     else
-      session[:login_state] = false
+      response.set_cookie "login_state", {:value=> "", :path => "/", :max_age => "2592000"}
+
       flash[:notice] = "登陆失败，请重新输入."
       redirect "/admin/login"
     end
