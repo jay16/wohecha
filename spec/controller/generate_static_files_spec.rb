@@ -21,7 +21,6 @@ describe "GenerateStaticFiles" do
     get "/admin/template?template=home" 
     generate_static_template(response, "home.erb")
 
-    expect(response.body).to include("太湖西山碧螺春")
     expect(response.body.size).to be > 0
   end
 
