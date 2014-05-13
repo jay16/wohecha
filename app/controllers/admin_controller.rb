@@ -8,7 +8,7 @@ class AdminController < ApplicationController
   #[local] get "/hello" => [global] get "/admin/hello"
   #[global] get "/admin/hello" => [local] request.path_info == "/hello"
   before do 
-    pass if %w(/login /chk_login).include?(request.path_info)
+    pass if %w(/login /chk_login /home /cart).include?(request.path_info)
     authenticate!
   end
 
@@ -50,4 +50,17 @@ class AdminController < ApplicationController
       redirect "/admin/login"
     end
   end
+
+  #generate static page to /views/home
+  #current function: /home /cart
+  get "/template" do
+    @teas = Tea.all(:onsale => true)
+
+    if params[:template] == "home"
+      erb :template_home, layout: :"../layouts/layout.v2"
+    else
+      haml (params[:mobile] ? :template_mobile_cart : :template_cart), layout: :"../layouts/layout"
+    end
+  end
+
 end

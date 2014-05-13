@@ -21,7 +21,7 @@ class HomeController < ApplicationController
     @teas = Tea.all(:onsale => true)
     #@teas.each { |tea| tea.update(:price => tea.id * 0.01) }
 
-    haml :cart, layout: :"../layouts/layout"
+    haml (mobile? ? :mobile_cart : :cart), layout: :"../layouts/layout"
   end
 
   # member#subscribe
@@ -35,8 +35,8 @@ class HomeController < ApplicationController
 
     #send email when subscribe successfully
     uri = URI.parse("http://main.intfocus.com/open/sendmailds")
-    query = { :id => 381, :emails => params[:email] }
-    uri.query = URI.encode_www_form(query)
+    query = { :id => 381, :emails => @member.email, :uid => 65 }
+    uri.query = query.map{|k, v| [k, v].join("=")}.join("&")#URI.encode_www_form(query)
     res = Net::HTTP.get(uri) 
 
     erb :subscribe, layout: :"../layouts/layout.v2"

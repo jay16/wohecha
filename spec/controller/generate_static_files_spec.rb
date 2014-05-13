@@ -6,18 +6,25 @@ describe "GenerateStaticFiles" do
   def request;  last_request;  end
 
   def generate_static_template(response, file)
-    static_home = File.join(ENV["APP_ROOT_PATH"], file)
+    static_home = File.join(ENV["APP_ROOT_PATH"], "app/views/home", file)
     File.open(static_home, "a+") do |file|
       file.puts response.body
     end
   end
 
-  it "generate statics files" do
-    %w(home cart).each do |path|
-      get "/#{path}" 
+  it "generate /home files" do
+    get "/admin/template?template=home" 
+    generate_static_template(response, "home.erb")
+  end
 
-      generate_static_template(response, "#{path}.erb")
-    end
+  it "generate /cart browser files" do
+    get "/admin/template?template=cart" 
+    generate_static_template(response, "cart.erb")
+  end
+
+  it "generate /cart mobile browser files" do
+    get "/admin/template?template=cart&mobile=true"
+    generate_static_template(response, "mobile_cart.erb")
   end
 end
 
