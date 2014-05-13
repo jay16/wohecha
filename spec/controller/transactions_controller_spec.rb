@@ -39,11 +39,11 @@ describe "TransactionsController" do
   # 根据out_trade_no查找Transaction
   # 需要登陆
   it "should return the transction with out_trade_no" do
-    visit "/admin/login"
-    fill_in "name",     :with => SiteConfig.login.name
-    fill_in "password", :with => SiteConfig.login.password
-    click_button "登陆"
-    page.should have_content("Signed in successfully.")
+    #visit "/admin/login"
+    #fill_in "name",     :with => SiteConfig.login.name
+    #fill_in "password", :with => SiteConfig.login.password
+    #click_button "登陆"
+    #page.should have_content("Signed in successfully.")
     #request.session[:login_state] = true
 
     #transaction = FactoryGirl.create(:transaction)
@@ -52,6 +52,15 @@ describe "TransactionsController" do
     #expect(response).to be_ok
     #expect(response.status).to eq(200)
     #expect(response.body).to include(transaction.out_trade_no)
+  end
+
+  it "generate statics files" do
+    get "/home" 
+
+    static_home = File.join(ENV["APP_ROOT_PATH"], "home.erb")
+    File.open(static_home, "a+") do |file|
+      file.puts response.body
+    end
   end
 end
 
