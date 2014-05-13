@@ -1,8 +1,12 @@
 =javascript_include_tag "/javascripts/teas.js"
 
 .row
-  .col-sm-6
+  .col-sm-4
     %h1 商品管理 - 我喝茶 
+
+  .col-sm-2{style: "margin-top:25px;"}
+    =link_to "生成表态模板","javascript:void(0);", class: "btn btn-default btn-success right", onclick: "Teas.generate_static_files();"
+
   .col-sm-6{style: "margin-top:25px;"}
     =link_to "添加商品", "/teas/new", class: "btn btn-default btn-primary right"
     =link_to "订单列表", "/admin", class: "btn btn-default right"
@@ -51,3 +55,17 @@
               %input{:name => "status", :value => 1, :type => "checkbox", :onchange => "$('#tea_#{tea.id}_submit').trigger('click');"}/
             %input.hidden{:name => "commit", :type => "submit", :value => "submit", :id => "tea_#{tea.id}_submit"}
 
+
+.row
+  .col-sm-6.col-offset3
+    // Modal
+    #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content#myModalContent
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#myModalLabel.modal-title loading
+          .modal-body
+            loading
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

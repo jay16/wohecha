@@ -24,6 +24,18 @@ window.Teas=
     else
       $(".outsale").addClass("hidden")
       
+  #generate static files with ajax
+  #trigger to generate static files
+  generate_static_files: ->
+    App.showLoading()
+    $.ajax
+      url: "/admin/generate"
+      type: "post"
+      success: (data) ->
+        $("#myModalContent").html data
+        $("#myModal").modal "show"
+        App.hideLoading()
+
   # search tea with keywords 
   search: (input) ->
     keyword = $(input).val()

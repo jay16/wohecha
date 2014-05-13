@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title 我喝茶 | 在路上
+    %title= [Settings.website.title, Settings.website.slogan].join(" | ")
     %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
     / Set the descritpion of you site
     %meta{:content => "我喝茶", :name => "description"}

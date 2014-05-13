@@ -28,6 +28,18 @@
         return $(".outsale").addClass("hidden");
       }
     },
+    generate_static_files: function() {
+      App.showLoading();
+      return $.ajax({
+        url: "/admin/generate",
+        type: "post",
+        success: function(data) {
+          $("#myModalContent").html(data);
+          $("#myModal").modal("show");
+          return App.hideLoading();
+        }
+      });
+    },
     search: function(input) {
       var count, keyword;
       keyword = $(input).val();

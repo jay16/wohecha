@@ -51,8 +51,27 @@ class AdminController < ApplicationController
     end
   end
 
+  # execute linux shell command
+  # return array with command result
+  # [execute status, execute result] 
+  def run_command(cmd)
+    IO.popen(cmd) do |stdout|
+      stdout.reject(&:empty?)
+    end.unshift($?.exitstatus.zero?)
+  end 
+
+
+  #trigger rspec to load /admin/template
+  #to generate static file
+  post "/generate" do
+    cmd = "cd /Users/lijunjie/Code/work/wohecha && bundle exec rspec spec/controller/generate_static_files_spec.rb"
+    @result = run_command(cmd).join("<br>")
+    haml :_modal, layout: false
+  end
+
   #generate static page to /views/home
   #current function: /home /cart
+  #will be load in rspec to insert .erb files
   get "/template" do
     @teas = Tea.all(:onsale => true)
 
