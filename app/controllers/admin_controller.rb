@@ -28,7 +28,6 @@ class AdminController < ApplicationController
   # GET /admin/login
   get "/login" do
     unless request.cookies["login_state"].to_s.strip.empty?
-
       redirect "/admin"
     else
       haml :login, layout: :"../layouts/layout"
@@ -36,13 +35,14 @@ class AdminController < ApplicationController
   end
 
   post "/chk_login" do
-    if params[:name] == SiteConfig.login.name and 
-       params[:password] == SiteConfig.login.password then
+    # chk name and password
+    if params[:name] == Settings.login.name and 
+       params[:password] == Settings.login.password
       # 必须指定path，否则cookie只在此path下有效
       # authencate! 在application_controller下，即"/"
       response.set_cookie "login_state", {:value=> remote_ip, :path => "/", :max_age => "2592000"}
 
-      redirect "/admin"
+      redirect request.cookies["before_login_path"] || "/admin"
     else
       response.set_cookie "login_state", {:value=> "", :path => "/", :max_age => "2592000"}
 

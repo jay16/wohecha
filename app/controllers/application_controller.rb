@@ -36,6 +36,7 @@ class ApplicationController < Sinatra::Base
   def authenticate! 
     if request.cookies["login_state"].to_s.strip.empty?
       # 记录登陆前的path，登陆成功后返回至此path
+      response.set_cookie "before_login_path", {:value=> request.env["REQUEST_PATH"], :path => "/", :max_age => "2592000"}
 
       flash[:notice] = "继续操作前请登录."
       redirect "/admin/login"
