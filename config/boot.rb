@@ -26,7 +26,7 @@ def run_command(cmd)
 end 
 
 status, *result = run_command("whoami")
-if result[0] == "root"
+if result[0].strip == "root"
   system("chown -R nobody:nobody #{ENV['APP_ROOT_PATH']} && chmod -R 777 #{ENV['APP_ROOT_PATH']}")
 else
   warn "#{result[0].strip} can't execute chown/chmod"
