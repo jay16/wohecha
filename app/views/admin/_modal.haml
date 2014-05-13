@@ -2,6 +2,8 @@
   %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
   %h4#myModalLabel.modal-title 生成静态模板 
 .modal-body{style:"max-height:300px;overflow:auto;padding:20px 50px;"}
+  %string= @status
+  %br
   %code= @result
 .modal-footer
   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 关闭

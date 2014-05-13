@@ -64,8 +64,11 @@ class AdminController < ApplicationController
   #trigger rspec to load /admin/template
   #to generate static file
   post "/generate" do
-    cmd = "cd /Users/lijunjie/Code/work/wohecha && bundle exec rspec spec/controller/generate_static_files_spec.rb"
-    @result = run_command(cmd).join("<br>")
+    cmd = "cd #{ENV['APP_ROOT_PATH']} && bundle exec rspec spec/controller/generate_static_files_spec.rb"
+    status, *result = run_command(cmd)
+    @status = "执行" + (status ? "成功" : "失败") + ":"
+    @result = result.join("<br>")
+
     haml :_modal, layout: false
   end
 
