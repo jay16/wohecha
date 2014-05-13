@@ -30,8 +30,6 @@ class HomeController < ApplicationController
   # send subscribe email when post successfully no matter email exist
   post "/subscribe" do
     if params[:email]
-      redirect "/home"
-    else
       @member = Member.first_or_create(:email => params[:email]) 
 
       #记录最后一次订阅的ip与browser
@@ -46,6 +44,8 @@ class HomeController < ApplicationController
       res = Net::HTTP.get(uri) 
 
       erb :subscribe, layout: :"../layouts/layout.v2"
+    else
+      redirect "/home"
     end
   end
 
