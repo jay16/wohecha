@@ -57,6 +57,7 @@ window.ShopCart =
       $("#"+input_id+"_amount").text(Math.round(count*price*10)/10)
       ShopCart.chk_total()
 
+  #for mobile browser
   dyna_resize_shop_cart: ->
     # Get the dimensions of the viewport
     width = $(window).width()
@@ -65,10 +66,21 @@ window.ShopCart =
     else
       $(".dyna-hidden").addClass "hidden"
 
+  init_shop_cart: ->
+    pairs = window.location.search.substring(1).split("&")
+    obj = {}
+    for i of pairs
+      continue  if pairs[i] is ""
+      pair = pairs[i].split("=")
+      obj[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1])
+
+    if obj["tea"]
+      $("#tea_"+obj["tea"]).find(".plus").trigger("click")
 
 # do when load this
 $ -> 
+  ShopCart.init_shop_cart()
   ShopCart.chk_total()
-  ShopCart.dyna_resize_shop_cart
+  ShopCart.dyna_resize_shop_cart()
 
 $(window).resize ShopCart.dyna_resize_shop_cart

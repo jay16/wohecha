@@ -68,12 +68,28 @@
       } else {
         return $(".dyna-hidden").addClass("hidden");
       }
+    },
+    init_shop_cart: function() {
+      var i, obj, pair, pairs;
+      pairs = window.location.search.substring(1).split("&");
+      obj = {};
+      for (i in pairs) {
+        if (pairs[i] === "") {
+          continue;
+        }
+        pair = pairs[i].split("=");
+        obj[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+      }
+      if (obj["tea"]) {
+        return $("#tea_" + obj["tea"]).find(".plus").trigger("click");
+      }
     }
   };
 
   $(function() {
+    ShopCart.init_shop_cart();
     ShopCart.chk_total();
-    return ShopCart.dyna_resize_shop_cart;
+    return ShopCart.dyna_resize_shop_cart();
   });
 
   $(window).resize(ShopCart.dyna_resize_shop_cart);
