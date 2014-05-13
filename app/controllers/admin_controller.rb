@@ -8,7 +8,7 @@ class AdminController < ApplicationController
   #[local] get "/hello" => [global] get "/admin/hello"
   #[global] get "/admin/hello" => [local] request.path_info == "/hello"
   before do 
-    pass if %w(/login /chk_login /home /cart).include?(request.path_info)
+    pass if %w(/login /chk_login /template).include?(request.path_info)
     authenticate!
   end
 
@@ -78,10 +78,15 @@ class AdminController < ApplicationController
   get "/template" do
     @teas = Tea.all(:onsale => true)
 
-    if params[:template] == "home"
+    case params[:template]
+    when "home"
       erb :template_home, layout: :"../layouts/layout.v2"
+    when "cart"
+      haml :template_cart, layout: :"../layouts/layout"
+    when "mobile_cart"
+      haml :template_mobile_cart, layout: :"../layouts/layout"
     else
-      haml (params[:mobile] ? :template_mobile_cart : :template_cart), layout: :"../layouts/layout"
+       "<h1> what are you doing</h1>"
     end
   end
 

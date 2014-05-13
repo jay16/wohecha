@@ -10,17 +10,19 @@ class HomeController < ApplicationController
   end
 
   # home page only show onsale product
+  # render static files without layout 
+  # already render layout when generate static file 
   get "/home" do
     @teas = Tea.all(:onsale => true)
 
-    erb :home, layout: :"../layouts/layout.v2"
+    erb :home#, layout: :"../layouts/layout.v2"
   end
 
   # shop cart
-  # render static files
-  # 
+  # render static files without layout 
+  # already render layout when generate static file 
   get "/cart" do
-    haml (mobile? ? :mobile_cart : :cart), layout: :"../layouts/layout"
+    erb (mobile? ? :mobile_cart : :cart)#, layout: :"../layouts/layout"
   end
 
   # member#subscribe
