@@ -23,9 +23,8 @@ module ApplicationHelper
   # generate keywords from obj
   # for js search function
   def keywords(obj)
-    dirty_words = %w(ip browser created_at updated_at)
+    dirty_words = %w(ip browser created_at updated_at _key _collection _repository _persistence_state)
     obj.instance_variables.reject { |v| dirty_words.include?(v.to_s.gsub("@","")) }
-    .map { |var| obj.instance_variable_get(var) }
-    .uniq.find_all { |i| i.is_a?(String) }.join(" ")
+    .map { |var| obj.instance_variable_get(var).to_s }.join(" ")
   end
 end
