@@ -35,9 +35,10 @@ class BlogsController < ApplicationController
     title = params[:title].strip
     shell_str = %Q(cd #{Settings.octopress.path} && bundle exec rake new_post["#{title}"])
     status, *result = run_shell(shell_str)
-    result.unshift(status == true ? "执行成功" : "执行失败")
+    #result.unshift(status == true ? "执行成功" : "执行失败")
+    puts result
 
-    flash[:notice] = result.join("<br>")
+    flash[:notice] = title + " - 创建" + (status == true ? "成功!" : "失败!")
     redirect "/blogs"
   end
 
@@ -57,8 +58,10 @@ class BlogsController < ApplicationController
   post "/update" do
     markdown_path = File.join(@post_path, params[:post])
     File.open(markdown_path, "w+") { |file| file.puts(params[:content]) } 
+    lines = IO.readlines(markdown_path).first(7)
+    title = lines.grep(/^title:/).first.scan(/^title:\s+"(.*?)"/).flatten.first
 
-    flash[:notice] = params[:post] + " 更新成功!"
+    flash[:notice] = title + " - 更新成功!"
     redirect "/blogs"
   end
 
@@ -66,6 +69,9 @@ class BlogsController < ApplicationController
   delete "/remove" do
     # remove markdown
     markdown_path = File.join(@post_path, params[:post])
+
+    lines = IO.readlines(markdown_path).first(7)
+    title = lines.grep(/^title:/).first.scan(/^title:\s+"(.*?)"/).flatten.first
     FileUtils.rm(markdown_path) if File.exist?(markdown_path)
 
     # remove images
@@ -73,7 +79,7 @@ class BlogsController < ApplicationController
     image_path = File.join(Settings.octopress.path, "source/images/posts", folder)
     FileUtils.rm_rf(image_path) if File.exist?(image_path)
 
-    flash[:notice] = params[:post] + " 删除成功!"
+    flash[:notice] = title + " - 删除成功!"
     redirect "/blogs"
   end
 
@@ -81,8 +87,9 @@ class BlogsController < ApplicationController
     shell_str = %Q(cd #{Settings.octopress.path} && bundle exec rake generate)
     status, *result = run_shell(shell_str)
     result.unshift(status == true ? "执行成功" : "执行失败")
+    puts result
 
-    flash[:notice] = result.join("<br>")
+    flash[:notice] = "生成静态博文 - 执行" + (status == true ? "成功!" : "失败!")
     redirect "/blogs"
   end
 

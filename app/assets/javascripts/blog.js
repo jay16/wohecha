@@ -8,8 +8,9 @@
         }
       });
     },
-    removeBlog: function(markdown) {
-      $("#myModal2 input[type='text']").val(markdown);
+    removeBlog: function(title, markdown) {
+      $("#inputTitle").val(title);
+      $("#inputPost").val(markdown);
       return $("#myModal2").modal("show");
     },
     inputMonitor: function(self, target) {

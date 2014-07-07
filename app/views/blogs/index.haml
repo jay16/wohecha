@@ -36,7 +36,7 @@
           %a.btn.btn-default.btn-link{href:"/blogs/edit?post=#{markdown}", "data-toggle" => "tooltip", "data-original-title" => "编辑博文[#{title}]"}
             %span.glyphicon.glyphicon-edit
         %td
-          %a.btn.btn-default.btn-link{onclick:"Blog.removeBlog('#{markdown}')", "data-toggle" => "tooltip", "data-original-title" => "删除博文[#{title}]", rel: "nofollow"}
+          %a.btn.btn-default.btn-link{onclick:"Blog.removeBlog('#{title}', '#{markdown}')", "data-toggle" => "tooltip", "data-original-title" => "删除博文[#{title}]", rel: "nofollow"}
             %span.glyphicon.glyphicon-trash
 
 / Modal
@@ -63,7 +63,8 @@
       .modal-body{style: "min-height:70px;"}
         %form.form-horizontal{"accept-charset" => "UTF-8", action: "/blogs/remove", method: "post", style: "width:70%;display:inline;"}
           %input{type: "hidden", name: "_method", value: "delete"}
-          %input.form-control{name: "post", value: "", type: "text", placeholder: "博文标题", style: "width:70%;display:inline;text-decoration:line-through;", readonly: "readonly"}
+          %input#inputPost{type: "hidden", name: "post", value: ""}
+          %input#inputTitle.form-control{name: "title", value: "", type: "text", placeholder: "博文标题", style: "width:70%;display:inline;text-decoration:line-through;", readonly: "readonly"}
           %input.btn.btn-primary{type: "submit"}
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

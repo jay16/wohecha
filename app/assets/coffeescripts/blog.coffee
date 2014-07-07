@@ -6,8 +6,9 @@ window.Blog =
       copy: ->
         val
 
-  removeBlog: (markdown) ->
-    $("#myModal2 input[type='text']").val(markdown);
+  removeBlog: (title, markdown) ->
+    $("#inputTitle").val(title);
+    $("#inputPost").val(markdown);
     $("#myModal2").modal("show")
 
   inputMonitor: (self, target) ->
