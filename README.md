@@ -20,7 +20,7 @@ map("/blogs")        { run BlogsController }
 map("/")             { run HomeController }
 ````
 
-# 博文管理
+## 博文管理
 
   1. 其实是以代码管理代码，博文框架为octopress，与该项目同路径不同文件夹；
   2. 路径信息在config/setting.yaml中octopress.path配置;
