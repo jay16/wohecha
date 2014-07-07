@@ -8,6 +8,7 @@ class ApplicationController < Sinatra::Base
   helpers TransactionsHelper
   helpers HomeHelper
   helpers TeasHelper
+  helpers BlogsHelper
   helpers Sinatra::FormHelpers
   
   enable :sessions, :logging, :dump_errors, :raise_errors, :static, :method_override
@@ -50,4 +51,8 @@ class ApplicationController < Sinatra::Base
   def remote_browser
     request.env["HTTP_USER_AGENT"] || "n-i-l"
   end
+
+  def run_shell(cmd)
+    IO.popen(cmd) { |stdout| stdout.reject(&:empty?) }.unshift($?.exitstatus.zero?)
+  end 
 end

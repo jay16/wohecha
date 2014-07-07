@@ -186,6 +186,10 @@ module Sinatra
     end
 
     def hash_to_html_attrs(options={})
+      new_hash = {}
+      options.each_pair { |k, v| new_hash[k.to_sym] = v }
+      options = new_hash
+
       html_attrs = ""
       options.keys.sort.each do |key|
         next if options[key].nil? # do not include empty attributes

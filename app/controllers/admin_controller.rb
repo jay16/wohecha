@@ -25,6 +25,10 @@ class AdminController < ApplicationController
     haml :members, layout: :"../layouts/layout"
   end
 
+  get "/blogs" do
+    post_path = File.join(Settings.octopress.path,"source/_posts") 
+  end
+
   # GET /admin/login
   get "/login" do
     unless request.cookies["login_state"].to_s.strip.empty?

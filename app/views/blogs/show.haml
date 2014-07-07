@@ -1,0 +1,8 @@
+.row{style: "margin: 10px auto;"}
+  %h2= params[:post]
+
+  %a.btn.btn-default.btn-sm.right{href: "/blogs/edit?post=#{params[:post]}", style: "margin-top: -35px;", "data-toggle" => "tooltip", "data-original-title" => "编辑Campaign"}
+    %span.glyphicon.glyphicon-edit
+
+.row
+  %pre= @content

@@ -3,8 +3,10 @@ module ApplicationHelper
   # flash/notice message will show on layout
   # when redirect
   def notice_message
-     #close = link_to("x", "#", { :class => "close", "data-dismiss" => "alert" })
-     tag(:div, flash[:notice], { :class => "alert alert-success" }) if flash[:notice]
+    unless flash[:notice].nil?
+     close = link_to("&times;", "#", class: "close", "data-dismiss" => "alert")
+     tag(:div, "#{close}#{flash[:notice]}", { class: "alert alert-success", role: "alert" }) 
+    end
   end
 
   MOBILE_USER_AGENTS =  'palm|blackberry|nokia|phone|midp|mobi|symbian|chtml|ericsson|minimo|' +

@@ -1,0 +1,35 @@
+.btn-toolbar{"data-role" => "editor-toolbar", "data-target" => "#editor"}
+  .btn-group
+    %a.btn{"data-edit" => "bold", "data-original-title" => "Bold (Ctrl/Cmd+B)", :title => ""}
+      %i.icon-bold
+    %a.btn{"data-edit" => "italic", "data-original-title" => "Italic (Ctrl/Cmd+I)", :title => ""}
+      %i.icon-italic
+    %a.btn{"data-edit" => "strikethrough", "data-original-title" => "Strikethrough", :title => ""}
+      %i.icon-strikethrough
+    %a.btn{"data-edit" => "underline", "data-original-title" => "Underline (Ctrl/Cmd+U)", :title => ""}
+      %i.icon-underline
+  .btn-group
+    %a.btn{"data-edit" => "insertunorderedlist", "data-original-title" => "Bullet list", :title => ""}
+      %i.icon-list-ul
+    %a.btn{"data-edit" => "insertorderedlist", "data-original-title" => "Number list", :title => ""}
+      %i.icon-list-ol
+    %a.btn{"data-edit" => "outdent", "data-original-title" => "Reduce indent (Shift+Tab)", :title => ""}
+      %i.icon-indent-left
+    %a.btn{"data-edit" => "indent", "data-original-title" => "Indent (Tab)", :title => ""}
+      %i.icon-indent-right
+  .btn-group
+    %a.btn.btn-info{"data-edit" => "justifyleft", "data-original-title" => "Align Left (Ctrl/Cmd+L)", :title => ""}
+      %i.icon-align-left
+    %a.btn{"data-edit" => "justifycenter", "data-original-title" => "Center (Ctrl/Cmd+E)", :title => ""}
+      %i.icon-align-center
+    %a.btn{"data-edit" => "justifyright", "data-original-title" => "Align Right (Ctrl/Cmd+R)", :title => ""}
+      %i.icon-align-right
+    %a.btn{"data-edit" => "justifyfull", "data-original-title" => "Justify (Ctrl/Cmd+J)", :title => ""}
+      %i.icon-align-justify
+  .btn-group
+    %a.btn{"data-edit" => "undo", "data-original-title" => "Undo (Ctrl/Cmd+Z)", :title => ""}
+      %i.icon-undo
+    %a.btn{"data-edit" => "redo", "data-original-title" => "Redo (Ctrl/Cmd+Y)", :title => ""}
+      %i.icon-repeat
+  %input#voiceBtn{"data-edit" => "inserttext", :style => "display: none;", :type => "text", "x-webkit-speech" => ""}
+

@@ -5,10 +5,10 @@
     %title= [Settings.website.title, Settings.website.slogan].join(" | ")
     %meta{"http-equiv" => "content-type", content: "text/html", charset: "UTF-8"}
     %link{href: "#{Settings.website.favicon}", rel: "shortcut icon"}
-    = javascript_include_tag "/javascripts/jquery.js"
-    = javascript_include_tag "/javascripts/bootstrap.min.3.0.3.js"
+    = javascript_include_tag "#{Settings.cdn.jquery}"
+    = javascript_include_tag "#{Settings.cdn.bootstrap_js}"
+    = stylesheet_link_tag "#{Settings.cdn.bootstrap_css}"
     = javascript_include_tag "/javascripts/app.js"
-    = stylesheet_link_tag "/stylesheets/bootstrap.min.3.0.3.css"
     = stylesheet_link_tag "/stylesheets/application.scss"
     -if mobile? or params[:template] == "mobile_cart"
       %meta{:content => "no", :name => "apple-mobile-web-app-capable"}
@@ -37,3 +37,12 @@
       .row.center
         .footer= "微信号: " + Settings.contact.weixin
         .footer &copy; 2014 wohecha.cn
+
+
+:javascript
+  $(function() {
+    $('body').tooltip({
+      selector: "[data-toggle=tooltip]",
+      container: "body"
+    })
+  })

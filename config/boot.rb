@@ -47,21 +47,18 @@ end
 require "asset-handler"
 require "form-helpers"
 
-controllers = %w(application transactions home admin teas)
+# application must be first
+# other controller base on it
+controllers = Dir.entries(File.join(ENV["APP_ROOT_PATH"],"app/controllers"))
+  .grep(/_controller\.rb$/).map { |f| f.sub("_controller.rb","") }
+tmp_index = controllers.index("application")
+controllers[tmp_index] = controllers[0]; controllers[0] = "application"
 # helper在controller中被调用，优先于controller
-controllers.each { |part| require "#{part}_helper" }
+controllers.each do |part| 
+  file_path = File.join(ENV["APP_ROOT_PATH"], "app/helpers", "#{part}_helper.rb")
+  `touch #{file_path}` if !File.exist?(file_path)
+  require "#{part}_helper" 
+end
 # controller,基类application_controller.rb
 # application_controller.rb最先被引用
 controllers.each { |part| require "#{part}_controller" }
-
-
-#预编译coffeescript
-#system("cd #{ENV['APP_ROOT_PATH']} && bundle exec rake coffee2js:complie")
-# 自定义匹配router前缀
-# route越复杂越前置，越模糊越后置
-#@app = Rack::Builder.new do
-#  map("/") { run TransactionsController }
-#end
-#run Sinatra::Application
-
-#Rack::Handler::Thin.run @app, :Port => 3000

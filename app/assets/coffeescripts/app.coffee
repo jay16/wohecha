@@ -1,5 +1,5 @@
 window.App =
-  showLoading :->
+  showLoading: ->
     $(".loading").removeClass("hidden")
-  hideLoading :->
+  hideLoading:->
     $(".loading").addClass("hidden")
