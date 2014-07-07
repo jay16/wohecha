@@ -17,7 +17,7 @@ module BlogsHelper
     FileUtils.mkdir_p(image_path) unless File.exist?(image_path)
 
     images = Dir.entries(image_path).find_all { |file| File.file?(File.join(image_path, file)) }
-    images.map { |img| File.join("/images/posts", folder, img) }
+    images.sort.map { |img| File.join("/images/posts", folder, img) }
   end
 
   def url_path(relative_path)

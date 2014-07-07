@@ -8,10 +8,11 @@
 
   .col-sm-6{style: "margin-top:25px;"}
     =link_to "创建博文", "javascript:void(0);", class: "btn btn-default right", "data-toggle" => "modal", "data-target" => "#myModal"
+    =link_to "订单列表", "/admin", class: "btn btn-default right"
 
 :css
   .table thead th, .table tbody td {text-align: left;}
-  .btn { padding: 1px 6px; } // .table .btn .glyphicon
+  .table .btn { padding: 1px 6px; } // .table .btn .glyphicon
 %table.table.table-condensed
   %thead
     %tr

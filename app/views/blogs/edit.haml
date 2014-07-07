@@ -38,7 +38,8 @@
       .row{style: "max-height:500px;overflow:auto;margin-left:15px;"}
         - post_images(params[:post]).each_with_index do |img, i|
           .row{style: "margin-left:0px;"}
-            %img{src: "#{url_path(img)}", style: "width:200px;display:inline;"}
+            %a{"data-toggle" => "tool-tip", "data-original-title" => "#{img}"}
+              %img{src: "#{url_path(img)}", style: "width:200px;display:inline;"}
           .row{style: "margin-left:0px;"}
             .input-append
               %input.span2{id: "img_url_#{i}", readonly: "readonly", value: "#{img}", style: "height:25px;padding:6px 3px;"}
