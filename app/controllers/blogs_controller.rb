@@ -64,8 +64,14 @@ class BlogsController < ApplicationController
 
   # delete /blogs/remove
   delete "/remove" do
+    # remove markdown
     markdown_path = File.join(@post_path, params[:post])
     FileUtils.rm(markdown_path) if File.exist?(markdown_path)
+
+    # remove images
+    folder = params[:post][11..-1].sub(".markdown","")
+    image_path = File.join(Settings.octopress.path, "source/images/posts", folder)
+    FileUtils.rm_rf(image_path) if File.exist?(image_path)
 
     flash[:notice] = params[:post] + " 删除成功!"
     redirect "/blogs"

@@ -26,5 +26,6 @@ map("/")             { run HomeController }
   2. 路径信息在config/setting.yaml中octopress.path配置;
   3. 若该项目代码以nginx/apache服务，要把octopress文件夹权限设置与nginx/apache启动用户权限相同.
   4. 博文图片建议以数字为序号命令,编写markdown方便，一目了然.
+  5. 删除博文: 删除markdown文件/images文件夹.
 
 
