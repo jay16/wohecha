@@ -4,7 +4,7 @@
 
   .col-sm-3{style: "margin-top:25px;"}
     %form.form-horizontal{action: "/blogs/octopress_generate", method: "post", style:"display:inline;"}
-      %input.btn.btn-default.btn-success{type: "submit", value: "生成静态博文"}
+      %input.btn.btn-default.btn-success{type: "submit", value: "生成静态博文", onclick: "App.showLoading('生成静态博文...');"}
     %a.btn.btn-default.btn-link{"data-toggle" => "popover", "data-original-title" => "说明", "data-content" => "创建/修改博文后,必须[生成静态博文]才会起效!", "data-placement" => "right"}
       %span.glyphicon.glyphicon-question-sign
 
@@ -30,10 +30,10 @@
         %td= title
         %td= categories 
         %td
-          %a.btn.btn-default.btn-link{href:"/blogs/show?post=#{markdown}", "data-toggle" => "tooltip", "data-original-title" => "查看博文[#{title}]"}
+          %a.btn.btn-default.btn-link{href:"/blogs/show?post=#{markdown}", "data-toggle" => "tooltip", "data-original-title" => "查看博文[#{title}]", onclick: "App.showLoading();"}
             %span.glyphicon.glyphicon-eye-open
         %td
-          %a.btn.btn-default.btn-link{href:"/blogs/edit?post=#{markdown}", "data-toggle" => "tooltip", "data-original-title" => "编辑博文[#{title}]"}
+          %a.btn.btn-default.btn-link{href:"/blogs/edit?post=#{markdown}", "data-toggle" => "tooltip", "data-original-title" => "编辑博文[#{title}]", onclick: "App.showLoading();"}
             %span.glyphicon.glyphicon-edit
         %td
           %a.btn.btn-default.btn-link{onclick:"Blog.removeBlog('#{title}', '#{markdown}')", "data-toggle" => "tooltip", "data-original-title" => "删除博文[#{title}]", rel: "nofollow"}
@@ -49,7 +49,7 @@
       .modal-body{style: "min-height:70px;"}
         %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/blogs/create", :method => "post", style: "width:70%;display:inline;"}
           %input.form-control{name: "title", value: "", type: "text", placeholder: "博文标题", style: "width:70%;display:inline;", onchange: "Blog.inputMonitor(this, '#btnSubmit');", onkeyup: "Blog.inputMonitor(this, '#btnSubmit');", input: "Blog.inputMonitor(this, '#btnSubmit');" }
-          %input#btnSubmit.btn.btn-primary{type: "submit", disabled: "disabled"}
+          %input#btnSubmit.btn.btn-primary{type: "submit", disabled: "disabled", onclick:"$('#myModal').modal('hide');App.showLoading('创建博文...’);"}
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
 
@@ -65,7 +65,7 @@
           %input{type: "hidden", name: "_method", value: "delete"}
           %input#inputPost{type: "hidden", name: "post", value: ""}
           %input#inputTitle.form-control{name: "title", value: "", type: "text", placeholder: "博文标题", style: "width:70%;display:inline;text-decoration:line-through;", readonly: "readonly"}
-          %input.btn.btn-primary{type: "submit"}
+          %input.btn.btn-primary{type: "submit", onclick:"$('#myModal2').modal('hide');App.showLoading('删除博文...’);"}
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
 

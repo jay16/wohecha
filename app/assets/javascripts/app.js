@@ -3,8 +3,13 @@
     showLoading: function() {
       return $(".loading").removeClass("hidden");
     },
+    showLoading: function(text) {
+      $(".loading").html(text);
+      return $(".loading").removeClass("hidden");
+    },
     hideLoading: function() {
-      return $(".loading").addClass("hidden");
+      $(".loading").addClass("hidden");
+      return $(".loading").html("加载中...");
     }
   };
 

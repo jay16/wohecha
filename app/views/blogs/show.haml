@@ -2,9 +2,9 @@
   - title, categories = octopress_parse(@post_path, params[:post])
   %h2= "查看[#{title}]"
 
-  %a.btn.btn-default.btn-sm.right{href: "/blogs", style: "margin-top: -35px;margin-right: 40px;", "data-toggle" => "tooltip", "data-original-title" => "博文列表"}
+  %a.btn.btn-default.btn-sm.right{href: "/blogs", style: "margin-top: -35px;margin-right: 40px;", "data-toggle" => "tooltip", "data-original-title" => "博文列表", onclick: "App.showLoading();"}
     %span.glyphicon.glyphicon-th-list
-  %a.btn.btn-default.btn-sm.right{href: "/blogs/edit?post=#{params[:post]}", style: "margin-top: -35px;", "data-toggle" => "tooltip", "data-original-title" => "编辑[#{title}]"}
+  %a.btn.btn-default.btn-sm.right{href: "/blogs/edit?post=#{params[:post]}", style: "margin-top: -35px;", "data-toggle" => "tooltip", "data-original-title" => "编辑[#{title}]", onclick: "App.showLoading();"}
     %span.glyphicon.glyphicon-edit
 
 .row
