@@ -2,6 +2,8 @@
 %link{:href => "http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css", :rel => "stylesheet"}
 %link{:href => "http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css", :rel => "stylesheet"}
 %link{:href => "http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css", :rel => "stylesheet"}
+
+- title, categories = octopress_parse(@post_path, params[:post])
 %title 编辑Markdown
 
 .container
@@ -12,7 +14,7 @@
   .row
     .span11.offset1
       .row{style: "margin: 10px 0px;"}
-        %h2 编辑MarkDown
+        %h2= "编辑[#{title}]"
 
         %a.btn.btn-default{href: "/blogs", style: "float:right;margin-top: -35px;margin-right:40px;", "data-toggle" => "tooltip", "data-original-title" => "返回博文列表"}
           %span.icon-list

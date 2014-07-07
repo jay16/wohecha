@@ -1,7 +1,7 @@
 default: &default
   website:
     title: "我喝茶"
-    sutitle: "我喝茶"
+    subtitle: "我喝茶"
     slogan: "在路上"
     favicon: "/images/favicon.ico"
   alipay:
@@ -18,6 +18,14 @@ default: &default
     add_to_shopcart: "添加到购物车"
   contact:
     weixin: "sha-aichun"
+  octopress:
+    website: "http://wiki.wohecha.cn"
+    path: "/Users/lijunjie/Code/work/wohecha_with_octopress"
+  cdn:
+    jquery: "http://code.jquery.com/jquery-2.1.1.min.js"
+    bootstrap_js: "http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"
+    bootstrap_css: "http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
+    bootstrap_wysiwyg: "http://solfie-cdn.qiniudn.com/bootstrap-wysiwyg.js"
 
 production:
   <<: *default
