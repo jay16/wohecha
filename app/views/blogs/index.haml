@@ -2,11 +2,13 @@
   .col-sm-4
     %h1 博文列表- 我喝茶 
 
-  .col-sm-2{style: "margin-top:25px;"}
-    %form.form-horizontal.right{action: "/blogs/octopress_generate", method: "post"}
+  .col-sm-3{style: "margin-top:25px;"}
+    %form.form-horizontal{action: "/blogs/octopress_generate", method: "post", style:"display:inline;"}
       %input.btn.btn-default.btn-success{type: "submit", value: "生成静态博文"}
+    %a.btn.btn-default.btn-link{"data-toggle" => "popover", "data-original-title" => "说明", "data-content" => "创建/修改博文后,必须[生成静态博文]才会起效!", "data-placement" => "right"}
+      %span.glyphicon.glyphicon-question-sign
 
-  .col-sm-6{style: "margin-top:25px;"}
+  .col-sm-5{style: "margin-top:25px;"}
     =link_to "创建博文", "javascript:void(0);", class: "btn btn-default right", "data-toggle" => "modal", "data-target" => "#myModal"
     =link_to "订单列表", "/admin", class: "btn btn-default right"
 

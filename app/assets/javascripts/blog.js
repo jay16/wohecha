@@ -1,10 +1,10 @@
 (function() {
   window.Blog = {
-    zclipFun: function(self, i) {
-      return $(self).zclip({
+    zclipFun: function(i, val) {
+      return $("#zclipBtn" + i).zclip({
         path: "http://solfie-cdn.qiniudn.com/ZeroClipboard-1.1.1.swf",
         copy: function() {
-          return $("#img_url_" + i).val();
+          return val;
         }
       });
     },

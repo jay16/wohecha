@@ -1,0 +1,104 @@
+#modalMarkdownCheatsheet.modal.modal-wide.hide.fade{"aria-hidden" => "false", :role => "dialog", :style => "display: block;", :tabindex => "-1"}
+  .modal-body
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    .markdown-cheatsheet
+      %h4 Headings
+      %pre
+        :preserve
+          # Heading 1
+          ## Heading 2
+          ### Heading 3
+          #### Heading 4
+          ##### Heading 5
+          ###### Heading 6
+      %h4 Text Emphasis
+      %pre
+        :preserve
+          This **will** make text bold.
+          And this should _make text_ italic.
+          Doing so can ~~strikethrough~~ text. (GFM syntax)
+      %h4 Links
+      %h5 Normal Links
+      %pre
+        :preserve
+          [Link Text](http://example.com/)
+          [Link Text](http://example.com/ "Link Title (optional)")
+      %h5 Refrence-Style Links
+      %pre
+        :preserve
+          [Link Text][1]
+      %p And then define the reference anywhere in the document:
+      %pre
+        :preserve
+          [1]: http://example.com/ "Link Title (optional)"
+      %h4 Images
+      %pre
+        :preserve
+          ![Alt Text](/path/to/image.jpg)
+          ![Alt Text](/path/to/image.jpg "Image Title (optional)")
+      %p You can also apply reference-style syntax to image, like:
+      %pre
+        :preserve
+          ![Alt Text][2]
+          
+          [2]: /path/to/image.jpg "Image Title (optional)"
+      %h4 Blockquote
+      %h5 Basic Quotation
+      %pre
+        :preserve
+          &gt; Quoted
+          &gt; Block
+          &gt; Text
+      %h5 Octopress Quotation Syntax
+      %pre
+        :preserve
+          {% blockquote Author Name %}
+          Flying is learning how to throw yourself at the ground and miss.
+          {% endblockquote %}
+          
+          {% blockquote Author Name https://example.com/quotation/source/link %}
+          Over the past 24 hours I've been reflecting on my life &amp; I've realized only one thing. I need a medieval battle axe.
+          {% endblockquote %}
+      %h4 Lists
+      %h5 Ordered List
+      %pre
+        :preserve
+          1. List Item #1
+          2. List Item #2
+          3. List Item #3
+      %h5 Unordered List
+      %pre
+        :preserve
+          * List Item #1
+          * List Item #2
+          * List Item #3
+      %h4 Codes
+      %h5 Inline Code
+      %pre
+        :preserve
+          Press `Command-Z` to undo.
+      %h5 GFM Code Block
+      %pre
+        :preserve
+          ```
+          console.log('Hello World!');
+          ```
+      %h5 GFM Code Block with Language and Title
+      %pre
+        :preserve
+          ``` html welcome.html
+          &lt;html&gt;
+          ...
+          &lt;/html&gt;
+          ```
+      %h4 Table
+      %pre
+        :preserve
+          | First Header | Second Header | Third Header |
+          | ------------ | :-----------: | -----------: |
+          | Content      |  center-align |  right-align |
+          | Content      |   **Cell**    |         Cell |
+          | New section  |     More      |         Data |
+  .modal-footer
+    %a.btn.btn-link.pull-left{:href => "http://github.github.com/github-flavored-markdown/", :target => "_blank"} Markdown Document
+    %button.btn{"data-dismiss" => "modal", :type => "button"} Close

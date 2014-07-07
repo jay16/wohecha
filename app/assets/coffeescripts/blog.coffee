@@ -1,10 +1,10 @@
 #encoding: utf-8
 window.Blog = 
-  zclipFun: (self, i) ->
-    $(self).zclip
+  zclipFun: (i, val) ->
+    $("#zclipBtn"+i).zclip
       path: "http://solfie-cdn.qiniudn.com/ZeroClipboard-1.1.1.swf"
       copy: ->
-        $("#img_url_"+i).val()
+        val
 
   removeBlog: (markdown) ->
     $("#myModal2 input[type='text']").val(markdown);
