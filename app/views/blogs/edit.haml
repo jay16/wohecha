@@ -17,13 +17,13 @@
         .span8
           %h2= "编辑[#{title}]"
 
-        .span3.offset8{style: "margin-top: -35px;"}
-          %a.btn.btn-default{"data-toggle" => "modal", "data-target" => "#modalMarkdownCheatsheet"}
-            %span.icon-question-sign
-          %a.btn.btn-default{href: "/blogs", "data-toggle" => "tooltip", "data-original-title" => "返回博文列表"}
-            %span.icon-list
-          %a.btn.btn-default{href: "/blogs/show?post=#{params[:post]}",  "data-toggle" => "tooltip", "data-original-title" => "查看该博文"}
+        .span2{style: "margin-top: 20px;"}
+          %a.right.btn.btn-default{href: "/blogs/show?post=#{params[:post]}",  "data-toggle" => "tooltip", "data-original-title" => "查看该博文"}
             %span.icon-eye-open
+          %a.right.btn.btn-default{href: "/blogs", "data-toggle" => "tooltip", "data-original-title" => "返回博文列表"}
+            %span.icon-list
+          %a.right.btn.btn-default{"data-toggle" => "modal", "data-target" => "#modalMarkdownCheatsheet"}
+            %span.icon-question-sign
 
   .row
     .span8.offset1
@@ -52,6 +52,9 @@
               %input.span2{id: "img_url_#{i}", readonly: "readonly", value: "#{img}", style: "width:200px;height:25px;padding:6px 3px;",onclick: "this.setSelectionRange(0, this.value.length)"}
 
 :css
+  .right {
+    float: right;
+  }
   #editor { 
     white-space: pre-wrap;
     overflow: scroll; 
