@@ -20,7 +20,13 @@ module BlogsHelper
     images.sort.map { |img| File.join("/images/posts", folder, img) }
   end
 
-  def url_path(relative_path)
+  def img_url_path(relative_path)
     [Settings.octopress.website, relative_path].join
+  end
+
+  def blog_url_path(post)
+    date  = post[0..9].gsub("-", "/")
+    title = post[11..-1].sub(".markdown","")
+    [Settings.octopress.website, "blog", date, title].join("/")
   end
 end

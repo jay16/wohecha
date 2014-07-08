@@ -35,16 +35,19 @@
         %input.btn.btn-primary{type: "submit", style: "float:right;"}
 
     .span3{style: "margin-left:15px;"}
-      .row{style: "margin-top:20px;margin-left:15px;"}
+      .row{style: "margin-top:10px;margin-bottom:10px;margin-left:15px;"}
         %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/blogs/image?post=#{params[:post]}", :enctype => "multipart/form-data", :method => "post", :style => "display:inline;width:100px;"}
-          %input.text_field{:name => "image", :onchange => "$('#image_submit').trigger('click');", :type => "file", :style => "width: 150px;"}
-            %input.btn{:name => "commit", :style => "display:none;", :type => "submit", :value => "submit", :id => "image_submit"}
-      .row{style: "max-height:500px;overflow:auto;margin-left:15px;"}
+          %span.btn.btn-success.fileinput-button
+            %i.icon-plus
+            %span 添加图片
+            %input.text_field{:name => "image", :onchange => "$('#image_submit').trigger('click');", :type => "file", :style => "width: 150px;"}
+          %input.btn{:name => "commit", :style => "display:none;", :type => "submit", :value => "submit", :id => "image_submit"}
+      .row{style: "max-height:600px;overflow:auto;margin-left:15px;"}
         - post_images(params[:post]).each_with_index do |img, i|
           .row{style: "margin-left:0px;", class: "img-#{i}"}
             .row{style: "margin-left:0px;"}
               %a{"data-toggle" => "tool-tip", "data-original-title" => "#{img}"}
-                %img{src: "#{url_path(img)}", style: "width:200px;display:inline;"}
+                %img{src: "#{img_url_path(img)}", style: "width:200px;display:inline;"}
             .row{style: "margin-left:0px;"}
               %input.span2{id: "img_url_#{i}", readonly: "readonly", value: "#{img}", style: "width:200px;height:25px;padding:6px 3px;",onclick: "this.setSelectionRange(0, this.value.length)"}
 
@@ -53,7 +56,7 @@
     white-space: pre-wrap;
     overflow: scroll; 
     min-height:200px;
-    max-height: 500px;
+    max-height: 600px;
     background-color: white;
     border-collapse: separate; 
     border: 1px solid rgb(204, 204, 204); 
@@ -66,6 +69,36 @@
     overflow: scroll;
     outline: none;
   }
+
+  .fileinput-button {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    margin-right: 4px;
+  }
+  .fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    border: solid transparent;
+    border-width: 0 0 100px 200px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-transform: translate(-300px, 0) scale(4);
+    direction: ltr;
+    cursor: pointer;
+  }
+  /* Fix for IE 6: */
+  * html .fileinput-button {
+    line-height: 22px;
+    margin: 1px -3px 0 0;
+  }
+  /* Fix for IE 7: */
+  * + html .fileinput-button {
+    margin: 1px 0 0 0;
+  }
+
 %script{:src => "http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"}
 %script{:src => "https://mindmup.s3.amazonaws.com/lib/jquery.hotkeys.js"}
 %script{:src => "http://cdn.bootcss.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"}
