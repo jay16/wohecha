@@ -1,12 +1,16 @@
 module ApplicationHelper
 
-  # flash/notice message will show on layout
-  # when redirect
-  def notice_message
-    unless flash[:notice].nil?
-     close = link_to("&times;", "#", class: "close", "data-dismiss" => "alert")
-     tag(:div, "#{close}#{flash[:notice]}", { class: "alert alert-success", role: "alert" }) 
-    end
+  # flash#success/warning/danger message will show
+  # when redirect between action
+  def flash_message
+    return if flash.empty?
+    # hash key must be symbol
+    hash = flash.inject({}) { |h, (k, v)| h[k.to_s] = v; h; }
+    # bootstrap#v3 [alert] javascript plugin
+    flash.keys.map(&:to_s).grep(/warning|danger|success/).map do |key|
+      close = link_to("&times;", "#", class: "close", "data-dismiss" => "alert")
+      tag(:div, "#{close}#{hash[key]}", { class: "alert alert-#{key}", role: "alert" }) 
+    end.join
   end
 
   MOBILE_USER_AGENTS =  'palm|blackberry|nokia|phone|midp|mobi|symbian|chtml|ericsson|minimo|' +

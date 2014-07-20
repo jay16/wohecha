@@ -50,7 +50,7 @@ class AdminController < ApplicationController
     else
       response.set_cookie "login_state", {:value=> "", :path => "/", :max_age => "2592000"}
 
-      flash[:notice] = "登陆失败，请重新输入."
+      flash[:warning] = "登陆失败，请重新输入."
       redirect "/admin/login"
     end
   end

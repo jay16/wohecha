@@ -1,11 +1,14 @@
-## [我喝茶](http://wohecha.cn/)
+# [我喝茶](http://wohecha.cn/)
+
+## 启动服务
 
 ````
 bundle install
+
 passenger start
 ````
 
-## 功能列表
+## 路由配置 
 
 ````
 # 管理中心 /admin/*
@@ -20,6 +23,8 @@ map("/blogs")        { run BlogsController }
 map("/")             { run HomeController }
 ````
 
+# 功能说明 
+
 ## 博文管理
 
   1. 其实是以代码管理代码，博文框架为octopress，与该项目同路径不同文件夹；
@@ -28,4 +33,11 @@ map("/")             { run HomeController }
   4. 博文图片建议以数字为序号命令,编写markdown方便，一目了然.
   5. 删除博文: 删除markdown文件/images文件夹.
 
+# 更新日志
+
+## 博文管理
+
+1. [2014/07/20 15:30]
+
+> 创建/编辑博文界面,图片列表使用iframe，添加新图片时只刷新iframe[src]而不影响博文内容的编辑状态.
 

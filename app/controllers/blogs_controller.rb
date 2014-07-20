@@ -35,10 +35,10 @@ class BlogsController < ApplicationController
     title = params[:title].strip
     shell_str = %Q(cd #{Settings.octopress.path} && bundle exec rake new_post["#{title}"])
     status, *result = run_shell(shell_str)
-    #result.unshift(status == true ? "执行成功" : "执行失败")
     puts result
 
-    flash[:notice] = title + " - 创建" + (status == true ? "成功!" : "失败!")
+    f_key = (status ? "success" : "danger").to_sym
+    flash[f_key] = title + " - 创建" + (status ? "成功!" : "失败!")
     redirect "/blogs"
   end
 
@@ -61,7 +61,7 @@ class BlogsController < ApplicationController
     lines = IO.readlines(markdown_path).first(7)
     title = lines.grep(/^title:/).first.scan(/^title:\s+"(.*?)"/).flatten.first
 
-    flash[:notice] = title + " - 更新成功!"
+    flash[:success] = title + " - 更新成功!"
     redirect "/blogs"
   end
 
@@ -79,7 +79,7 @@ class BlogsController < ApplicationController
     image_path = File.join(Settings.octopress.path, "source/images/posts", folder)
     FileUtils.rm_rf(image_path) if File.exist?(image_path)
 
-    flash[:notice] = title + " - 删除成功!"
+    flash[:success] = title + " - 删除成功!"
     redirect "/blogs"
   end
 
@@ -89,7 +89,8 @@ class BlogsController < ApplicationController
     result.unshift(status == true ? "执行成功" : "执行失败")
     puts result
 
-    flash[:notice] = "生成静态博文 - 执行" + (status == true ? "成功!" : "失败!")
+    f_key = (status ? "success" : "danger").to_sym
+    flash[f_key] = "生成静态博文 - 执行" + (status == true ? "成功!" : "失败!")
     redirect "/blogs"
   end
 
@@ -103,13 +104,27 @@ class BlogsController < ApplicationController
 
     image_path = File.join(image_dir, image_name)
     if File.exist?(image_path)
-      flash[:notice] = "图片已经存在."
+      flash[:warning] = "图片已经存在."
     else
-      flash[:notice] = "图片创建成功."
+      flash[:success] = "图片创建成功."
       File.open(File.join(image_dir, image_name), "wb") { |f| f.write(image_data) }
     end
 
-    redirect "/blogs/edit?post=#{params[:post]}"
+    # reload the image frame
+    redirect "/blogs/images?post=#{params[:post]}"
+  end
+
+  # get /blog/images
+  get "/images" do
+    post = params[:post].strip
+    folder = post[11..-1].sub(".markdown","")
+    image_path = File.join(Settings.octopress.path, "source/images/posts", folder)
+    FileUtils.mkdir_p(image_path) unless File.exist?(image_path)
+
+    images = Dir.entries(image_path).find_all { |file| File.file?(File.join(image_path, file)) }
+    @images = images.sort.map { |img| File.join("/images/posts", folder, img) }
+
+    haml :images
   end
 
 end

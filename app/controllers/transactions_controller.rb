@@ -55,7 +55,7 @@ class TransactionsController < ApplicationController
     @status, @transaction = find_or_create_transaction!
     @order = Order.all(:out_trade_no => @transaction.out_trade_no).first
 
-    flash[:notice] = "付款成功啦!"
+    flash[:success] = "付款成功啦!"
     haml :done, layout: :"../layouts/layout"
   end
 

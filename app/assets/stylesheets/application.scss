@@ -339,3 +339,53 @@ a:hover {
 .table tbody td {
   text-align: center;
 }
+
+.right {
+  float: right;
+}
+#editor { 
+  white-space: pre-wrap;
+  overflow: scroll; 
+  min-height:200px;
+  max-height: 600px;
+  background-color: white;
+  border-collapse: separate; 
+  border: 1px solid rgb(204, 204, 204); 
+  padding: 4px; 
+  box-sizing: content-box; 
+  -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+  box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+  border-top-right-radius: 3px; border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px; border-top-left-radius: 3px;
+  overflow: scroll;
+  outline: none;
+}
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  float: left;
+  margin-right: 4px;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  border: solid transparent;
+  border-width: 0 0 100px 200px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -moz-transform: translate(-300px, 0) scale(4);
+  direction: ltr;
+  cursor: pointer;
+}
+/* Fix for IE 6: */
+* html .fileinput-button {
+  line-height: 22px;
+  margin: 1px -3px 0 0;
+}
+/* Fix for IE 7: */
+* + html .fileinput-button {
+  margin: 1px 0 0 0;
+}

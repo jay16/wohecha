@@ -4,10 +4,10 @@
     <title>我喝茶 | 在路上</title>
     <meta charset='UTF-8' content='text/html' http-equiv='content-type'>
     <link href='/images/favicon.ico' rel='shortcut icon'>
-    <script src="/javascripts/jquery.js"></script>
-    <script src="/javascripts/bootstrap.min.3.0.3.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css" media="screen, projection" rel="stylesheet" type="text/css">
     <script src="/javascripts/app.js"></script>
-    <link href="/stylesheets/bootstrap.min.3.0.3.css" media="screen, projection" rel="stylesheet" type="text/css">
     <link href="/stylesheets/application.scss" media="screen, projection" rel="stylesheet" type="text/css">
   </head>
   <body style='background:#f0f0f0;'>
@@ -35,29 +35,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr class='tea' id='tea_1'>
-                <td><image src="./images/longjing-400.png" style="width:120px;"></td>
-                <td>
-                  <span class='name'>茅家埠西湖龙井 <br>西湖龙井核心产区之茅家埠</span>
-                </td>
-                <td>
-                  <span class='price'>80.0</span>
-                   元/盒
-                </td>
-                <td>30.0g</td>
-                <td>
-                  <a class='minus btn btn-default btn-xs btn-primary' onclick="ShopCart.minus('tea_1', 80.0);" style='border-radius: 3px 0px 0px 3px;'>
-                    <i class='glyphicon glyphicon-minus'></i>
-                  </a>
-                  <input class='form-control quantity' disabled='disabled' id='tea_1_quantity' min='0' style='padding:0px;width:50px;display:inline;line-height:22px;height:22px;font-size:8px;border-radius: 0px;margin: auto -5px;text-align:center;' type='number' value='0'>
-                  <a class='plus btn btn-default btn-xs btn-primary' onclick="ShopCart.plus('tea_1', 80.0);" style='border-radius: 0px 3px 3px 0px;'>
-                    <i class='glyphicon glyphicon-plus'></i>
-                  </a>
-                </td>
-                <td class='amount' id='tea_1_amount'>0</td>
-              </tr>
               <tr class='tea' id='tea_2'>
-                <td><image src="./images/biluochun-400.png" style="width:120px;"></td>
+                <td><image src="./images/blog_img-02.jpg" style="width:120px;"></td>
                 <td>
                   <span class='name'>太湖西山碧螺春 <br>西山镇消夏湾茶园</span>
                 </td>
@@ -78,7 +57,7 @@
                 <td class='amount' id='tea_2_amount'>0</td>
               </tr>
               <tr class='tea' id='tea_3'>
-                <td><image src="./images/baicha-400.png" style="width:120px;"></td>
+                <td><image src="./images/blog_img-03.jpg" style="width:120px;"></td>
                 <td>
                   <span class='name'>安吉桂家场白茶 <br>天荒坪镇桂家场茶园</span>
                 </td>
@@ -132,3 +111,15 @@
     </div>
   </body>
 </html>
+<script>
+  $(function() {
+    $('body').tooltip({
+      selector: "[data-toggle=tooltip]",
+      container: "body"
+    })
+    $('body').popover({
+      selector: "[data-toggle=popover]",
+      container: "body"
+    })
+  })
+</script>

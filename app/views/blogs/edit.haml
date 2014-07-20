@@ -4,13 +4,14 @@
 %link{:href => "http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css", :rel => "stylesheet"}
 
 - title, categories = octopress_parse(@post_path, params[:post])
-%title 编辑Markdown
+%title 编辑博文
 
 .container
   .row
     .col-sm-12{style: "text-align:center;"}
       .loading.hidden 加载中...
-      = notice_message
+      = flash_message
+
   .row
     .span11.offset1
       .row{style: "margin: 10px 0px;"}
@@ -35,22 +36,14 @@
         %input.btn.btn-primary{type: "submit", style: "float:right;"}
 
     .span3{style: "margin-left:15px;"}
-      .row{style: "margin-top:10px;margin-bottom:10px;margin-left:15px;"}
-        %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/blogs/image?post=#{params[:post]}", :enctype => "multipart/form-data", :method => "post", :style => "display:inline;width:100px;"}
-          %span.btn.btn-success.fileinput-button
-            %i.icon-plus
-            %span 添加图片
-            %input.text_field{:name => "image", :onchange => "$('#image_submit').trigger('click');", :type => "file", :style => "width: 150px;"}
-          %input.btn{:name => "commit", :style => "display:none;", :type => "submit", :value => "submit", :id => "image_submit"}
-      .row{style: "max-height:600px;overflow:auto;margin-left:15px;"}
-        - post_images(params[:post]).each_with_index do |img, i|
-          .row{style: "margin-left:0px;", class: "img-#{i}"}
-            .row{style: "margin-left:0px;"}
-              %a{"data-toggle" => "tool-tip", "data-original-title" => "#{img}"}
-                %img{src: "#{img_url_path(img)}", style: "width:200px;display:inline;"}
-            .row{style: "margin-left:0px;"}
-              %input.span2{id: "img_url_#{i}", readonly: "readonly", value: "#{img}", style: "width:200px;height:25px;padding:6px 3px;",onclick: "this.setSelectionRange(0, this.value.length)"}
+      %iframe{style: "height:650px;overflow-y:auto;overflow-x:none;border:0px;", src:"/blogs/images?post=#{params[:post]}"}
 
+%script{:src => "http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"}
+%script{:src => "https://mindmup.s3.amazonaws.com/lib/jquery.hotkeys.js"}
+%script{:src => "http://cdn.bootcss.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"}
+= javascript_include_tag "http://solfie-cdn.qiniudn.com/jquery.zclip-1.1.1.min.js"
+= javascript_include_tag "#{Settings.cdn.bootstrap_wysiwyg}"
+= javascript_include_tag "/javascripts/blog.js"
 :css
   .right {
     float: right;
@@ -73,41 +66,6 @@
     outline: none;
   }
 
-  .fileinput-button {
-    position: relative;
-    overflow: hidden;
-    float: left;
-    margin-right: 4px;
-  }
-  .fileinput-button input {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    border: solid transparent;
-    border-width: 0 0 100px 200px;
-    opacity: 0;
-    filter: alpha(opacity=0);
-    -moz-transform: translate(-300px, 0) scale(4);
-    direction: ltr;
-    cursor: pointer;
-  }
-  /* Fix for IE 6: */
-  * html .fileinput-button {
-    line-height: 22px;
-    margin: 1px -3px 0 0;
-  }
-  /* Fix for IE 7: */
-  * + html .fileinput-button {
-    margin: 1px 0 0 0;
-  }
-
-%script{:src => "http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"}
-%script{:src => "https://mindmup.s3.amazonaws.com/lib/jquery.hotkeys.js"}
-%script{:src => "http://cdn.bootcss.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"}
-= javascript_include_tag "http://solfie-cdn.qiniudn.com/jquery.zclip-1.1.1.min.js"
-= javascript_include_tag "#{Settings.cdn.bootstrap_wysiwyg}"
-= javascript_include_tag "/javascripts/blog.js"
 :javascript
   $(function(){
     $("#editor").wysiwyg();
