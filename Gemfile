@@ -15,6 +15,7 @@ gem "sinatra-flash"
 #gem "sinatra-mapping"
 
 #db
+#gem "sqlite3"
 gem "dm-core"
 gem "dm-migrations"
 gem "dm-timestamps"

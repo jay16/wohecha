@@ -1,4 +1,5 @@
 #encoding: utf-8 
+require "erb"
 class AdminController < ApplicationController
   enable :logging
   set :views, ENV["VIEW_PATH"] + "/admin"
@@ -68,30 +69,42 @@ class AdminController < ApplicationController
   #trigger rspec to load /admin/template
   #to generate static file
   post "/generate" do
-    cmd = "cd #{ENV['APP_ROOT_PATH']} && bundle exec rspec spec/controller/generate_static_files_spec.rb"
-    status, *result = run_command(cmd)
-    @status = "执行" + (status ? "成功" : "失败") + ":"
-    @result = result.join("<br>")
+   # cmd = "cd #{ENV['APP_ROOT_PATH']} && bundle exec rspec spec/controller/generate_static_files_spec.rb"
+   # status, *result = run_command(cmd)
+   # @status = "执行" + (status ? "成功" : "失败") + ":"
+   # @result = result.join("<br>")
+
+    @teas = Tea.all(:onsale => true)
+    home_path = File.join(ENV["APP_ROOT_PATH"], "app/views/home")
+    begin
+      File.open(File.join(home_path, "home.erb"), "wb+") do |file|
+        file.puts erb(:template_home, layout: :"../layouts/layout.v2")
+      end
+    rescue => e
+      @result = "1. 首页生成失败.<br>   #{e.message}"
+    else
+      @result = "1. 首页生成功能."
+    end
+    begin
+      File.open(File.join(home_path, "cart.erb"), "wb+") do |file|
+        file.puts haml(:template_cart, layout: :"../layouts/layout")
+      end
+    rescue => e
+      @result << "<br>2. 购物车生成失败.<br>   #{e.message}"
+    else
+      @result << "<br>2. 购物车生成成功."
+    end
+    begin
+      File.open(File.join(home_path, "mobile_cart.erb"), "wb+") do |file|
+        file.puts haml(:template_mobile_cart, layout: :"../layouts/layout")
+      end
+    rescue => e
+      @result << "<br>3. 购物车(手机界面)生成失败.<br>   #{e.message}"
+    else
+      @result << "<br>3. 购物车(手机界面)生成成功."
+    end
 
     haml :_modal, layout: false
-  end
-
-  #generate static page to /views/home
-  #current function: /home /cart
-  #will be load in rspec to insert .erb files
-  get "/template" do
-    @teas = Tea.all(:onsale => true)
-
-    case params[:template]
-    when "home"
-      erb :template_home, layout: :"../layouts/layout.v2"
-    when "cart"
-      haml :template_cart, layout: :"../layouts/layout"
-    when "mobile_cart"
-      haml :template_mobile_cart, layout: :"../layouts/layout"
-    else
-       "<h1> what are you doing</h1>"
-    end
   end
 
 end

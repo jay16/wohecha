@@ -49,5 +49,4 @@ class AssetHandler < Sinatra::Base
     db_path = File.join(ENV["APP_ROOT_PATH"], "db")
     FileUtils.mkdir_p(db_path) unless File.exist?(db_path)
     require "database"
-
 end

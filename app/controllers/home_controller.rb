@@ -13,16 +13,14 @@ class HomeController < ApplicationController
   # render static files without layout 
   # already render layout when generate static file 
   get "/home" do
-    @teas = Tea.all(:onsale => true)
-
-    erb :home#, layout: :"../layouts/layout.v2"
+    erb :home
   end
 
   # shop cart
   # render static files without layout 
   # already render layout when generate static file 
   get "/cart" do
-    erb (mobile? ? :mobile_cart : :cart)#, layout: :"../layouts/layout"
+    erb (mobile? ? :mobile_cart : :cart)
   end
 
   # member#subscribe

@@ -37,7 +37,14 @@ map("/")             { run HomeController }
 
 ## 博文管理
 
-1. [2014/07/20 15:30]
+1. 2014/07/20 15:30
 
-> 创建/编辑博文界面,图片列表使用iframe，添加新图片时只刷新iframe[src]而不影响博文内容的编辑状态.
+  创建/编辑博文界面,图片列表使用iframe，添加新图片时只刷新iframe[src]而不影响博文内容的编辑状态.
+
+2. 2014/08/06 23:12
+
+  1. ERB文件生成HTML模板[快送门](http://ruby-doc.org/stdlib-1.9.3/libdoc/erb/rdoc/ERB.html)
+  2. IRB调试`irb -r ./config/boot.rb`
+  3. 疑惑: Gemfile只加载了thin,但使用passenger启动，加载sqlite3不报错，但读取不出数据（界面正常），而thin启动一切正常.
+
 
