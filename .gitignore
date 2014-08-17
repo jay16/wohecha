@@ -5,6 +5,9 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 # Ignore bundler config
+/app/views/home/home.erb
+app/views/home/home.erb
+app/views/home/*cart.erb
 .ruby-version
 .DS_Store
 *.lock

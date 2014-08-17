@@ -11,7 +11,7 @@ class TeasController < ApplicationController
   get "/" do
     @teas = Tea.all
 
-    haml :list, layout: :"../layouts/layout"
+    haml :index, layout: :"../layouts/layout"
   end
 
   #get /teas/new

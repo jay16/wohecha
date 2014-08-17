@@ -73,7 +73,7 @@ class AdminController < ApplicationController
    # status, *result = run_command(cmd)
    # @status = "执行" + (status ? "成功" : "失败") + ":"
    # @result = result.join("<br>")
-
+    btime = Time.now
     @teas = Tea.all(:onsale => true)
     home_path = File.join(ENV["APP_ROOT_PATH"], "app/views/home")
     begin
@@ -81,28 +81,29 @@ class AdminController < ApplicationController
         file.puts erb(:template_home, layout: :"../layouts/layout.v2")
       end
     rescue => e
-      @result = "1. 首页生成失败.<br>   #{e.message}"
+      @result = "1. 首页生成[失败].<br>   #{e.message}"
     else
-      @result = "1. 首页生成功能."
+      @result = "1. 首页生成[成功]."
     end
     begin
       File.open(File.join(home_path, "cart.erb"), "wb+") do |file|
         file.puts haml(:template_cart, layout: :"../layouts/layout")
       end
     rescue => e
-      @result << "<br>2. 购物车生成失败.<br>   #{e.message}"
+      @result << "<br>2. 购物车生成[失败].<br>   #{e.message}"
     else
-      @result << "<br>2. 购物车生成成功."
+      @result << "<br>2. 购物车生成[成功]."
     end
     begin
       File.open(File.join(home_path, "mobile_cart.erb"), "wb+") do |file|
         file.puts haml(:template_mobile_cart, layout: :"../layouts/layout")
       end
     rescue => e
-      @result << "<br>3. 购物车(手机界面)生成失败.<br>   #{e.message}"
+      @result << "<br>3. 购物车(移动端界面)生成[失败].<br>   #{e.message}"
     else
-      @result << "<br>3. 购物车(手机界面)生成成功."
+      @result << "<br>3. 购物车(移动端界面)生成[成功]."
     end
+    @tlast = ((Time.now - btime).to_f*1000).to_i
 
     haml :_modal, layout: false
   end

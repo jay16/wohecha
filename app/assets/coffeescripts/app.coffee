@@ -10,3 +10,12 @@ window.App =
   hideLoading:->
     $(".loading").addClass("hidden")
     $(".loading").html("加载中...")
+
+  checkboxState: (self) ->
+    state = $(self).attr("checked")
+    if(state == undefined || state == "undefined")
+      $(self).attr("checked", "true")
+      return true
+    else
+      $(self).removeAttr("checked")
+      return false

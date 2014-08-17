@@ -2,9 +2,9 @@
 window.Teas=
   delete: (id, name) ->
     result = confirm("确认删除["+name+"]\n此动作不可撤消!")
-    Teas.delete_with_ajax(id) if result
+    Teas.deleteWithAjax(id) if result
 
-  delete_with_ajax: (id) ->
+  deleteWithAjax: (id) ->
     $.ajax(
       type: "delete"
       url: "/teas/"+id
@@ -16,17 +16,16 @@ window.Teas=
         alert("error:delete with ajax!")
     );
 
-  show_all_teas: (input) ->
-    is_checked = $(input).attr("checked")
-
-    if is_checked == "checked"
-      $(".tea").removeClass("hidden")
+  showAllTeas: (input) ->
+    if App.checkboxState(input)
+      $(".tea").removeClass("hidden") 
     else
       $(".outsale").addClass("hidden")
+
       
   #generate static files with ajax
   #trigger to generate static files
-  generate_static_files: ->
+  generateStaticFiles: ->
     App.showLoading()
     $.ajax
       url: "/admin/generate"

@@ -4,10 +4,10 @@
       var result;
       result = confirm("确认删除[" + name + "]\n此动作不可撤消!");
       if (result) {
-        return Teas.delete_with_ajax(id);
+        return Teas.deleteWithAjax(id);
       }
     },
-    delete_with_ajax: function(id) {
+    deleteWithAjax: function(id) {
       return $.ajax({
         type: "delete",
         url: "/teas/" + id,
@@ -19,16 +19,14 @@
         }
       });
     },
-    show_all_teas: function(input) {
-      var is_checked;
-      is_checked = $(input).attr("checked");
-      if (is_checked === "checked") {
+    showAllTeas: function(input) {
+      if (App.checkboxState(input)) {
         return $(".tea").removeClass("hidden");
       } else {
         return $(".outsale").addClass("hidden");
       }
     },
-    generate_static_files: function() {
+    generateStaticFiles: function() {
       App.showLoading();
       return $.ajax({
         url: "/admin/generate",

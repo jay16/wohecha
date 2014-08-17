@@ -8,7 +8,7 @@
     = javascript_include_tag "#{Settings.cdn.jquery}"
     = javascript_include_tag "#{Settings.cdn.bootstrap_js}"
     = stylesheet_link_tag "#{Settings.cdn.bootstrap_css}"
-    = javascript_include_tag "/javascripts/application.js"
+    = javascript_include_tag "/javascripts/app.js"
     = stylesheet_link_tag "/stylesheets/application.scss"
     -if mobile? or params[:template] == "mobile_cart"
       %meta{:content => "no", :name => "apple-mobile-web-app-capable"}

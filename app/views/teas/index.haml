@@ -1,12 +1,11 @@
 =javascript_include_tag "/javascripts/teas.js"
-= @teas.count
 
 .row
   .col-sm-4
     %h1 商品管理 - 我喝茶 
 
   .col-sm-2{style: "margin-top:25px;"}
-    =link_to "生成表态模板","javascript:void(0);", class: "btn btn-default btn-success right", onclick: "Teas.generate_static_files();"
+    =link_to "生成表态模板","javascript:void(0);", class: "btn btn-default btn-success right", onclick: "Teas.generateStaticFiles();"
 
   .col-sm-6{style: "margin-top:25px;"}
     =link_to "添加商品", "/teas/new", class: "btn btn-default btn-primary right"
@@ -20,7 +19,7 @@
     %span.search-result
   .col-sm-4{style: "margin-top:10px;"}
     %label{class: "right"}
-      %input{:id => "showall", :name => "showall", :value => 1, :type => "checkbox", :onchange => "Teas.show_all_teas(this);", class: "right"} 显示所有商品
+      %input{:id => "showall", :name => "showall", :value => 1, :type => "checkbox", :onchange => "Teas.showAllTeas(this);", class: "right"} 显示所有商品
 
 %table.table.table-striped
   %thead
