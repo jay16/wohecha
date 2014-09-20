@@ -10,7 +10,7 @@
     = stylesheet_link_tag "#{Settings.cdn.bootstrap_css}"
     = javascript_include_tag "/javascripts/app.js"
     = stylesheet_link_tag "/stylesheets/application.scss"
-    -if mobile? or params[:template] == "mobile_cart"
+    -if mobile? or (params = params || {} and params[:template] == "mobile_cart")
       %meta{:content => "no", :name => "apple-mobile-web-app-capable"}
       %meta{:content => "True", :name => "HandheldFriendly"}/
       %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/

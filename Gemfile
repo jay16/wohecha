@@ -22,7 +22,7 @@ gem "dm-timestamps"
 gem "dm-sqlite-adapter"
 
 #assets
-gem "haml"
+gem "haml", "~> 4.0.5"
 gem "sass"
 gem "therubyracer"
 gem "coffee-script"
@@ -37,6 +37,9 @@ gem "settingslogic"
 gem "code_statistics"
 
 gem "alipay_dualfun", :github => "happypeter/alipay_dualfun"
+
+# for erb operation
+gem "tilt"
 
 
 # octopress env

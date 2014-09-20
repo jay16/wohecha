@@ -19,6 +19,20 @@ class CoffeeHandler < Sinatra::Base
     end
 end
 
+class ImageHandler < Sinatra::Base
+    set :views, ENV["APP_ROOT_PATH"] +  "/app/assets/images"
+    
+    get "/images/*" do
+        filename = params[:splat].first
+        filepath = [settings.views, filename].join("/")
+        if File.exist?(filepath) and File.file?(filepath)
+            send_file(filepath,:type => 'image/jpeg', :disposition => 'inline') 
+        else
+          "not exist or not file - #{filepath}"
+        end
+    end
+end
+
 
 class AssetHandler < Sinatra::Base
 

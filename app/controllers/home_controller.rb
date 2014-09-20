@@ -42,6 +42,7 @@ class HomeController < ApplicationController
       query = { :id => 381, :emails => @member.email, :uid => 65 }
       uri.query = query.map{|k, v| [k, v].join("=")}.join("&")#URI.encode_www_form(query)
       res = Net::HTTP.get(uri) 
+      puts res.to_s
 
       erb :subscribe, layout: :"../layouts/layout.v2"
     else
@@ -51,6 +52,6 @@ class HomeController < ApplicationController
 
 
   not_found do
-    "sorry"
+    "sorry - home"
   end
 end

@@ -47,4 +47,8 @@ map("/")             { run HomeController }
   2. IRB调试`irb -r ./config/boot.rb`
   3. 疑惑: Gemfile只加载了thin,但使用passenger启动，加载sqlite3不报错，但读取不出数据（界面正常），而thin启动一切正常.
 
+3. 2014/09/20 11:41 sat
 
+  1. js测试(jasmine)
+  2. 抽取sinatra渲染代码，生成静态文件
+  3. 调整图片放置结构, app/assets/images => app/asserts/images/teas/:id/*.jpg

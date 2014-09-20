@@ -131,7 +131,7 @@ DEPENDENCIES
   dm-sqlite-adapter
   dm-timestamps
   factory_girl
-  haml
+  haml (~> 4.0.5)
   jekyll (~> 0.12)
   liquid (~> 2.3.0)
   pygments.rb (~> 0.3.4)
@@ -149,3 +149,4 @@ DEPENDENCIES
   stringex (~> 1.4.0)
   therubyracer
   thin
+  tilt

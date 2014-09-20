@@ -202,7 +202,7 @@
         <% @teas.each_slice(3) do |row| %>
         <div class="row">
           <% row.each do |tea| %>
-          <article class="span4 post"> <img class="img-news" src="./images/<%= tea.image %>" alt="">
+            <article class="span4 post"> <img class="img-news" src="./images/teas/<%= tea.id %>/<%= tea.image %>" alt="">
             <div class="inside">
               <p class="post-date"><i class="icon-calendar"></i> <%= tea.market.strip if tea.market %></p>
               <h2><%= tea.name %></h2>

@@ -3,6 +3,7 @@ module ApplicationHelper
   # flash#success/warning/danger message will show
   # when redirect between action
   def flash_message
+    flash = flash || {}
     return if flash.empty?
     # hash key must be symbol
     hash = flash.inject({}) { |h, (k, v)| h[k.to_s] = v; h; }
@@ -21,7 +22,7 @@ module ApplicationHelper
   # check remote client whether is mobile
   # define different layout
   def mobile?
-    agent_str = request.env["HTTP_USER_AGENT"].to_s.downcase
+    agent_str = request.env["HTTP_USER_AGENT"].to_s.downcase rescue "false"
     return false if agent_str =~ /ipad/
     agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
   end
