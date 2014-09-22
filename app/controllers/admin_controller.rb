@@ -13,11 +13,15 @@ class AdminController < ApplicationController
     authenticate!
   end
 
+
   # GET /admin
   get "/" do
+    @teas = Tea.all
     @transactions = Transaction.all
+    @post_path = File.join(Settings.octopress.path, "source/_posts")
+    @blogs = Dir.entries(@post_path).grep(/\.markdown$/)
 
-    haml :transactions, layout: :"../layouts/layout"
+    haml :index, layout: :"../layouts/layout"
   end
 
   get "/members" do

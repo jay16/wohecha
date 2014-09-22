@@ -16,8 +16,9 @@ config/*.yaml
 sync_images_and_db.rb
 
 # 项目本地文件夹
-/tmp
-/vendor
+app/assets/images/teas
+tmp/
+vendor/
 
 # 数据库/log文件
 /db/*.db

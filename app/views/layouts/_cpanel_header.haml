@@ -1,0 +1,39 @@
+-# coding: UTF-8
+%nav.navbar.navbar-default{role: "navigation", style:"margin-bottom:0px;"}
+  .container
+    / Brand and toggle get grouped for better mobile display
+    .navbar-header
+      %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to "控制台", "/admin", class: "navbar-brand"
+    / Collect the nav links, forms, and other content for toggling
+    .collapse.navbar-collapse{role: "navigation", id:"bs-example-navbar-collapse-1"}
+      %ul.nav.navbar-nav
+        %li.active= link_to "概况", "/admin"
+        %li= link_to "茶品", "/admin/teas"
+        %li= link_to "订单", "/admin/transactions"
+        %li= link_to "博文", "/admin/blogs"
+
+      %ul.nav.navbar-nav.navbar-right
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            设置
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              %a{:href => "/users/edit"}
+                %i.glyphicon.glyphicon-user
+                账户设置
+            %li
+              %a{:href => "/"}
+                %i.glyphicon.glyphicon-wrench
+                返回前台 
+            %li.divider
+            %li
+              = link_to "/logout", method: :delete do
+                %i.glyphicon.glyphicon-log-out
+                退出
+

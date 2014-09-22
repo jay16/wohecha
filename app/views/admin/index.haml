@@ -1,1 +1,20 @@
-admin#index
+-#encoding: utf-8
+%table.table.table-striped.table-condensed
+  %thead
+    %tr
+      %th 名称
+      %th 数量
+      %th 备注
+  %tbody
+    %tr
+      %td 茶品
+      %td= @teas.count
+      %td 
+    %tr
+      %td 订单
+      %td= @transactions.count
+      %td 
+    %tr
+      %td 博文
+      %td= @blogs.count
+      %td 

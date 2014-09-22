@@ -39,16 +39,17 @@
       });
     },
     search: function(input) {
-      var count, keyword;
+      var count, date_begin, keyword;
       keyword = $(input).val();
       if (!keyword.trim()) {
         $(".tea").removeClass("hidden");
         $(".outsale").addClass("hidden");
         return $(".search-result").text("");
       } else {
+        date_begin = new Date();
         count = 0;
         return $(".tea").each(function() {
-          var keywords;
+          var date_end, keywords, search_duration, text;
           keywords = $(this).data("keywords");
           if (keywords.indexOf(keyword) >= 0) {
             $(this).removeClass("hidden");
@@ -56,7 +57,10 @@
           } else {
             $(this).addClass("hidden");
           }
-          return $(".search-result").text("[" + count + "] results.");
+          date_end = new Date();
+          search_duration = (date_end.getTime() - date_begin.getTime()) / 1000;
+          text = "找到约" + count + "条结果(用时" + search_duration + "秒)";
+          return $(".search-result").text(text);
         });
       }
     }

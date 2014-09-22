@@ -19,7 +19,10 @@ namespace :tea do
         new_image_path = File.join(_new_image_dir, tea.image)
         FileUtils.cp(old_image_path, new_image_path)
         puts [old_image_path, new_image_path].join(" => ")
-        puts "yes" if File.exist?(new_image_path)
+        if File.exist?(new_image_path)
+          puts "yes" 
+          FileUtils.rm(old_image_path)
+        end
       else
         puts "Error: " + old_image_path
       end

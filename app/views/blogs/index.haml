@@ -1,23 +1,21 @@
 .row
-  .col-sm-4
-    %h1 博文列表- 我喝茶 
+  .col-sm-8
+    %h1 博文列表
 
-  .col-sm-3{style: "margin-top:25px;"}
-    %form.form-horizontal{action: "/blogs/octopress_generate", method: "post", style:"display:inline;"}
-      %input.btn.btn-default.btn-success{type: "submit", value: "生成静态博文", onclick: "App.showLoading('生成静态博文...');"}
-    %a.btn.btn-default.btn-link{"data-toggle" => "popover", "data-original-title" => "特别说明", "data-content" => "创建/修改/删除博文后,必须[生成静态博文]才会起效!", "data-placement" => "right"}
-      %span.glyphicon.glyphicon-question-sign
-
-  .col-sm-5{style: "margin-top:25px;"}
+  .col-sm-4{style: "margin-top:25px;"}
     =link_to "创建博文", "javascript:void(0);", class: "btn btn-default right", "data-toggle" => "modal", "data-target" => "#myModal"
-    =link_to "订单列表", "/admin", class: "btn btn-default right"
+    %form.right.form-horizontal{action: "/blogs/octopress_generate", method: "post", style:"display:inline;"}
+      %input.btn.btn-default.btn-success{type: "submit", value: "生成静态博文", onclick: "App.showLoading('生成静态博文...');"}
+    %a.right.btn.btn-default.btn-link{"data-toggle" => "popover", "data-original-title" => "特别说明", "data-content" => "创建/修改/删除博文后,必须[生成静态博文]才会起效!", "data-placement" => "right"}
+      %span.glyphicon.glyphicon-question-sign
 
 :css
   .table thead th, .table tbody td {text-align: left;}
   .table .btn { padding: 1px 6px; } // .table .btn .glyphicon
-%table.table.table-condensed
+%table.table.table-condensed.table-striped
   %thead
     %tr
+      %th 列号
       %th 标题 
       %th 分类 
       %th{style: "width:10px;"} 浏览
@@ -25,19 +23,20 @@
       %th{style: "width:10px;"} 编辑 
       %th{style: "width:10px;"} 删除 
   %tbody
-    - @markdowns.each do |markdown|
+    - @markdowns.each_with_index do |markdown, index|
       - title, categories = octopress_parse(@post_path, markdown)
       %tr
+        %td= index + 1
         %td= title
         %td= categories 
         %td
           %a.btn.btn-default.btn-link{href: "#{blog_url_path(markdown)}", target: "_blank", "data-toggle" => "tooltip", "data-original-title" => "浏览博文网页,若浏览失败，应该是[未]生成静态博文"}
             %span.glyphicon.glyphicon-share-alt
         %td
-          %a.btn.btn-default.btn-link{href:"/blogs/show?post=#{markdown}", "data-toggle" => "tooltip", "data-original-title" => "查看博文[#{title}]", onclick: "App.showLoading();"}
+          %a.btn.btn-default.btn-link{href:"/admin/blogs/show?post=#{markdown}", "data-toggle" => "tooltip", "data-original-title" => "查看博文[#{title}]", onclick: "App.showLoading();"}
             %span.glyphicon.glyphicon-eye-open
         %td
-          %a.btn.btn-default.btn-link{href:"/blogs/edit?post=#{markdown}", "data-toggle" => "tooltip", "data-original-title" => "编辑博文[#{title}]", onclick: "App.showLoading();"}
+          %a.btn.btn-default.btn-link{href:"/admin/blogs/edit?post=#{markdown}", "data-toggle" => "tooltip", "data-original-title" => "编辑博文[#{title}]", onclick: "App.showLoading();"}
             %span.glyphicon.glyphicon-pencil
         %td
           %a.btn.btn-default.btn-link{onclick:"Blog.removeBlog('#{title}', '#{markdown}')", "data-toggle" => "tooltip", "data-original-title" => "删除博文[#{title}]", rel: "nofollow"}

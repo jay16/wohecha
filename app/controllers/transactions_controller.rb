@@ -9,6 +9,13 @@ class TransactionsController < ApplicationController
     authenticate!
   end
 
+  # index
+  get "/" do
+    @transactions = Transaction.all
+
+    haml :index, layout: :"../layouts/layout"
+  end
+
   #post /transactions/checkout
   post "/checkout" do
     #生成唯一out_trade_no

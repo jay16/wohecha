@@ -9,7 +9,7 @@ class TeasController < ApplicationController
 
   # GET /teas
   get "/" do
-    @teas = Tea.all
+    @teas = Tea.all(:order => [:onsale.desc]) #:limit => 20
 
     haml :index, layout: :"../layouts/layout"
   end

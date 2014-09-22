@@ -19,16 +19,16 @@
           %h2= "编辑[#{title}]"
 
         .span2{style: "margin-top: 20px;"}
-          %a.right.btn.btn-default{href: "/blogs/show?post=#{params[:post]}",  "data-toggle" => "tooltip", "data-original-title" => "查看该博文"}
+          %a.right.btn.btn-default{href: "/admin/blogs/show?post=#{params[:post]}",  "data-toggle" => "tooltip", "data-original-title" => "查看该博文"}
             %span.icon-eye-open
-          %a.right.btn.btn-default{href: "/blogs", "data-toggle" => "tooltip", "data-original-title" => "返回博文列表"}
+          %a.right.btn.btn-default{href: "/admin/blogs", "data-toggle" => "tooltip", "data-original-title" => "返回博文列表"}
             %span.icon-list
           %a.right.btn.btn-default{"data-toggle" => "modal", "data-target" => "#modalMarkdownCheatsheet"}
             %span.icon-question-sign
 
   .row
     .span8.offset1
-      %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/blogs/update", :method => "post", :style => "display:inline;width:100px;"}
+      %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/admin/blogs/update", :method => "post", :style => "display:inline;width:100px;"}
         = haml :"_toolbar", layout: false
         %input{name: "post", value: "#{params[:post]}", type: "hidden"}
         %textarea#editor{name: "content", contenteditable: "true", style: "width:100%;height:100%;"}= @content
@@ -36,7 +36,7 @@
         %input.btn.btn-primary{type: "submit", style: "float:right;"}
 
     .span3{style: "margin-left:15px;"}
-      %iframe{style: "height:650px;overflow-y:auto;overflow-x:none;border:0px;", src:"/blogs/images?post=#{params[:post]}"}
+      %iframe{style: "height:650px;overflow-y:auto;overflow-x:none;border:0px;", src:"/admin/blogs/images?post=#{params[:post]}"}
 
 %script{:src => "http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"}
 %script{:src => "https://mindmup.s3.amazonaws.com/lib/jquery.hotkeys.js"}

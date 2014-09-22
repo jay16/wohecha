@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
   enable :sessions, :logging, :dump_errors, :raise_errors, :static, :method_override
 
   # css/js/view配置文档
-  #use ImageHandler
+  use ImageHandler
   use SassHandler
   use CoffeeHandler
   use AssetHandler

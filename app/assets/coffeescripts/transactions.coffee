@@ -9,6 +9,7 @@ window.Transactions =
       $(".over").addClass("hidden")
       $(".search-result").text("")
     else
+      date_begin = new Date()
       count = 0
       $(".transaction").each ->
         keywords = $(this).data("keywords") 
@@ -18,7 +19,10 @@ window.Transactions =
         else
           $(this).addClass("hidden")
 
-        $(".search-result").text("["+count+"] results.")
+        date_end = new Date()
+        search_duration = (date_end.getTime() - date_begin.getTime())/1000
+        text = "找到约"+count+"条结果(用时" + search_duration+ "秒)"
+        $(".search-result").text(text)
 
 
   show_all_transactions: (input) ->
