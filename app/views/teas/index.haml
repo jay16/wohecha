@@ -5,7 +5,7 @@
     %h1 商品列表
 
   .col-sm-4{style: "margin-top:25px;"}
-    =link_to "添加商品", "/teas/new", class: "btn btn-default btn-primary right"
+    =link_to "添加商品", "/admin/teas/new", class: "btn btn-default btn-primary right"
     =link_to "生成表态模板","javascript:void(0);", class: "btn btn-default btn-success right", onclick: "Teas.generateStaticFiles();"
 
 
@@ -39,19 +39,19 @@
 
         %td{style:"vertical-align: middle"}= index + 1
         %td
-          %img.img-news{src: "./images/teas/#{tea.id}/#{tea.image}", style: "width:100px;"}
+          %img.img-news{src: "../images/teas/#{tea.id}/#{tea.image}", style: "width:100px;"}
         %td= tea.name 
         %td= tea.from
         %td= tea.price.to_s + " #{tea.unit1}/#{tea.unit2}"
         %td= tea.weight.to_i.to_s + " " + tea.unit3
         %td.hidden= tea.desc
         %td
-          = link_to "编辑", "/teas/#{tea.id}/edit"
-          %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/teas/#{tea.id}/image", :enctype => "multipart/form-data", :method => "post", :style => "display:inline;width:100px;"}
-            %span.btn.btn-small.btn-success.fileinput-button{style:"font-size:10px;padding: 1px 3px;"}
-              %i.icon-plus
-              %span{style: "font-size:8px;"} 更换<br>图片
-              %input.text_field{:name => "image", :onchange => "$('#image_submit#{tea.id}').trigger('click');", :type => "file", :style => "width: 150px;"}
+          %a.btn{href: "/admin/teas/#{tea.id}/edit", "data-toggle" => "tooltip", "data-original-title" => "编辑茶品"}
+            %span.glyphicon.glyphicon-edit
+          %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/teas/#{tea.id}/image", :enctype => "multipart/form-data", :method => "post"}
+            %a{"data-toggle" => "tooltip", "data-original-title" => "更换图片"}
+              %span.glyphicon.glyphicon-picture.fileinput-button{style:"padding: 3px 12px;"}
+                %input.text_field{:name => "image", :onchange => "$('#image_submit#{tea.id}').trigger('click');", :type => "file"}
             %input.btn{:name => "commit", :style => "display:none;", :type => "submit", :value => "submit", :id => "image_submit#{tea.id}"}
         %td
           %form.form-inline{"accept-charset" => "UTF-8", :action => "/teas/#{tea.id}/onsale", :method => "post", :role => "form"}

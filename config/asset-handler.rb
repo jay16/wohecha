@@ -24,12 +24,12 @@ class ImageHandler < Sinatra::Base
     
     get "/images/*" do
         filename = params[:splat].first
-        filepath = [settings.views, filename].join("/")
+        filepath = "%s/%s" % [settings.views, filename]
         # use default image when not found
-        unless File.exist?(filepath) or File.file?(filepath)
+        unless (File.exist?(filepath) and File.file?(filepath))
             filepath = [settings.views, "default.jpg"].join("/")
-            send_file(filepath,:type => 'image/jpeg', :disposition => 'inline') 
         end
+        send_file(filepath,:type => 'image/jpeg', :disposition => 'inline') 
     end
 end
 

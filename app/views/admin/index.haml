@@ -9,7 +9,8 @@
     %tr
       %td 茶品
       %td= @teas.count
-      %td 
+      - onsale_count = @teas.find_all { |tea| tea.onsale }.count
+      %td= "在售:%d / 其他:%d" % [onsale_count, @teas.count - onsale_count]
     %tr
       %td 订单
       %td= @transactions.count

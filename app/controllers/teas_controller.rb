@@ -17,7 +17,7 @@ class TeasController < ApplicationController
   #get /teas/new
   get "/new" do
     @tea = Tea.new
-    @form_path = "/teas/create"
+    @form_path = "/admin/teas/create"
 
     haml :new, layout: :"../layouts/layout"
   end
