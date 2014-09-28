@@ -25,7 +25,7 @@ window.Transactions =
         $(".search-result").text(text)
 
 
-  show_all_transactions: (input) ->
+  showAllTransactions: (input) ->
     is_checked = $(input).attr("checked")
 
     if is_checked == "checked"

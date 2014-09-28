@@ -2,7 +2,7 @@ require "rack"
 require "tilt"
 
 module Utils
-  module ClassMethods
+  module Tiltor
     module ContentTyped; attr_accessor :content_type; end
 
     def erb(template, options = {}, locals = {}, &block)
@@ -47,10 +47,6 @@ module Utils
       #options.merge!(engine_options) { |key, v1, v2| v1 }
       engine_options = {}
 
-      # customer settings
-      if not options.has_key?(:layout) and settings.respond_to?(:layout) 
-        options.merge!({layout: settings.layout}) 
-      end
       # extract generic options
       locals          = options.delete(:locals) || locals         || {}
       views           = options.delete(:views)  || settings.views || "./views"
@@ -79,6 +75,10 @@ module Utils
         @default_layout = layout_was
       end
 
+      # customer settings
+      if layout.nil? and settings.respond_to?(:layout) 
+        layout = settings.layout
+      end
       # render layout
       if layout
         options = options.merge(:views => views, :layout => false, :eat_errors => eat_errors, :scope => scope).
@@ -95,7 +95,7 @@ module Utils
         #warn "WARING: #{path} - exist without base - #{base}"
         path
       else
-        [base, path].join("/")
+        "%s/%s" % [base, path]
       end
     end
 
@@ -181,71 +181,6 @@ module Utils
         self.undef_method(name) if respond_to? name
         String === content ? class_eval("def #{name}() #{content}; end") : define_method(name, &content)
       end
-    end
-  end
-end
-class Utils::Tilter
-  include Utils::ClassMethods
-
-  attr_accessor :bindings
-  def initialize(b = TOPLEVEL_BINDING)
-    @bindings = b
-  end
-
-
-  # Access settings defined with Base.set.
-  def self.settings
-    self
-  end
-
-  # Access settings defined with Base.set.
-  def settings
-    #self.class.settings
-    self
-  end
-  
-  # Sets an option to the given value.  If the value is a proc,
-  # the proc will be called every time the option is accessed.
-  def set(option, value = (not_set = true), ignore_setter = false, &block)
-    raise ArgumentError if block and !not_set
-    value, not_set = block, false if block
-
-    if not_set
-      raise ArgumentError unless option.respond_to?(:each)
-      option.each { |k,v| set(k, v) }
-      return self
-    end
-
-    if respond_to?("#{option}=") and not ignore_setter
-      return __send__("#{option}=", value)
-    end
-
-    setter = proc { |val| set option, val, true }
-    getter = proc { value }
-
-    case value
-    when Proc
-      getter = value
-    when Symbol, Fixnum, FalseClass, TrueClass, NilClass
-      getter = value.inspect
-    when Hash
-      setter = proc do |val|
-        val = value.merge val if Hash === val
-        set option, val, true
-      end
-    end
-
-    define_singleton("#{option}=", setter) if setter
-    define_singleton(option, getter) if getter
-    define_singleton("#{option}?", "!!#{option}") unless respond_to? "#{option}?"
-    self
-  end
-  # Dynamically defines a method on settings.
-  def define_singleton(name, content = Proc.new)
-    # replace with call to singleton_class once we're 1.9 only
-    (class << self; self; end).class_eval do
-      self.undef_method(name) if respond_to? name
-      String === content ? class_eval("def #{name}() #{content}; end") : define_method(name, &content)
     end
   end
 end

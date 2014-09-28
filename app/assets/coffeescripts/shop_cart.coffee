@@ -1,6 +1,6 @@
 #encoding: utf-8
 window.ShopCart =
-  chk_total: ->
+  chkTotal: ->
     total_amount = 0 #购物车商品总金额
     total_quantity= 0 #购物车商品数量
     order_list = new Array()
@@ -46,7 +46,7 @@ window.ShopCart =
     count += 1
     $quantity.attr("value", count)
     $("#"+input_id+"_amount").text(Math.round(count*price*10)/10)
-    ShopCart.chk_total()
+    ShopCart.chkTotal()
 
   minus: (input_id, price) ->
     $quantity = $("#" + input_id+"_quantity")
@@ -55,10 +55,10 @@ window.ShopCart =
       count = count - 1
       $quantity.attr("value", count)
       $("#"+input_id+"_amount").text(Math.round(count*price*10)/10)
-      ShopCart.chk_total()
+      ShopCart.chkTotal()
 
   #for mobile browser
-  dyna_resize_shop_cart: ->
+  dynaResizeShopCart: ->
     # Get the dimensions of the viewport
     width = $(window).width()
     if width > 550
@@ -66,7 +66,7 @@ window.ShopCart =
     else
       $(".dyna-hidden").addClass "hidden"
 
-  init_shop_cart: ->
+  initShopCart: ->
     pairs = window.location.search.substring(1).split("&")
     obj = {}
     for i of pairs
@@ -79,8 +79,8 @@ window.ShopCart =
 
 # do when load this
 $ -> 
-  ShopCart.init_shop_cart()
-  ShopCart.chk_total()
-  ShopCart.dyna_resize_shop_cart()
+  ShopCart.initShopCart()
+  ShopCart.chkTotal()
+  ShopCart.dynaResizeShopCart()
 
-$(window).resize ShopCart.dyna_resize_shop_cart
+$(window).resize ShopCart.dynaResizeShopCart

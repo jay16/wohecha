@@ -1,0 +1,30 @@
+%form{:role => "form", :action => @form_path, :method => @form_action }
+  .form-group
+    %label{:for => "name"} 名称 / 上市日期 / 是否下架
+    %br
+    %input#name.form-control{:placeholder => "name", :type => "text", :name => "tea[name]", :value => "#{@tea.name}", style: "width:60%;display:inline;"}
+    %input#market.form-control{:placeholder => "market", :type => "text", :name => "tea[market]", :value => "#{@tea.market || Time.now.strftime('%Y新品')}", style: "width:35%;display:inline;"}
+  .form-group
+    %label{:for => "from"} 产地
+    %input#from.form-control{:placeholder => "from", :type => "text", :name => "tea[from]", :value => "#{@tea.from}"}
+  .form-group
+    %label{:for => "price"} 价格 
+    %br
+    %input#price.form-control{:placeholder => "price", :type => "text", :name => "tea[price]", :value => "#{@tea.price}", style: "width:20%;display:inline;"}
+    %input#unit1.form-control{:placeholder => "price", :type => "text", :name => "tea[unit1]", :value => "#{@tea.unit1 || '元'}", style: "width:20%;display:inline;"}
+    &#47; 
+    %input#unit2.form-control{:placeholder => "price", :type => "text", :name => "tea[unit2]", :value => "#{@tea.unit2 || '盒'}", style: "width:20%;display:inline;"}
+  .form-group
+    %label{:for => "weight"} 净重
+    %br
+    %input#weight.form-control{:placeholder => "price", :type => "text", :name => "tea[weight]", :value => "#{@tea.weight}", style: "width:20%;display:inline;"}
+    &#47; 
+    %input#unit3.form-control{:placeholder => "price", :type => "text", :name => "tea[unit3]", :value => "#{@tea.unit3 || 'g'}", style: "width:20%;display:inline;"}
+  .form-group
+    %label{:for => "desc"} 描述
+    <textarea class="form-control" rows="3" name="tea[desc]">#{@tea.desc}</textarea>
+  .form-group
+    %label{:for => "blog"} 博客链接
+    %input#blog.form-control{:placeholder => "blog", :type => "text", :name => "tea[blog]", :value => "#{@tea.blog}"}
+  %button.btn.btn-default.btn-primary.right{:type => "submit"} 提交 
+  %a.btn.btn-default.right{:href => "/admin/teas"} 返回商品列表

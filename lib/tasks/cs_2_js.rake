@@ -1,3 +1,4 @@
+#encoding:utf-8
 desc "tasks around CoffeeScript"
 namespace :cs2js do
 
@@ -9,7 +10,7 @@ namespace :cs2js do
      coffeescripts.each do |coffeescript_file|
        bint = Time.now.to_f
        begin
-         file = File.open(File.join(javascript_path, File.basename(coffeescript_file, ".coffee") + ".js"), "w+")
+         file = File.open(File.join(javascript_path, File.basename(coffeescript_file, ".coffee") + ".js"), "w:utf-8")
          file.puts CoffeeScript.compile(File.read(File.join(coffeescript_path,coffeescript_file)))
          file.close
        rescue => e

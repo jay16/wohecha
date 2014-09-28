@@ -3,7 +3,7 @@ module ApplicationHelper
   # flash#success/warning/danger message will show
   # when redirect between action
   def flash_message
-    flash = flash || {}
+    return if !defined?(flash)
     return if flash.empty?
     # hash key must be symbol
     hash = flash.inject({}) { |h, (k, v)| h[k.to_s] = v; h; }
@@ -30,8 +30,10 @@ module ApplicationHelper
   # generate keywords from obj
   # for js search function
   def keywords(obj)
-    dirty_words = %w(ip browser created_at updated_at _key _collection _repository _persistence_state)
-    obj.instance_variables.reject { |v| dirty_words.include?(v.to_s.gsub("@","")) }
-    .map { |var| obj.instance_variable_get(var).to_s }.join(" ")
+    dirty_words = %w[ip browser created_at updated_at id]
+    obj.class.properties.map(&:name)
+      .reject { |v| dirty_words.include?(v.to_s) }
+      .map { |var| obj.instance_variable_get("@%s" % var).to_s }
+      .join(" ")
   end
 end

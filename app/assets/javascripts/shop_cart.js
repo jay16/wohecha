@@ -1,6 +1,6 @@
 (function() {
   window.ShopCart = {
-    chk_total: function() {
+    chkTotal: function() {
       var order_list, total_amount, total_quantity;
       total_amount = 0;
       total_quantity = 0;
@@ -47,7 +47,7 @@
       count += 1;
       $quantity.attr("value", count);
       $("#" + input_id + "_amount").text(Math.round(count * price * 10) / 10);
-      return ShopCart.chk_total();
+      return ShopCart.chkTotal();
     },
     minus: function(input_id, price) {
       var $quantity, count;
@@ -57,10 +57,10 @@
         count = count - 1;
         $quantity.attr("value", count);
         $("#" + input_id + "_amount").text(Math.round(count * price * 10) / 10);
-        return ShopCart.chk_total();
+        return ShopCart.chkTotal();
       }
     },
-    dyna_resize_shop_cart: function() {
+    dynaResizeShopCart: function() {
       var width;
       width = $(window).width();
       if (width > 550) {
@@ -69,7 +69,7 @@
         return $(".dyna-hidden").addClass("hidden");
       }
     },
-    init_shop_cart: function() {
+    initShopCart: function() {
       var i, obj, pair, pairs;
       pairs = window.location.search.substring(1).split("&");
       obj = {};
@@ -87,11 +87,11 @@
   };
 
   $(function() {
-    ShopCart.init_shop_cart();
-    ShopCart.chk_total();
-    return ShopCart.dyna_resize_shop_cart();
+    ShopCart.initShopCart();
+    ShopCart.chkTotal();
+    return ShopCart.dynaResizeShopCart();
   });
 
-  $(window).resize(ShopCart.dyna_resize_shop_cart);
+  $(window).resize(ShopCart.dynaResizeShopCart);
 
 }).call(this);

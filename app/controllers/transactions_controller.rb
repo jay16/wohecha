@@ -3,19 +3,6 @@ require "json"
 class TransactionsController < ApplicationController
   set :views, ENV["VIEW_PATH"] + "/transactions"
 
-  #无权限则登陆
-  before "/:out_trade_no" do 
-    pass if %(/checkout /done /notify).include?(request.path_info)
-    authenticate!
-  end
-
-  # index
-  get "/" do
-    @transactions = Transaction.all
-
-    haml :index, layout: :"../layouts/layout"
-  end
-
   #post /transactions/checkout
   post "/checkout" do
     #生成唯一out_trade_no
@@ -88,14 +75,6 @@ class TransactionsController < ApplicationController
     haml :show, layout: :"../layouts/layout"
   end
  
-  # wheth transaction over
-  post "/:id/status" do
-    @transaction = Transaction.first(:id => params[:id])
-    @transaction.update(:status => params[:status])
-
-    redirect "/admin?transaction=#{@transaction.id}"
-  end
-
   def find_or_create_transaction!
     # %(WAIT_SELLER_SEND_GOODS WAIT_SELLER_SEND_GOODS).include?(params[:trade_status])
     transaction = Transaction.all(:out_trade_no => params[:out_trade_no]).first
@@ -119,11 +98,8 @@ class TransactionsController < ApplicationController
 
 
   def generate_out_trade_no
-    ip_hex = remote_ip.split(".").map{ |is| ("%02X" %is.to_i).to_s }.join.hex
+    ip_hex = remote_ip.split(".").map{ |is| ("%02X" % is.to_i).to_s }.join.hex
     Time.now.to_i.to_s + ip_hex.to_s + Order.count.to_s
   end
 
-  not_found do
-    "sorry, #{request.path_info} - not found!"
-  end
 end

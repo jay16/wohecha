@@ -1,0 +1,23 @@
+%h1 订单列表- 我喝茶 
+
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th{style: "width:120px"} 订单id
+      %th{style: "width:120px"} 买家
+      %th{style: "width:120px"} 收货地址
+      %th{style: "width:120px"} 金额
+      %th{style: "width:100px"} 状态
+      %th{style: "width:120px"} 创建时间
+      %th{style: "width:120px"} 更新时间
+  %tbody
+    - @transactions.each do |transaction|
+      %tr
+        %td= transaction.out_trade_no
+        %td= transaction.receive_name
+        %td= transaction.receive_address
+        %td= transaction.total_fee
+        %td= transaction.trade_status.split("_").join(" ")
+        %td= transaction.created_at.strftime("%Y/%m/%d %H:%M:%S")
+        %td= transaction.updated_at.strftime("%Y/%m/%d %H:%M:%S")

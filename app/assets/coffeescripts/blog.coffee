@@ -7,8 +7,9 @@ window.Blog =
         val
 
   removeBlog: (title, markdown) ->
-    $("#inputTitle").val(title);
-    $("#inputPost").val(markdown);
+    $("#inputTitle").val(title)
+    $("#inputPost").val(markdown)
+    $("#formRemove").attr("action", "/cpanel/blogs/" + markdown)
     $("#myModal2").modal("show")
 
   inputMonitor: (self, target) ->

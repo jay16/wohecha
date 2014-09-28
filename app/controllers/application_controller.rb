@@ -1,7 +1,9 @@
 #encoding: utf-8
+#require 'sinatra/advanced_routes'
 class ApplicationController < Sinatra::Base
   register Sinatra::Reloader
   register Sinatra::Flash
+  # register Sinatra::AdvancedRoutes
   # register Sinatra::Auth
 
   helpers ApplicationHelper
@@ -33,21 +35,12 @@ class ApplicationController < Sinatra::Base
   #  send_file(file, :disposition => :inline) if File.exist?(file)
   #end
 
-  #global shared function
-  ##############################################
-  #authen user
-  def authenticate! 
-    if request.cookies["login_state"].to_s.strip.empty?
-      # 记录登陆前的path，登陆成功后返回至此path
-      response.set_cookie "before_login_path", {:value=> request.env["REQUEST_PATH"], :path => "/", :max_age => "2592000"}
-
-      flash[:notice] = "继续操作前请登录."
-      redirect "/admin/login"
-    end
-  end
-
   def remote_ip
     request.env["REMOTE_ADDR"] || "n-i-l"
+  end
+
+  def remote_path
+    request.env["REQUEST_PATH"] || "/"
   end
 
   def remote_browser
@@ -57,4 +50,22 @@ class ApplicationController < Sinatra::Base
   def run_shell(cmd)
     IO.popen(cmd) { |stdout| stdout.reject(&:empty?) }.unshift($?.exitstatus.zero?)
   end 
+
+  # 404 page
+  not_found do
+    haml :"shared/not_found", layout: :"layouts/layout", views: ENV["VIEW_PATH"]
+  end
+
+  # import for collect routes
+  #def get_with_collect_route path, opts = {}, &bk
+  #  @global_routes ||= []
+  #  @global_routes.push({
+  #    :path => path,
+  #    :opts => opts,
+  #    :bk   => bk || nil
+  #  })
+  #  _get path, opts = {}, &bk
+  #end
+  #alias_method :_get, :get
+  #alias_method :get, :get_with_collect_route
 end

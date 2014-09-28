@@ -7,7 +7,7 @@ window.Teas=
   deleteWithAjax: (id) ->
     $.ajax(
       type: "delete"
-      url: "/teas/"+id
+      url: "/cpanel/teas/"+id
       #data: { "id": id }
       #dataType: "json"
       success: (data) ->
@@ -18,9 +18,11 @@ window.Teas=
 
   showAllTeas: (input) ->
     if App.checkboxState(input)
-      $(".tea").removeClass("hidden") 
-    else
+      App.checkboxUnChecked(input)
       $(".outsale").addClass("hidden")
+    else
+      App.checkboxChecked(input)
+      $(".tea").removeClass("hidden") 
 
       
   #generate static files with ajax
@@ -28,7 +30,7 @@ window.Teas=
   generateStaticFiles: ->
     App.showLoading()
     $.ajax
-      url: "/admin/generate"
+      url: "/cpanel/generate"
       type: "post"
       success: (data) ->
         $("#myModalContent").html data

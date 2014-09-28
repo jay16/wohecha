@@ -49,6 +49,6 @@ map("/")             { run HomeController }
 
 3. 2014/09/20 11:41 sat
 
-  1. js测试(jasmine)
+  1. js测试([jasmine](http://jasmine.github.io/2.0/introduction.html))
   2. 抽取sinatra渲染代码，生成静态文件
   3. 调整图片放置结构, app/assets/images => app/asserts/images/teas/:id/*.jpg

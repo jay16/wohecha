@@ -4,9 +4,14 @@ require "uri"
 class HomeController < ApplicationController
   set :views, ENV["VIEW_PATH"] + "/home"
 
-  # root
+  # root page
   get "/" do
     haml :index
+  end
+
+  # redirect to cpanel
+  get "/admin" do
+    redirect "/cpanel"
   end
 
   # home page only show onsale product
@@ -20,7 +25,7 @@ class HomeController < ApplicationController
   # render static files without layout 
   # already render layout when generate static file 
   get "/cart" do
-    erb (mobile? ? :mobile_cart : :cart)
+    erb(mobile? ? :mobile_cart : :cart)
   end
 
   # member#subscribe
@@ -50,8 +55,4 @@ class HomeController < ApplicationController
     end
   end
 
-
-  not_found do
-    "sorry - home"
-  end
 end

@@ -11,6 +11,7 @@
     removeBlog: function(title, markdown) {
       $("#inputTitle").val(title);
       $("#inputPost").val(markdown);
+      $("#formRemove").attr("action", "/cpanel/blogs/" + markdown);
       return $("#myModal2").modal("show");
     },
     inputMonitor: function(self, target) {

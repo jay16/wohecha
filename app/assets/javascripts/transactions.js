@@ -26,7 +26,7 @@
         });
       }
     },
-    show_all_transactions: function(input) {
+    showAllTransactions: function(input) {
       var is_checked;
       is_checked = $(input).attr("checked");
       if (is_checked === "checked") {

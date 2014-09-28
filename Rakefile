@@ -13,3 +13,5 @@ task :environment => "Gemfile.lock" do
 end
 
 Dir.glob('lib/tasks/*.rake').each { |file| load file }
+require 'jasmine'
+load 'jasmine/tasks/jasmine.rake'

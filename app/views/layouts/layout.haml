@@ -7,8 +7,10 @@
     %link{href: "#{Settings.website.favicon}", rel: "shortcut icon"}
     = javascript_include_tag "/javascripts/jquery-2.1.1.min.js"
     = javascript_include_tag "/javascripts/bootstrap.320.min.js"
+    = javascript_include_tag "/javascripts/nprogress.js"
     = javascript_include_tag "/javascripts/application.js"
     = stylesheet_link_tag "/stylesheets/bootstrap.320.min.css"
+    = stylesheet_link_tag "/stylesheets/nprogress.css"
     = stylesheet_link_tag "/stylesheets/application.scss"
     -if mobile? or (params = params || {} and params[:template] == "mobile_cart")
       %meta{:content => "no", :name => "apple-mobile-web-app-capable"}
@@ -20,7 +22,6 @@
           min-width:300px;
         }
   %body{style: "background:#f0f0f0;"}
-    = haml :"../layouts/_cpanel_header"
     .container
       .row
         .col-sm-12{style: "text-align:center;"}
@@ -39,25 +40,3 @@
         .footer= "微信号: " + Settings.contact.weixin
         .footer &copy; 2014 wohecha.cn
 
-
-:javascript
-  $(function() {
-    $('body').tooltip({
-      selector: "[data-toggle=tooltip]",
-      container: "body"
-    })
-    $('body').popover({
-      selector: "[data-toggle=popover]",
-      container: "body"
-    })
-
-    // navbar-nav active menu
-    var pathname = window.location.pathname;
-    $(".navbar-nav:first li").each(function(){
-      var href = $(this).children("a:first").attr("href");
-      if(pathname == href)
-        $(this).addClass("active")
-      else
-        $(this).removeClass("active")
-    });
-  })

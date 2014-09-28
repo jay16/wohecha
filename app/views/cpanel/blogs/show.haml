@@ -1,0 +1,13 @@
+.row{style: "margin: 10px auto;"}
+  - title, categories = octopress_parse(@post_path, params[:post])
+  %h2= "#{title} [Markdown]"
+
+  %a.btn.btn-default.btn-sm.right{href: "/cpanel/blogs/#{params[:post]}/scan", target: "_blank", style: "margin-top: -35px;margin-right: 60px;", "data-toggle" => "tooltip", "data-original-title" => "浏览博文网页,若浏览失败，应该是[未]生成静态博文", "data-placement" => "left"}
+    %span.glyphicon.glyphicon-share-alt
+  %a.btn.btn-default.btn-sm.right{href: "/cpanel/blogs", style: "margin-top: -35px;margin-right: 30px;", "data-toggle" => "tooltip", "data-original-title" => "博文列表", onclick: "App.showLoading();"}
+    %span.glyphicon.glyphicon-th-list
+  %a.btn.btn-default.btn-sm.right{href: "/cpanel/blogs/#{params[:post]}/edit", style: "margin-top: -35px;", "data-toggle" => "tooltip", "data-original-title" => "编辑[#{title}]", onclick: "App.showLoading();"}
+    %span.glyphicon.glyphicon-pencil
+
+.row
+  %pre= @content

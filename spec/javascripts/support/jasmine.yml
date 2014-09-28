@@ -11,17 +11,11 @@
 #   - dist/**/*.js
 #
 src_files:
-  - app/assets/javascripts/jquery-1.9.0.js
+  - app/assets/javascripts/jquery-2.1.1.min.js
+  - app/assets/javascripts/bootstrap.320.min.js
   - app/assets/javascripts/application.js
+  - app/assets/javascripts/teas.js
 
-stylesheets:
-  - stylesheets/**/*.css
-
-helpers:
-  - 'helpers/*.js'
-
-spec_files:
-  - '**/*_spec.js'
 # stylesheets
 #
 # Return an array of stylesheet filepaths relative to src_dir to include before jasmine specs.
@@ -33,6 +27,8 @@ spec_files:
 #   - css/style.css
 #   - stylesheets/*.css
 #
+stylesheets:
+  - stylesheets/**/*.css
 
 # helpers
 #
@@ -44,6 +40,8 @@ spec_files:
 # helpers:
 #   - helpers/**/*.js
 #
+helpers:
+  - 'helpers/jasmine-jquery.js'
 
 # spec_files
 #
@@ -55,6 +53,8 @@ spec_files:
 # spec_files:
 #   - **/*[sS]pec.js
 #
+spec_files:
+  - '**/*_[sS]pec.js'
 
 # src_dir
 #

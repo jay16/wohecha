@@ -1,0 +1,17 @@
+%h1 订单明细
+
+=link_to "订单列表", "/admin", { class: "btn btn-default right", style: "margin-top: -40px;"}
+
+.row 
+  .col-sm-6
+    %p 订单信息
+
+    %table.table.table-hover.table-bordered
+
+      - @columns.each do |key, value|
+        %tr
+          %td{style:"width:100px;"}= value
+          %td= @transaction.instance_variable_get("@"+key.to_s)
+
+  .col-sm-6
+    = haml :_order , layout: false if @order

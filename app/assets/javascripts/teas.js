@@ -10,7 +10,7 @@
     deleteWithAjax: function(id) {
       return $.ajax({
         type: "delete",
-        url: "/teas/" + id,
+        url: "/cpanel/teas/" + id,
         success: function(data) {
           return window.location.reload();
         },
@@ -21,15 +21,17 @@
     },
     showAllTeas: function(input) {
       if (App.checkboxState(input)) {
-        return $(".tea").removeClass("hidden");
-      } else {
+        App.checkboxUnChecked(input);
         return $(".outsale").addClass("hidden");
+      } else {
+        App.checkboxChecked(input);
+        return $(".tea").removeClass("hidden");
       }
     },
     generateStaticFiles: function() {
       App.showLoading();
       return $.ajax({
-        url: "/admin/generate",
+        url: "/cpanel/generate",
         type: "post",
         success: function(data) {
           $("#myModalContent").html(data);

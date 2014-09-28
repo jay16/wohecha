@@ -1,0 +1,42 @@
+%h1 交易完成 - 我喝茶 
+
+=link_to "继续购物", "/home", { class: "btn btn-default right", style: "margin-top: -40px;"}
+
+.row
+  .col-sm-6
+
+    %p 订单信息
+    %table.table.table-hover.table-bordered
+      %tbody
+        %tr
+          %td{style: "width:100px;"} 订单号
+          %td= @transaction.out_trade_no
+        %tr
+          %td 收货人
+          %td= @transaction.receive_name
+        %tr
+          %td 收货人手机
+          %td= @transaction.receive_mobile
+        %tr
+          %td 收货人邮箱
+          %td= @transaction.buyer_email
+        %tr
+          %td 收货地址
+          %td= @transaction.receive_address
+        %tr
+          %td 订单金额
+          %td= @transaction.total_fee
+        %tr
+          %td 订单状态
+          %td= @transaction.trade_status.split("_").join(" ")
+        %tr
+          %td 创建时间
+          %td= @transaction.created_at.strftime("%Y/%m/%d %H:%M:%S")
+        %tr
+          %td 更新时间
+          %td= @transaction.updated_at.strftime("%Y/%m/%d %H:%M:%S")
+        %tr
+          %td status
+          %td= @status
+
+  = haml :_done_order, layout: false if @order
