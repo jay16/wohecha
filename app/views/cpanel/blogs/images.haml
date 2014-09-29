@@ -19,7 +19,7 @@
         .loading.hidden 加载中...
         = flash_message
     .row
-      %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/blogs/image?post=#{params[:post]}", :enctype => "multipart/form-data", :method => "post", :style => "display:inline;width:100px;"}
+      %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/cpanel/blogs/#{params[:post]}/image", :enctype => "multipart/form-data", :method => "post", :style => "display:inline;width:100px;"}
         %span.btn.btn-success.fileinput-button
           %i.icon-plus
           %span 添加图片

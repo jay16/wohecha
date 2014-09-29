@@ -7,7 +7,6 @@ describe "Cpanel::HomeController" do
     get "/cpanel"
     expect(last_response).to be_redirect
     expect(last_response.status).to be(302)
-    #expect(last_response.location).to eq(redirect_url("/cpanel/login"))
 
     follow_redirect!
     expect(last_request.url).to eq(redirect_url("/cpanel/login"))
@@ -55,7 +54,6 @@ describe "Cpanel::HomeController" do
 
     follow_redirect!
     expect(last_request.url).to eq(redirect_url("/cpanel"))
-
     expect(last_response).to be_redirect
 
     follow_redirect!
@@ -70,10 +68,7 @@ describe "Cpanel::HomeController" do
 
     follow_redirect!
     expect(last_request.cookies["_login_state"]).to eq(remote_ip)
-    #expect(last_request.url).to eq(redirect_url("/cpanel"))
-    #expect(last_request.cookies["_before_login_path"]).to eq("/cpanel")
-    pending "should record _before_login_path in cookie when login fail"
-    pending "should redirect _before_login_path in cookie when login successfuuly"
+    expect(last_request.cookies["_before_login_path"]).to eq(redirect_url("/cpanel"))
   end
 
   it "should show all routes config in this Application" do

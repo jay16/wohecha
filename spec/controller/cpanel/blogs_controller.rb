@@ -12,10 +12,13 @@ describe "Cpanel::BlogsController" do
 
       follow_redirect!
       expect(last_request.url).to eq(redirect_url("/cpanel/login"))
+
+      expect(last_request.cookies["_login_state"]).to be_nil
+      expect(last_request.cookies["_before_login_path"]).to eq(redirect_url("/cpanel/blogs"))
     end
   end
 
-  describe "should operation within login" do
+  describe "should operation with login successfully" do
     def post_path
       File.join(Settings.octopress.path, "source/_posts")
     end
@@ -31,6 +34,7 @@ describe "Cpanel::BlogsController" do
     end
 
     before:all do
+      get  "/cpanel/blogs"
       post "/cpanel/login", { 
         :name     => Settings.login.name, 
         :password => Settings.login.password
@@ -40,7 +44,7 @@ describe "Cpanel::BlogsController" do
       expect(last_response.status).to be(302)
 
       follow_redirect!
-      expect(last_request.url).to eq(redirect_url("/cpanel"))
+      expect(last_request.url).to eq(redirect_url("/cpanel/blogs"))
 
       # content
       expect(markdowns.count).to be > 0
@@ -81,12 +85,13 @@ describe "Cpanel::BlogsController" do
       expect(last_response.body).to include(@edit)
     end
 
-    it "should contain [view] [list] in [edit]" do
+    it "should contain [view] [list] [add image] in [edit]" do
       get "/cpanel/blogs/%s/edit" % @markdown
 
       expect(last_response).to be_ok
       expect(last_response.body).to include(@view)
       expect(last_response.body).to include(@list)
+      expect(last_response.body).to include("/cpanel/blogs/%s/image" % @markdown)
     end
 
     it "should redirect wiki blog when click [scan]" do
@@ -96,6 +101,17 @@ describe "Cpanel::BlogsController" do
 
       follow_redirect!
       expect(last_request.url).to eq(blog_url_path(@markdown))
+    end
+
+    it "should contain [post image url] when load image list [iframe]" do
+      url_base = "/cpanel/blogs/%s" % @markdown
+      url_get  = "%s/images" % url_base
+      url_post = "%s/image" % url_base
+
+      get url_get
+
+      expect(last_response).to be_ok
+      expect(last_response.body).to include(url_post)
     end
   end
 end

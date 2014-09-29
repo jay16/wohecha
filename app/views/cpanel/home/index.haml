@@ -1,25 +1,30 @@
 -#encoding: utf-8
-%table.table.table-striped.table-condensed
-  %thead
-    %tr
-      %th 名称
-      %th 数量
-      %th 备注
-  %tbody
-    %tr
-      %td 茶品
-      %td= @teas.count
-      - onsale_count = @teas.find_all { |tea| tea.onsale }.count
-      %td= "在售:%d / 其他:%d" % [onsale_count, @teas.count - onsale_count]
-    %tr
-      %td 订单
-      %td= @transactions.count
-      %td= "最近成交时间: %s" % @transactions.first.created_at if @transactions.first
-    %tr
-      %td 会员
-      %td= @members.count
-      %td= "最近注册时间: %s" % @members.first.created_at if @members.first
-    %tr
-      %td 博文
-      %td= @blogs.count
-      %td 
+
+.row
+  %h1 整体概况
+
+.row{style: "margin-top: 5px; background: white;"}
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th 名称
+        %th 数量
+        %th 备注
+    %tbody
+      %tr
+        %td 茶品
+        %td= @teas.count
+        - onsale_count = @teas.find_all { |tea| tea.onsale }.count
+        %td= "在售:%d / 其他:%d" % [onsale_count, @teas.count - onsale_count]
+      %tr
+        %td 订单
+        %td= @transactions.count
+        %td= "最近成交时间: %s" % @transactions.first.created_at.strftime("%Y-%m-%d %H:%M:%S") if @transactions.first
+      %tr
+        %td 会员
+        %td= @members.count
+        %td= "最近注册时间: %s" % @members.first.created_at.strftime("%Y-%m-%d %H:%M:%S") if @members.first
+      %tr
+        %td 博文
+        %td= @blogs.count
+        %td 

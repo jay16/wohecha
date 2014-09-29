@@ -50,5 +50,16 @@ map("/")             { run HomeController }
 3. 2014/09/20 11:41 sat
 
   1. js测试([jasmine](http://jasmine.github.io/2.0/introduction.html))
+
+    ````
+    bundle exec rake jasmine:ci
+    ````
+
   2. 抽取sinatra渲染代码，生成静态文件
   3. 调整图片放置结构, app/assets/images => app/asserts/images/teas/:id/*.jpg
+
+4. 2014/09/29 14:54 mon
+
+  1. 调整功能结构，管理权限在/cpanel
+  2. rspec测试完成controller/view
+

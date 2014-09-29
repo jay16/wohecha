@@ -3,7 +3,7 @@ require File.expand_path "../../../spec_helper.rb", __FILE__
 
 describe "Cpanel::TeasController" do
   describe "should unauthorized without login" do
-    it "should be foribbid when visit /cpanel/teas" do
+    it "should be redirect to /cpanel/login when visit /cpanel/teas" do
       get "/cpanel/teas"
 
       expect(last_response).to_not be_ok
@@ -12,11 +12,15 @@ describe "Cpanel::TeasController" do
 
       follow_redirect!
       expect(last_request.url).to eq(redirect_url("/cpanel/login"))
+
+      expect(last_request.cookies["_login_state"]).to be_nil
+      expect(last_request.cookies["_before_login_path"]).to eq(redirect_url("/cpanel/teas"))
     end
   end
 
-  describe "should operation within login" do
+  describe "should operation with login successfully" do
     before:all do
+      get  "/cpanel/teas"
       post "/cpanel/login", { 
         :name     => Settings.login.name, 
         :password => Settings.login.password
@@ -26,7 +30,7 @@ describe "Cpanel::TeasController" do
       expect(last_response.status).to be(302)
 
       follow_redirect!
-      expect(last_request.url).to eq(redirect_url("/cpanel"))
+      expect(last_request.url).to eq(redirect_url("/cpanel/teas"))
     end
 
     it "should show teas list and contain all operations" do
@@ -50,7 +54,7 @@ describe "Cpanel::TeasController" do
       pending "no view"
     end
 
-    it "should contain [upate] url in [edit]" do
+    it "should contain [upate] url when [edit]" do
       tea = Tea.first
 
       get "/cpanel/teas/%d/edit" % tea.id
@@ -59,13 +63,14 @@ describe "Cpanel::TeasController" do
       expect(last_response.body).to include("/cpanel/teas/%d" % tea.id)
     end
 
-    it "should redirect to teas list when submit [update]" do
+    it "should redirect to teas [list] when submit [update]" do
       tea = Tea.first
       new_name = tea.name + "-post"
 
       post "/cpanel/teas/%d" % tea.id, { tea: { name: new_name }}
 
       expect(last_response).to be_redirect
+      expect(last_response.status).to eq(302)
       follow_redirect!
       expect(last_request.url).to eq(redirect_url("/cpanel/teas?tea=%d" % tea.id))
 
@@ -83,7 +88,7 @@ describe "Cpanel::TeasController" do
       expect(_tea.onsale).to_not be(tea.onsale)
       expect(last_response).to be_redirect
       follow_redirect!
-      expect(last_request.url).to eq(redirect_url("/cpanel/teas?tea=%d" % tea.id))
+      expect(last_request.url).to eq(redirect_url("/cpanel/teas?tea=%d" % _tea.id))
 
       post "/cpanel/teas/%d/onsale" % tea.id, { status: !(_tea.onsale || false) }
 
@@ -91,7 +96,7 @@ describe "Cpanel::TeasController" do
       expect(_tea_.onsale).to_not be(_tea.onsale)
       expect(last_response).to be_redirect
       follow_redirect!
-      expect(last_request.url).to eq(redirect_url("/cpanel/teas?tea=%d" % tea.id))
+      expect(last_request.url).to eq(redirect_url("/cpanel/teas?tea=%d" % _tea_.id))
     end
 
   end

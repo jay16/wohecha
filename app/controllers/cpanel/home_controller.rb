@@ -82,11 +82,12 @@ class Cpanel::HomeController < Cpanel::ApplicationController
   end
 
   private
-    def generate engine, template, target, options={}
+
+    def generate engine, template, target, options = {}
       _btime = Time.now.to_f
       begin
-        content = send(engine, template, options) 
-        File.open(target, "wb+") { |file| file.puts content }
+        output = send(engine, template, options) 
+        File.open(target, "wb+") { |file| file.puts output }
       rescue => e
         result = "[失败]生成%s.<br>   %s" % [template, e.message]
       else

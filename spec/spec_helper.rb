@@ -11,7 +11,7 @@ module RSpecMixin
   #include Capybara::DSL
 
   def app() 
-    `cd #{ENV["APP_ROOT_PATH"]}/db && rm wohecha_test.db && cp wohecha_development.db wohecha_test.db`
+    `cd #{ENV["APP_ROOT_PATH"]}/db && cp -f wohecha_development.db wohecha_test.db`
 
     rackup  = File.read(File.dirname(__FILE__) + '/../config.ru')
     builder = "Rack::Builder.new {( %s\n )}" % rackup

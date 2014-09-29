@@ -104,6 +104,19 @@ class Cpanel::BlogsController < Cpanel::ApplicationController
     redirect "/cpanel/blogs"
   end
 
+  # get /cpanel/blogs/:post/images
+  get "/:post/images" do
+    post = params[:post].strip
+    folder = post[11..-1].sub(".markdown","")
+    image_path = File.join(Settings.octopress.path, "source/images/posts", folder)
+    FileUtils.mkdir_p(image_path) unless File.exist?(image_path)
+
+    images = Dir.entries(image_path).find_all { |file| File.file?(File.join(image_path, file)) }
+    @images = images.sort.map { |img| File.join("/images/posts", folder, img) }
+
+    haml :images
+  end
+
   # add image
   # post /cpanel/blogs/:post/image
   post "/:post/image" do
@@ -123,19 +136,6 @@ class Cpanel::BlogsController < Cpanel::ApplicationController
     end
 
     redirect "/cpanel/blogs/#{params[:post]}/images"
-  end
-
-  # get /cpanel/blog/:post/images
-  get "/:post/images" do
-    post = params[:post].strip
-    folder = post[11..-1].sub(".markdown","")
-    image_path = File.join(Settings.octopress.path, "source/images/posts", folder)
-    FileUtils.mkdir_p(image_path) unless File.exist?(image_path)
-
-    images = Dir.entries(image_path).find_all { |file| File.file?(File.join(image_path, file)) }
-    @images = images.sort.map { |img| File.join("/images/posts", folder, img) }
-
-    haml :images
   end
 
   private
