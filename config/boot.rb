@@ -1,10 +1,13 @@
 require "rubygems"
 
+root_path = File.expand_path("../../", __FILE__)
 ENV["APP_NAME"] ||= "wohecha"
 ENV["RACK_ENV"] ||= "development"
+ENV["VIEW_PATH"] = "%s/app/views" % root_path
+ENV["APP_ROOT_PATH"] = root_path
 
 begin
-  ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../../Gemfile", __FILE__) 
+  ENV["BUNDLE_GEMFILE"] ||= "%s/Gemfile" % root_path
   require "rake"
   require "bundler"
   Bundler.setup
@@ -12,9 +15,6 @@ rescue => e
   puts e.backtrace &&  exit
 end
 Bundler.require(:default, ENV["RACK_ENV"])
-
-ENV["APP_ROOT_PATH"] = File.expand_path("../../", __FILE__)
-ENV["VIEW_PATH"] = File.join(ENV["APP_ROOT_PATH"], "app/views")
 
 # execute linux shell command
 # return array with command result
@@ -27,19 +27,18 @@ end
 
 status, *result = run_command("whoami")
 if result[0].strip == "root"
-  system("chown -R nobody:nobody #{ENV['APP_ROOT_PATH']} && chmod -R 777 #{ENV['APP_ROOT_PATH']}")
+  system("chown -R nobody:nobody #{root_path} && chmod -R 777 #{root_path}")
 else
-  warn "#{result[0].strip} can't execute chown/chmod"
+  warn "warning: [#{result[0].strip}] can't execute chown/chmod"
 end
 
 # 扩充require路径数组
 # require 文件时会在$:数组中查找是否存在
-$:.unshift(File.join(ENV["APP_ROOT_PATH"],"config"))
-$:.unshift(File.join(ENV["APP_ROOT_PATH"],"lib/tasks"))
+$:.unshift("%s/config" % root_path)
+$:.unshift("%s/lib/tasks" % root_path) 
 %w(controllers helpers models).each do |path|
-  $:.unshift(File.join(ENV["APP_ROOT_PATH"],"app",path))
+  $:.unshift("%s/app/%s" % [root_path, path])
 end
-
 
 # config文夹下为配置信息优先加载
 # modle信息已在asset-hanler中加载
@@ -49,29 +48,25 @@ require "form-helpers"
 
 # application must be first
 # other controller base on it
-#controllers = Dir.entries(File.join(ENV["APP_ROOT_PATH"],"app/controllers"))
-#  .grep(/_controller\.rb$/).map { |f| f.sub("_controller.rb","") }
-#tmp_index = controllers.index("application")
-#controllers[tmp_index] = controllers[0]; controllers[0] = "application"
-## helper在controller中被调用，优先于controller
-#controllers.each do |part| 
-#  file_path = File.join(ENV["APP_ROOT_PATH"], "app/helpers", "#{part}_helper.rb")
-#  `touch #{file_path}` if !File.exist?(file_path)
-#  require "#{part}_helper" 
-#end
-require "application_helper.rb"
-require "home_helper.rb"
-require "transactions_helper.rb"
-require "teas_helper.rb"
-require "blogs_helper.rb"
-require "application_controller.rb"
-require "home_controller.rb"
-require "transactions_controller.rb"
-require "cpanel/application_controller.rb"
-require "cpanel/teas_controller.rb"
-require "cpanel/orders_controller.rb"
-require "cpanel/home_controller.rb"
-require "cpanel/blogs_controller.rb"
-# controller,基类application_controller.rb
-# application_controller.rb最先被引用
-#controllers.each { |part| require "#{part}_controller" }
+def recursion_require(dir_path, regexp, base_path = ENV["APP_ROOT_PATH"])
+  _temp_files, _temp_dirs = [], []
+  Dir.entries("%s/%s" % [base_path, dir_path]).sort.each do |dir_name|
+    next if %w[. ..].include?(dir_name)
+
+    path_name = "%s/%s/%s" % [base_path, dir_path, dir_name]
+    if File.file?(path_name) and dir_name =~ /\.rb$/
+      dir_name.scan(regexp).empty? ? (warn "warning not match #{regexp.inspect} - #{dir_name}") : _temp_files.push(path_name)
+    elsif File.directory?(path_name)
+      _temp_dirs.push(dir_name)
+    end
+  end
+
+  _temp_files.each do |file|
+    require file
+  end if not _temp_files.empty?
+  _temp_dirs.each do |dir_name|
+    recursion_require("%s/%s" % [dir_path, dir_name], regexp, base_path)
+  end if not _temp_dirs.empty?
+end
+recursion_require("app/helpers", /_helper\.rb$/, root_path)
+recursion_require("app/controllers", /_controller\.rb$/, root_path)

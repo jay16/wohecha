@@ -37,9 +37,13 @@ describe "HomeController" do
 
   describe "should contain products info that [onsale]" do
     before do
+      post "/cpanel/login", { 
+        :name     => Settings.login.name, 
+        :password => Settings.login.password
+      }
+      # regenerate static page need login 
       post "/cpanel/generate"
 
-      expect(last_response).to be_redirect
       expect(last_response.body).to_not include("[失败]")
     end
 

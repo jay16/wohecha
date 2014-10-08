@@ -11,9 +11,10 @@ module RSpecMixin
   #include Capybara::DSL
 
   def app() 
-    `cd #{ENV["APP_ROOT_PATH"]}/db && cp -f wohecha_development.db wohecha_test.db`
+    shell = %Q{cd %s/db && cp -f %s_development.db %s_test.db} % [ENV["APP_ROOT_PATH"], ENV["APP_NAME"], ENV["APP_NAME"]]
+    raise "Error: shell execute fail - \n#{shell}" if not system(shell)
 
-    rackup  = File.read(File.dirname(__FILE__) + '/../config.ru')
+    rackup  = File.read("%s/config.ru" % ENV["APP_ROOT_PATH"])
     builder = "Rack::Builder.new {( %s\n )}" % rackup
     eval builder
   end

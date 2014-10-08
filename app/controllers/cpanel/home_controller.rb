@@ -61,8 +61,6 @@ class Cpanel::HomeController < Cpanel::ApplicationController
     end
   end
 
-
-
   # generate static file
   # post /cpanel/generate
   post "/generate" do
