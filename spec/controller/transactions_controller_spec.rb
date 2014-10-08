@@ -49,14 +49,5 @@ describe "TransactionsController" do
     #expect(last_response.status).to eq(200)
     #expect(last_response.body).to include(transaction.out_trade_no)
   end
-
-  it "generate statics files" do
-    get "/home" 
-
-    static_home = File.join(ENV["APP_ROOT_PATH"], "home.erb")
-    File.open(static_home, "a+") do |file|
-      file.puts last_response.body
-    end
-  end
 end
 

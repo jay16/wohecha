@@ -34,6 +34,7 @@ end
 
 # 扩充require路径数组
 # require 文件时会在$:数组中查找是否存在
+$:.unshift(root_path)
 $:.unshift("%s/config" % root_path)
 $:.unshift("%s/lib/tasks" % root_path) 
 %w(controllers helpers models).each do |path|
@@ -48,25 +49,7 @@ require "form-helpers"
 
 # application must be first
 # other controller base on it
-def recursion_require(dir_path, regexp, base_path = ENV["APP_ROOT_PATH"])
-  _temp_files, _temp_dirs = [], []
-  Dir.entries("%s/%s" % [base_path, dir_path]).sort.each do |dir_name|
-    next if %w[. ..].include?(dir_name)
-
-    path_name = "%s/%s/%s" % [base_path, dir_path, dir_name]
-    if File.file?(path_name) and dir_name =~ /\.rb$/
-      dir_name.scan(regexp).empty? ? (warn "warning not match #{regexp.inspect} - #{dir_name}") : _temp_files.push(path_name)
-    elsif File.directory?(path_name)
-      _temp_dirs.push(dir_name)
-    end
-  end
-
-  _temp_files.each do |file|
-    require file
-  end if not _temp_files.empty?
-  _temp_dirs.each do |dir_name|
-    recursion_require("%s/%s" % [dir_path, dir_name], regexp, base_path)
-  end if not _temp_dirs.empty?
-end
+require "lib/utils/boot.rb"
+include Utils::Boot
 recursion_require("app/helpers", /_helper\.rb$/, root_path)
-recursion_require("app/controllers", /_controller\.rb$/, root_path)
+recursion_require("app/controllers", /_controller\.rb$/, root_path, [/\/application_.*\.rb$/])
