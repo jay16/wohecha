@@ -4,7 +4,7 @@ require "logger"
 class SassHandler < Sinatra::Base
     set :views, ENV["APP_ROOT_PATH"] +  "/app/assets/stylesheets"
     
-    get '/stylesheets/*.scss' do
+    get "/stylesheets/*.scss" do
         filename = params[:splat].first
         scss filename.to_sym
     end
@@ -27,9 +27,9 @@ class ImageHandler < Sinatra::Base
         filepath = "%s/%s" % [settings.views, filename]
         # use default image when not found
         unless (File.exist?(filepath) and File.file?(filepath))
-            filepath = [settings.views, "default.jpg"].join("/")
+            filepath = "%s/default.jpg" % settings.views
         end
-        send_file(filepath,:type => 'image/jpeg', :disposition => 'inline') 
+        send_file(filepath,:type => "image/jpeg", :disposition => "inline") 
     end
 end
 
@@ -41,8 +41,8 @@ class AssetHandler < Sinatra::Base
     enable :method_override
     enable :coffeescript
 
-    Logger.class_eval { alias :write :'<<' }
-    logger_file = File.join(ENV["APP_ROOT_PATH"], "log/#{ENV['RACK_ENV']}.log")
+    Logger.class_eval { alias :write :"<<" }
+    logger_file = File.join(ENV["APP_ROOT_PATH"], "log/#{ENV["RACK_ENV"]}.log")
     logger = ::Logger.new(::File.new(logger_file, "a+"))
     use Rack::CommonLogger, logger
 
@@ -58,8 +58,6 @@ class AssetHandler < Sinatra::Base
     set :cssengine, "css"
   end
 
-    # 加载数据库及model
-    db_path = File.join(ENV["APP_ROOT_PATH"], "db")
-    FileUtils.mkdir_p(db_path) unless File.exist?(db_path)
-    require "database"
+  # 加载数据库及model
+  require "database.rb"
 end

@@ -50,11 +50,11 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title 创建博文
       .modal-body{style: "min-height:70px;"}
-        %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/blogs/create", :method => "post", style: "width:70%;display:inline;"}
+        %form.form-horizontal{"accept-charset" => "UTF-8", :action => "/cpanel/blogs", :method => "post", style: "width:70%;display:inline;"}
           %input.form-control{name: "title", value: "", type: "text", placeholder: "博文标题", style: "width:70%;display:inline;", onchange: "Blog.inputMonitor(this, '#btnSubmit');", onkeyup: "Blog.inputMonitor(this, '#btnSubmit');", input: "Blog.inputMonitor(this, '#btnSubmit');" }
           %input#btnSubmit.btn.btn-primary{type: "submit", disabled: "disabled", onclick:"$('#myModal').modal('hide');App.showLoading('创建博文...’);"}
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 取消
       .modal-footer
-        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
 
 / Modal
 #myModal2.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -70,7 +70,7 @@
           %input#inputPost{type: "hidden", name: "post", value: ""}
           %input#inputTitle.form-control{name: "title", value: "", type: "text", placeholder: "博文标题", style: "width:70%;display:inline;text-decoration:line-through;", readonly: "readonly"}
           %input.btn.btn-primary{type: "submit", onclick:"$('#myModal2').modal('hide');App.showLoading('删除博文...’);"}
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 取消
       .modal-footer
-        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
 
 = javascript_include_tag "/javascripts/blog.js"

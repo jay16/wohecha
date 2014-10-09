@@ -3,7 +3,7 @@ require "rubygems"
 root_path = File.expand_path("../../", __FILE__)
 ENV["APP_NAME"] ||= "wohecha"
 ENV["RACK_ENV"] ||= "development"
-ENV["VIEW_PATH"] = "%s/app/views" % root_path
+ENV["VIEW_PATH"]  = "%s/app/views" % root_path
 ENV["APP_ROOT_PATH"] = root_path
 
 begin
@@ -52,4 +52,4 @@ require "form-helpers"
 require "lib/utils/boot.rb"
 include Utils::Boot
 recursion_require("app/helpers", /_helper\.rb$/, root_path)
-recursion_require("app/controllers", /_controller\.rb$/, root_path, [/\/application_.*\.rb$/])
+recursion_require("app/controllers", /_controller\.rb$/, root_path, [/$application_/])

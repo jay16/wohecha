@@ -2,18 +2,19 @@
 module Utils
   module Boot
     def recursion_require(dir_path, regexp, base_path = ENV["APP_ROOT_PATH"], sort_rules = [])
-     _partition = Dir.entries("%s/%s" % [base_path, dir_path])
-       .reject { |dir_name| %w[. ..].include?(dir_name) }
-       .partition { |dir_name| File.file?("%s/%s/%s" % [base_path, dir_path, dir_name]) }
+      _dir_path = "%s/%s" % [base_path, dir_path]
+      _partition = Dir.entries(_dir_path)
+        .reject    { |dir_name| %w[. ..].include?(dir_name) }
+        .partition { |dir_name| File.file?("%s/%s" % [_dir_path, dir_name]) }
       _temp_files, _temp_dirs = *_partition
 
-      if not sort_rules.empty?
+      unless sort_rules.empty?
         _temp_files = sort_by_rules(_temp_files, sort_rules) 
       end
-      _temp_files.each do |file|
-        file_path = "%s/%s/%s" % [base_path, dir_path, file]
+      _temp_files.each do |dir_name|
+        file_path = "%s/%s" % [_dir_path, dir_name]
         warn_info =  "warning not match %s - %s" % [regexp.inspect, file_path]
-        file.scan(regexp).empty? ? (warn warn_info) : (require file_path)
+        dir_name.scan(regexp).empty? ? (warn warn_info) : (require file_path)
       end if not _temp_files.empty?
 
       _temp_dirs.each do |dir_name|
